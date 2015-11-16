@@ -12,9 +12,6 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 $parent_file = 'edit-comments.php';
 $submenu_file = 'edit-comments.php';
 
-/**
- * @global string $action
- */
 global $action;
 wp_reset_vars( array('action') );
 
@@ -69,7 +66,7 @@ case 'editcomment' :
 	$comment_id = absint( $_GET['c'] );
 
 	if ( !$comment = get_comment( $comment_id ) )
-		comment_footer_die( __( 'Invalid comment ID.' ) . sprintf(' <a href="%s">' . __('Go back') . '</a>.', 'javascript:history.go(-1)') );
+		comment_footer_die( __('Oops, no comment with this ID.') . sprintf(' <a href="%s">' . __('Go back') . '</a>.', 'javascript:history.go(-1)') );
 
 	if ( !current_user_can( 'edit_comment', $comment_id ) )
 		comment_footer_die( __('You are not allowed to edit this comment.') );
@@ -117,13 +114,13 @@ case 'spam'    :
 ?>
 <div class="wrap">
 
-<h1><?php echo esc_html( $title ); ?></h1>
+<h2><?php echo esc_html( $title ); ?></h2>
 
 <?php
 switch ( $action ) {
 	case 'spam' :
 		$caution_msg = __('You are about to mark the following comment as spam:');
-		$button      = _x( 'Mark as Spam', 'comment' );
+		$button      = __('Mark as Spam');
 		break;
 	case 'trash' :
 		$caution_msg = __('You are about to move the following comment to the Trash:');
@@ -177,7 +174,7 @@ if ( $comment->comment_approved != '0' ) { // if not unapproved
 </tr>
 <?php } ?>
 <tr>
-	<th scope="row"><?php /* translators: column name or table row header */ _e( 'In Response To' ); ?></th>
+	<th scope="row"><?php _e( 'In Response To' ); ?></th>
 	<td>
 	<?php
 		$post_id = $comment->comment_post_ID;
@@ -252,7 +249,7 @@ case 'unapprovecomment' :
 	$noredir = isset($_REQUEST['noredir']);
 
 	if ( !$comment = get_comment($comment_id) )
-		comment_footer_die( __( 'Invalid comment ID.' ) . sprintf(' <a href="%s">' . __('Go back') . '</a>.', 'edit-comments.php') );
+		comment_footer_die( __('Oops, no comment with this ID.') . sprintf(' <a href="%s">' . __('Go back') . '</a>.', 'edit-comments.php') );
 	if ( !current_user_can( 'edit_comment', $comment->comment_ID ) )
 		comment_footer_die( __('You are not allowed to edit comments on this post.') );
 

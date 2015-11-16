@@ -11,8 +11,6 @@
  *
  * @since 2.7.0
  *
- * @staticvar array $column_headers
- *
  * @param string|WP_Screen $screen The screen you want the headers for
  * @return array Containing the headers in the format id => UI String
  */
@@ -62,8 +60,6 @@ function get_hidden_columns( $screen ) {
  *
  * @since 2.7.0
  *
- * @global array $wp_meta_boxes
- *
  * @param WP_Screen $screen
  */
 function meta_box_prefs( $screen ) {
@@ -77,12 +73,9 @@ function meta_box_prefs( $screen ) {
 
 	$hidden = get_hidden_meta_boxes($screen);
 
-	foreach ( array_keys( $wp_meta_boxes[ $screen->id ] ) as $context ) {
-		foreach ( array( 'high', 'core', 'default', 'low' ) as $priority ) {
-			if ( ! isset( $wp_meta_boxes[ $screen->id ][ $context ][ $priority ] ) ) {
-				continue;
-			}
-			foreach ( $wp_meta_boxes[ $screen->id ][ $context ][ $priority ] as $box ) {
+	foreach ( array_keys($wp_meta_boxes[$screen->id]) as $context ) {
+		foreach ( array_keys($wp_meta_boxes[$screen->id][$context]) as $priority ) {
+			foreach ( $wp_meta_boxes[$screen->id][$context][$priority] as $box ) {
 				if ( false == $box || ! $box['title'] )
 					continue;
 				// Submit box cannot be hidden
@@ -169,8 +162,6 @@ function add_screen_option( $option, $args = array() ) {
  *
  * @since 3.1.0
  *
- * @global WP_Screen $current_screen
- *
  * @return WP_Screen Current screen object
  */
 function get_current_screen() {
@@ -188,7 +179,7 @@ function get_current_screen() {
  * @since 3.0.0
  *
  * @param mixed $hook_name Optional. The hook name (also known as the hook suffix) used to determine the screen,
- *	                       or an existing screen object.
+ *	or an existing screen object.
  */
 function set_current_screen( $hook_name = '' ) {
 	WP_Screen::get( $hook_name )->set_current_screen();
@@ -332,11 +323,6 @@ final class WP_Screen {
 
 	/**
 	 * Stores old string-based help.
-	 *
-	 * @static
-	 * @access private
-	 *
-	 * @var array
 	 */
 	private static $_old_compat_help = array();
 
@@ -353,11 +339,8 @@ final class WP_Screen {
 	 * The screen object registry.
 	 *
 	 * @since 3.3.0
-	 *
-	 * @static
-	 * @access private
-	 *
 	 * @var array
+	 * @access private
 	 */
 	private static $_registry = array();
 
@@ -385,15 +368,12 @@ final class WP_Screen {
 	 * @since 3.3.0
 	 * @access public
 	 *
-	 * @static
-	 *
-	 * @global string $hook_suffix
-	 *
 	 * @param string|WP_Screen $hook_name Optional. The hook name (also known as the hook suffix) used to determine the screen.
-	 * 	                                  Defaults to the current $hook_suffix global.
+	 * 	Defaults to the current $hook_suffix global.
 	 * @return WP_Screen Screen object.
 	 */
 	public static function get( $hook_name = '' ) {
+
 		if ( $hook_name instanceof WP_Screen ) {
 			return $hook_name;
 		}
@@ -549,10 +529,6 @@ final class WP_Screen {
 	 *
 	 * @see set_current_screen()
 	 * @since 3.3.0
-	 *
-	 * @global WP_Screen $current_screen
-	 * @global string    $taxnow
-	 * @global string    $typenow
 	 */
 	public function set_current_screen() {
 		global $current_screen, $taxnow, $typenow;
@@ -584,8 +560,9 @@ final class WP_Screen {
 	 * @since 3.5.0
 	 *
 	 * @param string $admin The admin to check against (network | user | site).
-	 *                      If empty any of the three admins will result in true.
-	 * @return bool True if the screen is in the indicated admin, false otherwise.
+	 * If empty any of the three admins will result in true.
+	 * @return boolean True if the screen is in the indicated admin, false otherwise.
+	 *
 	 */
 	public function in_admin( $admin = null ) {
 		if ( empty( $admin ) )
@@ -600,8 +577,6 @@ final class WP_Screen {
 	 * For backwards compatibility.
 	 *
 	 * @since 3.3.0
-	 *
-	 * @static
 	 *
 	 * @param WP_Screen $screen A screen object.
 	 * @param string $help Help text.
@@ -812,8 +787,6 @@ final class WP_Screen {
 	 * This will trigger the deprecated filters for backwards compatibility.
 	 *
 	 * @since 3.3.0
-	 *
-	 * @global string $screen_layout_columns
 	 */
 	public function render_screen_meta() {
 
@@ -974,24 +947,18 @@ final class WP_Screen {
 		<div id="screen-meta-links">
 		<?php if ( $this->get_help_tabs() ) : ?>
 			<div id="contextual-help-link-wrap" class="hide-if-no-js screen-meta-toggle">
-			<button type="button" id="contextual-help-link" class="button show-settings" aria-controls="contextual-help-wrap" aria-expanded="false"><?php _e( 'Help' ); ?></button>
+			<a href="#contextual-help-wrap" id="contextual-help-link" class="show-settings" aria-controls="contextual-help-wrap" aria-expanded="false"><?php _e( 'Help' ); ?></a>
 			</div>
 		<?php endif;
 		if ( $this->show_screen_options() ) : ?>
 			<div id="screen-options-link-wrap" class="hide-if-no-js screen-meta-toggle">
-			<button type="button" id="show-settings-link" class="button show-settings" aria-controls="screen-options-wrap" aria-expanded="false"><?php _e( 'Screen Options' ); ?></button>
+			<a href="#screen-options-wrap" id="show-settings-link" class="show-settings" aria-controls="screen-options-wrap" aria-expanded="false"><?php _e( 'Screen Options' ); ?></a>
 			</div>
 		<?php endif; ?>
 		</div>
 		<?php
 	}
 
-	/**
-	 *
-	 * @global array $wp_meta_boxes
-	 *
-	 * @return bool
-	 */
 	public function show_screen_options() {
 		global $wp_meta_boxes;
 
@@ -1050,8 +1017,6 @@ final class WP_Screen {
 	 * Render the screen options tab.
 	 *
 	 * @since 3.3.0
-	 *
-	 * @global array $wp_meta_boxes
 	 */
 	public function render_screen_options() {
 		global $wp_meta_boxes;

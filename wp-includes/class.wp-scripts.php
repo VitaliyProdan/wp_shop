@@ -35,9 +35,6 @@ class WP_Scripts extends WP_Dependencies {
 		add_action( 'init', array( $this, 'init' ), 0 );
 	}
 
-	/**
-	 * @access public
-	 */
 	public function init() {
 		/**
 		 * Fires when the WP_Scripts instance is initialized.
@@ -64,24 +61,12 @@ class WP_Scripts extends WP_Dependencies {
 		return $this->do_items( $handles, $group );
 	}
 
-	/**
-	 * @deprecated 3.3
-	 * @see print_extra_script()
-	 *
-	 * @param string $handle
-	 * @param bool   $echo
-	 * @return bool|string|void
-	 */
+	// Deprecated since 3.3, see print_extra_script()
 	public function print_scripts_l10n( $handle, $echo = true ) {
 		_deprecated_function( __FUNCTION__, '3.3', 'print_extra_script()' );
 		return $this->print_extra_script( $handle, $echo );
 	}
 
-	/**
-	 * @param string $handle
-	 * @param bool   $echo
-	 * @return bool|string|void
-	 */
 	public function print_extra_script( $handle, $echo = true ) {
 		if ( !$output = $this->get_data( $handle, 'data' ) )
 			return;
@@ -98,11 +83,6 @@ class WP_Scripts extends WP_Dependencies {
 		return true;
 	}
 
-	/**
-	 * @param string   $handle Name of the item. Should be unique.
-	 * @param int|bool $group
-	 * @return bool True on success, false if not set.
-	 */
 	public function do_item( $handle, $group = false ) {
 		if ( !parent::do_item($handle) )
 			return false;
@@ -183,7 +163,7 @@ class WP_Scripts extends WP_Dependencies {
 
 		$tag = "{$cond_before}<script type='text/javascript' src='$src'></script>\n{$cond_after}";
 
-		/**
+		/** 
 		 * Filter the HTML script tag of an enqueued script.
 		 *
 		 * @since 4.1.0
@@ -204,12 +184,9 @@ class WP_Scripts extends WP_Dependencies {
 	}
 
 	/**
-	 * Localizes a script, only if the script has already been added
+	 * Localizes a script
 	 *
-	 * @param string $handle
-	 * @param string $object_name
-	 * @param array $l10n
-	 * @return bool
+	 * Localizes only if the script has already been added
 	 */
 	public function localize( $handle, $object_name, $l10n ) {
 		if ( $handle === 'jquery' )
@@ -240,13 +217,8 @@ class WP_Scripts extends WP_Dependencies {
 		return $this->add_data( $handle, 'data', $script );
 	}
 
-	/**
-	 * @param string $handle    Name of the item. Should be unique.
-	 * @param bool   $recursion Internal flag that calling function was called recursively.
-	 * @param mixed  $group     Group level.
-	 * @return bool Not already in the group or a lower group
-	 */
 	public function set_group( $handle, $recursion, $group = false ) {
+
 		if ( $this->registered[$handle]->args === 1 )
 			$grp = 1;
 		else
@@ -258,12 +230,6 @@ class WP_Scripts extends WP_Dependencies {
 		return parent::set_group( $handle, $recursion, $grp );
 	}
 
-	/**
-	 * @param mixed $handles   Item handle and argument (string) or item handles and arguments (array of strings).
-	 * @param bool  $recursion Internal flag that function is calling itself.
-	 * @param mixed $group     Group level: (int) level, (false) no groups.
-	 * @return bool True on success, false on failure.
-	 */
 	public function all_deps( $handles, $recursion = false, $group = false ) {
 		$r = parent::all_deps( $handles, $recursion );
 		if ( ! $recursion ) {
@@ -279,26 +245,16 @@ class WP_Scripts extends WP_Dependencies {
 		return $r;
 	}
 
-	/**
-	 * @return array
-	 */
 	public function do_head_items() {
 		$this->do_items(false, 0);
 		return $this->done;
 	}
 
-	/**
-	 * @return array
-	 */
 	public function do_footer_items() {
 		$this->do_items(false, 1);
 		return $this->done;
 	}
 
-	/**
-	 * @param string $src
-	 * @return bool
-	 */
 	public function in_default_dir( $src ) {
 		if ( ! $this->default_dirs ) {
 			return true;
@@ -316,9 +272,6 @@ class WP_Scripts extends WP_Dependencies {
 		return false;
 	}
 
-	/**
-	 * @access public
-	 */
 	public function reset() {
 		$this->do_concat = false;
 		$this->print_code = '';

@@ -15,10 +15,6 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 
 	private $error;
 
-	/**
-	 *
-	 * @return bool
-	 */
 	public function ajax_user_can() {
 		return current_user_can('install_plugins');
 	}
@@ -32,8 +28,6 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 	 *
 	 * @since 4.0.0
 	 * @access protected
-	 *
-	 * @return array
 	 */
 	protected function get_installed_plugin_slugs() {
 		$slugs = array();
@@ -54,15 +48,6 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		return $slugs;
 	}
 
-	/**
-	 *
-	 * @global array  $tabs
-	 * @global string $tab
-	 * @global int    $paged
-	 * @global string $type
-	 * @global string $term
-	 * @global string $wp_version
-	 */
 	public function prepare_items() {
 		include( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 
@@ -214,9 +199,6 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		}
 	}
 
-	/**
-	 * @access public
-	 */
 	public function no_items() {
 		if ( isset( $this->error ) ) {
 			$message = $this->error->get_error_message() . '<p class="hide-if-no-js"><a href="#" class="button" onclick="document.location.reload(); return false;">' . __( 'Try again' ) . '</a></p>';
@@ -226,13 +208,6 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		echo '<div class="no-plugin-results">' . $message . '</div>';
 	}
 
-	/**
-	 *
-	 * @global array $tabs
-	 * @global string $tab
-	 *
-	 * @return array
-	 */
 	protected function get_views() {
 		global $tabs, $tab;
 
@@ -301,8 +276,6 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * @global string $tab
-	 *
 	 * @param string $which
 	 */
 	protected function display_tablenav( $which ) {
@@ -335,16 +308,10 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		}
 	}
 
-	/**
-	 * @return array
-	 */
 	protected function get_table_classes() {
 		return array( 'widefat', $this->_args['plural'] );
 	}
 
-	/**
-	 * @return array
-	 */
 	public function get_columns() {
 		return array();
 	}
@@ -374,9 +341,6 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 		}
 	}
 
-	/**
-	 * @global string $wp_version
-	 */
 	public function display_rows() {
 		$plugins_allowedtags = array(
 			'a' => array( 'href' => array(),'title' => array(), 'target' => array() ),

@@ -28,7 +28,7 @@ if ( empty( $plugins ) ) {
 	include( ABSPATH . 'wp-admin/admin-header.php' );
 	?>
 	<div class="wrap">
-		<h1><?php echo esc_html( $title ); ?></h1>
+		<h2><?php echo esc_html( $title ); ?></h2>
 		<div id="message" class="error"><p><?php _e( 'You do not appear to have any plugins available at this time.' ); ?></p></div>
 	</div>
 	<?php
@@ -174,7 +174,7 @@ default:
 </div>
 <?php endif; ?>
 <div class="wrap">
-<h1><?php echo esc_html( $title ); ?></h1>
+<h2><?php echo esc_html( $title ); ?></h2>
 
 <div class="fileedit-sub">
 <div class="alignleft">

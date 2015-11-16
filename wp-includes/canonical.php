@@ -27,16 +27,14 @@
  * or query in an attempt to figure the correct page to go to.
  *
  * @since 2.3.0
- *
- * @global WP_Rewrite $wp_rewrite
- * @global bool $is_IIS
- * @global WP_Query $wp_query
- * @global wpdb $wpdb
+ * @uses $wp_rewrite
+ * @uses $is_IIS
  *
  * @param string $requested_url Optional. The URL that was requested, used to
  *		figure if redirect is needed.
  * @param bool $do_redirect Optional. Redirect to the new URL.
- * @return string|void The string of the URL, if redirect needed.
+ * @return null|false|string Null, if redirect not needed. False, if redirect
+ *		not needed or the string of the URL
  */
 function redirect_canonical( $requested_url = null, $do_redirect = true ) {
 	global $wp_rewrite, $is_IIS, $wp_query, $wpdb;
@@ -449,9 +447,8 @@ function redirect_canonical( $requested_url = null, $do_redirect = true ) {
 			$redirect_url .= '?' . $redirect['query'];
 	}
 
-	if ( ! $redirect_url || $redirect_url == $requested_url ) {
-		return;
-	}
+	if ( !$redirect_url || $redirect_url == $requested_url )
+		return false;
 
 	// Hex encoded octets are case-insensitive.
 	if ( false !== strpos($requested_url, '%') ) {
@@ -475,10 +472,8 @@ function redirect_canonical( $requested_url = null, $do_redirect = true ) {
 	 */
 	$redirect_url = apply_filters( 'redirect_canonical', $redirect_url, $requested_url );
 
-	// yes, again -- in case the filter aborted the request
-	if ( ! $redirect_url || $redirect_url == $requested_url ) {
-		return;
-	}
+	if ( !$redirect_url || $redirect_url == $requested_url ) // yes, again -- in case the filter aborted the request
+		return false;
 
 	if ( $do_redirect ) {
 		// protect against chained redirects
@@ -488,7 +483,7 @@ function redirect_canonical( $requested_url = null, $do_redirect = true ) {
 		} else {
 			// Debug
 			// die("1: $redirect_url<br />2: " . redirect_canonical( $redirect_url, false ) );
-			return;
+			return false;
 		}
 	} else {
 		return $redirect_url;
@@ -527,9 +522,8 @@ function _remove_qs_args_if_not_in_url( $query_string, Array $args_to_check, $ur
  * @since 2.3.0
  *
  * @global wpdb $wpdb WordPress database abstraction object.
- * @global WP_Rewrite $wp_rewrite
  *
- * @return false|string The correct URL if one is found. False on failure.
+ * @return bool|string The correct URL if one is found. False on failure.
  */
 function redirect_guess_404_permalink() {
 	global $wpdb, $wp_rewrite;
@@ -564,10 +558,6 @@ function redirect_guess_404_permalink() {
 	return false;
 }
 
-/**
- *
- * @global WP_Rewrite $wp_rewrite
- */
 function wp_redirect_admin_locations() {
 	global $wp_rewrite;
 	if ( ! ( is_404() && $wp_rewrite->using_permalinks() ) )

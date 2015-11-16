@@ -22,10 +22,10 @@ inlineEditPost = {
 			}
 		});
 
-		$( '.cancel', qeRow ).click( function() {
+		$('a.cancel', qeRow).click(function(){
 			return inlineEditPost.revert();
 		});
-		$( '.save', qeRow ).click( function() {
+		$('a.save', qeRow).click(function(){
 			return inlineEditPost.save(this);
 		});
 		$('td', qeRow).keydown(function(e){
@@ -34,7 +34,7 @@ inlineEditPost = {
 			}
 		});
 
-		$( '.cancel', bulkRow ).click( function() {
+		$('a.cancel', bulkRow).click(function(){
 			return inlineEditPost.revert();
 		});
 
@@ -81,7 +81,7 @@ inlineEditPost = {
 		var te = '', type = this.type, tax, c = true;
 		this.revert();
 
-		$( '#bulk-edit td' ).attr( 'colspan', $( 'th:visible, td:visible', '.widefat:first thead' ).length );
+		$('#bulk-edit td').attr('colspan', $('.widefat:first thead th:visible').length);
 		// Insert the editor at the top of the table with an empty row above to maintain zebra striping.
 		$('table.widefat tbody').prepend( $('#bulk-edit') ).prepend('<tr class="hidden"></tr>');
 		$('#bulk-edit').addClass('inline-editor').show();
@@ -117,7 +117,7 @@ inlineEditPost = {
 	},
 
 	edit : function(id) {
-		var t = this, fields, editRow, rowData, status, pageOpt, pageLevel, nextPage, pageLoop = true, nextLevel, cur_format, f, val, pw;
+		var t = this, fields, editRow, rowData, status, pageOpt, pageLevel, nextPage, pageLoop = true, nextLevel, cur_format, f, val;
 		t.revert();
 
 		if ( typeof(id) === 'object' ) {
@@ -131,9 +131,9 @@ inlineEditPost = {
 
 		// add the new edit row with an extra blank row underneath to maintain zebra striping.
 		editRow = $('#inline-edit').clone(true);
-		$( 'td', editRow ).attr( 'colspan', $( 'th:visible, td:visible', '.widefat:first thead' ).length );
+		$('td', editRow).attr('colspan', $('.widefat:first thead th:visible').length);
 
-		$(t.what+id).removeClass('is-expanded').hide().after(editRow).after('<tr class="hidden"></tr>');
+		$(t.what+id).hide().after(editRow).after('<tr class="hidden"></tr>');
 
 		// populate the data
 		rowData = $('#inline_'+id);
@@ -209,10 +209,9 @@ inlineEditPost = {
 			$('select[name="_status"] option[value="future"]', editRow).remove();
 		}
 
-		pw = $( '.inline-edit-password-input' ).prop( 'disabled', false );
 		if ( 'private' === status ) {
 			$('input[name="keep_private"]', editRow).prop('checked', true);
-			pw.val( '' ).prop( 'disabled', true );
+			$('input.inline-edit-password-input').val('').prop('disabled', true);
 		}
 
 		// remove the current page and children from the parent dropdown

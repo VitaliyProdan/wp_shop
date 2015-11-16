@@ -12,6 +12,8 @@
  *
  * @since 2.1.0
  * @access private
+ *
+ * @return null Will return null if register_globals PHP directive was disabled.
  */
 function wp_unregister_GLOBALS() {
 	if ( !ini_get( 'register_globals' ) )
@@ -384,12 +386,12 @@ function wp_set_wpdb_vars() {
 }
 
 /**
+ * Access/Modify private global variable `$_wp_using_ext_object_cache`.
+ *
  * Toggle `$_wp_using_ext_object_cache` on and off without directly
  * touching global.
  *
  * @since 3.7.0
- *
- * @global bool $_wp_using_ext_object_cache
  *
  * @param bool $using Whether external object cache is being used.
  * @return bool The current 'using' setting.
@@ -635,8 +637,6 @@ function wp_clone( $object ) {
  *
  * @since 1.5.1
  *
- * @global WP_Screen $current_screen
- *
  * @return bool True if inside WordPress administration interface, false otherwise.
  */
 function is_admin() {
@@ -657,8 +657,6 @@ function is_admin() {
  * for checking roles and capabilities.
  *
  * @since 3.1.0
- *
- * @global WP_Screen $current_screen
  *
  * @return bool True if inside WordPress blog administration pages.
  */
@@ -681,8 +679,6 @@ function is_blog_admin() {
  *
  * @since 3.1.0
  *
- * @global WP_Screen $current_screen
- *
  * @return bool True if inside WordPress network administration pages.
  */
 function is_network_admin() {
@@ -704,8 +700,6 @@ function is_network_admin() {
  * {@see current_user_can()}.
  *
  * @since 3.1.0
- *
- * @global WP_Screen $current_screen
  *
  * @return bool True if inside WordPress user administration pages.
  */
@@ -740,8 +734,6 @@ function is_multisite() {
  *
  * @since 3.1.0
  *
- * @global int $blog_id
- *
  * @return int Blog id
  */
 function get_current_blog_id() {
@@ -762,10 +754,7 @@ function get_current_blog_id() {
  * @since 3.4.0
  * @access private
  *
- * @global string    $text_direction
- * @global WP_Locale $wp_locale      The WordPress date and time locale object.
- *
- * @staticvar bool $loaded
+ * @global $wp_locale The WordPress date and time locale object.
  */
 function wp_load_translations_early() {
 	global $text_direction, $wp_locale;

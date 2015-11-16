@@ -153,11 +153,11 @@
 
 .media-modal-close {
 	position: absolute;
-	top: 0;
-	right: 0;
-	width: 50px;
-	height: 50px;
-	padding: 0;
+	text-decoration: none;
+	top: 10px;
+	right: 10px;
+	width: 30px;
+	height: 30px;
 	z-index: 1000;
 	-webkit-transition: color .1s ease-in-out, background .1s ease-in-out;
 	transition: color .1s ease-in-out, background .1s ease-in-out;
@@ -169,7 +169,12 @@
 }
 
 .media-modal-close span.media-modal-icon {
+	display: block;
+	margin-top: 5px;
+	width: 30px;
+	height: 15px;
 	background-image: none;
+	text-align: center;
 }
 
 .media-modal-close .media-modal-icon:before {
@@ -204,8 +209,7 @@
 	-webkit-font-smoothing: subpixel-antialiased;
 }
 
-/* higher specificity */
-.wp-core-ui .media-modal-icon {
+.media-modal-icon {
 	background-image: url(../images/uploader-icons.png);
 	background-repeat: no-repeat;
 }
@@ -696,10 +700,6 @@
 	height: 100%;
 }
 
-.wp-customizer:not(.mobile) .media-frame-content .crop-content.site-icon {
-	margin-right: 300px;
-}
-
 .media-frame-content .crop-content .crop-image {
 	display: block;
 	margin: auto;
@@ -935,7 +935,7 @@
 	position: absolute;
 }
 
-.wp-core-ui .attachment-close {
+.wp-core-ui .attachment .close {
 	display: block;
 	position: absolute;
 	top: 5px;
@@ -943,24 +943,36 @@
 	height: 22px;
 	width: 22px;
 	padding: 0;
+	font-size: 20px;
+	line-height: 20px;
+	text-align: center;
+	text-decoration: none;
+	color: #464646;
 	background-color: #fff;
 	background-position: -96px 4px;
+	border-width: 0;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 	-webkit-box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.3 );
 	box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.3 );
+	-webkit-transition-duration: none;
+	transition-duration: none;
+	-webkit-transition-property: none;
+	transition-property: none;
 }
 
-.wp-core-ui .attachment-close:hover,
-.wp-core-ui .attachment-close:focus {
+.wp-core-ui .attachment a.close:hover,
+.wp-core-ui .attachment a.close:focus {
+	-webkit-box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.6 );
+	box-shadow: 0 0 0 1px rgba( 0, 0, 0, 0.6 );
 	background-position: -36px 4px;
+
 }
 
 .wp-core-ui .attachment .check {
 	display: none;
 	height: 24px;
 	width: 24px;
-	padding: 0;
 	position: absolute;
 	z-index: 10;
 	top: 0;
@@ -971,15 +983,14 @@
 	box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba( 0, 0, 0, 0.15 );
 }
 
-.wp-core-ui .attachment .check .media-modal-icon {
-	display: block;
+.wp-core-ui .attachment .check div {
 	background-position: -1px 0;
 	height: 15px;
 	width: 15px;
 	margin: 5px;
 }
 
-.wp-core-ui .attachment .check:hover .media-modal-icon {
+.wp-core-ui .attachment .check:hover div {
 	background-position: -40px 0;
 }
 
@@ -999,14 +1010,14 @@
 		0 0 0 2px #1e8cbe;
 }
 
-.wp-core-ui .attachment.details .check .media-modal-icon,
-.wp-core-ui .media-frame.mode-grid .attachment.selected .check .media-modal-icon {
+.wp-core-ui .attachment.details .check div,
+.wp-core-ui .media-frame.mode-grid .attachment.selected .check div {
 	background-position: -21px 0;
 }
 
-.wp-core-ui .attachment.details .check:hover .media-modal-icon,
-.wp-core-ui .attachment.selected .check:focus .media-modal-icon,
-.wp-core-ui .media-frame.mode-grid .attachment.selected .check:hover .media-modal-icon {
+.wp-core-ui .attachment.details .check:hover div,
+.wp-core-ui .attachment.selected .check:focus div,
+.wp-core-ui .media-frame.mode-grid .attachment.selected .check:hover div {
 	background-position: -60px 0;
 }
 
@@ -1163,6 +1174,10 @@
 	max-width: 400px;
 }
 
+.media-sidebar .media-uploader-status {
+	border-bottom: 1px solid #dfdfdf;
+}
+
 .uploader-inline .media-uploader-status h3 {
 	display: none;
 }
@@ -1206,21 +1221,31 @@
 }
 
 .upload-errors .upload-error {
-	padding: 12px;
-	margin-bottom: 12px;
-	background: #fff;
-	border-left: 4px solid #dd3d36;
-	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	margin: 8px auto 0 auto;
+	padding: 8px;
+	border: 1px #c00 solid;
+	background: #ffebe8;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
-.upload-errors .upload-error-filename {
+.upload-errors .upload-error-label {
+	padding: 2px 4px;
+	margin-right: 8px;
 	font-weight: bold;
+	color: #fff;
+	background: #e00;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#e00), to(#a00));
+	background-image: -webkit-linear-gradient(top, #e00, #a00);
+	background-image: linear-gradient(to bottom, #e00, #a00);
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
 .upload-errors .upload-error-message {
 	display: block;
 	padding-top: 8px;
+	color: #b44;
 	word-wrap: break-word;
 }
 
@@ -1380,35 +1405,34 @@
 	font-weight: bold;
 }
 
-.media-selection .button-link {
+.media-selection .selection-info a {
+	display: block;
 	float: left;
 	padding: 1px 8px;
 	margin: 1px 8px 1px -8px;
 	line-height: 16px;
+	text-decoration: none;
 	border-right: 1px solid #dfdfdf;
 	color: #21759B;
 }
 
-.media-selection .button-link:hover,
-.media-selection .button-link:focus {
+.media-selection .selection-info a:hover {
 	background: #21759B;
 	color: #fff;
 	border-color: transparent;
 }
 
-.media-selection .button-link:last-child {
+.media-selection .selection-info a:last-child {
 	border-right: 0;
 	margin-right: 0;
 }
 
-.selection-info .clear-selection {
+.media-selection .selection-info .clear-selection {
 	color: red;
 }
 
-.selection-info .clear-selection:hover,
-.selection-info .clear-selection:focus {
+.media-selection .selection-info .clear-selection:hover {
 	background: red;
-	color: #fff;
 }
 
 .media-selection .selection-view {
@@ -1611,6 +1635,7 @@
 }
 
 .attachment-info .edit-attachment,
+.attachment-info .refresh-attachment,
 .attachment-info .delete-attachment,
 .attachment-info .trash-attachment,
 .attachment-info .untrash-attachment {
@@ -1619,10 +1644,12 @@
 	white-space: nowrap;
 }
 
+.attachment-info .refresh-attachment,
 .attachment-details.needs-refresh .attachment-info .edit-attachment {
 	display: none;
 }
 
+.attachment-details.needs-refresh .attachment-info .refresh-attachment,
 .attachment-info .edit-attachment {
 	display: block;
 }
@@ -1630,17 +1657,12 @@
 .media-modal .delete-attachment,
 .media-modal .trash-attachment,
 .media-modal .untrash-attachment {
-	display: inline;
-	padding: 0;
 	color: #bc0b0b;
 }
 
 .media-modal .delete-attachment:hover,
-.media-modal .delete-attachment:focus,
 .media-modal .trash-attachment:hover,
-.media-modal .trash-attachment:focus,
-.media-modal .untrash-attachment:hover,
-.media-modal .untrash-attachment:focus {
+.media-modal .untrash-attachment:hover {
 	color: red;
 }
 
@@ -1801,17 +1823,10 @@
 	overflow: auto;
 }
 
-.media-embed .embed-link-settings {
-	/* avoid Firefox to give focus to the embed preview container parent */
-	overflow: visible;
-}
-
 .embed-preview img,
 .embed-preview iframe,
-.embed-preview embed,
-.mejs-container video {
+.embed-preview embed {
 	max-width: 100%;
-	vertical-align: middle;
 }
 
 .embed-preview a {
@@ -1821,12 +1836,6 @@
 .embed-preview img {
 	display: block;
 	height: auto;
-}
-
-.mejs-container:focus {
-	outline: 1px solid #5b9dd9;
-	-webkit-box-shadow: 0 0 2px 1px rgba(30, 140, 190, .8);
-	box-shadow: 0 0 2px 1px rgba(30, 140, 190, .8);
 }
 
 .image-details .media-modal {
@@ -1886,9 +1895,9 @@
 }
 
 .image-details .advanced-toggle {
-	padding: 0;
 	color: #666;
-	text-transform: uppercase;
+	text-decoration: none;
+	display: block;
 }
 
 .image-details .advanced-toggle:after {
@@ -2047,6 +2056,7 @@
 }
 
 /* Drag & drop on the editor upload */
+#wp-fullscreen-body .uploader-editor,
 .wp-editor-wrap .uploader-editor {
 	background: rgba( 150, 150, 150, 0.9 );
 	position: absolute;
@@ -2059,6 +2069,17 @@
 	text-align: center;
 }
 
+#wp-fullscreen-body .uploader-editor {
+	background: rgba( 0, 86, 132, 0.9 );
+	position: fixed;
+	z-index: 100050; /* above the editor toolbar */
+}
+
+.wp-editor-wrap.wp-fullscreen-wrap .uploader-editor {
+	opacity: 0;
+}
+
+#wp-fullscreen-body .uploader-editor-content,
 .wp-editor-wrap .uploader-editor-content {
 	border: 1px dashed #fff;
 	position: absolute;
@@ -2068,6 +2089,7 @@
 	bottom: 10px;
 }
 
+#wp-fullscreen-body .uploader-editor .uploader-editor-title,
 .wp-editor-wrap .uploader-editor .uploader-editor-title {
 	position: absolute;
 	top: 50%;
@@ -2089,6 +2111,7 @@
 	background: rgba( 0, 86, 132, 0.9 );
 }
 
+#wp-fullscreen-body .uploader-editor .uploader-editor-title,
 .wp-editor-wrap .uploader-editor.droppable .uploader-editor-title {
 	display: block;
 }
@@ -2479,15 +2502,12 @@
 
 @media only screen and (max-width: 480px) {
 	.media-modal-close {
-		top: -5px;
+		top: 5px;
+		right: 5px;
 	}
 
 	.media-modal .media-frame-title {
 		height: 40px;
-	}
-
-	.wp-core-ui.wp-customizer .media-button {
-		margin-top: 13px;
 	}
 
 	.media-modal .media-frame-title h1,

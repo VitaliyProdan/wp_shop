@@ -1,8 +1,8 @@
 /**
  * plugin.js
  *
+ * Copyright, Moxiecode Systems AB
  * Released under LGPL License.
- * Copyright (c) 1999-2015 Ephox Corp. All rights reserved
  *
  * License: http://www.tinymce.com/license
  * Contributing: http://www.tinymce.com/contributing
@@ -350,21 +350,23 @@ tinymce.PluginManager.add('lists', function(editor) {
 				}
 
 				return true;
-			}
-
-			if (ulParent.nodeName == 'LI') {
-				ul = ulParent;
-				newBlock = createNewTextBlock(li, 'LI');
-			} else if (isListNode(ulParent)) {
-				newBlock = createNewTextBlock(li, 'LI');
 			} else {
-				newBlock = createNewTextBlock(li);
+				if (ulParent.nodeName == 'LI') {
+					ul = ulParent;
+					newBlock = createNewTextBlock(li, 'LI');
+				} else if (isListNode(ulParent)) {
+					newBlock = createNewTextBlock(li, 'LI');
+				} else {
+					newBlock = createNewTextBlock(li);
+				}
+
+				splitList(ul, li, newBlock);
+				normalizeList(ul.parentNode);
+
+				return true;
 			}
 
-			splitList(ul, li, newBlock);
-			normalizeList(ul.parentNode);
-
-			return true;
+			return false;
 		}
 
 		function indent(li) {

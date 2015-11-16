@@ -38,7 +38,7 @@ final class WP_Customize_Manager {
 	/**
 	 * Whether this is a Customizer pageload.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	protected $previewing = false;
 
@@ -48,13 +48,6 @@ final class WP_Customize_Manager {
 	 * @var WP_Customize_Widgets
 	 */
 	public $widgets;
-
-	/**
-	 * Methods and properties deailing with managing nav menus in the Customizer.
-	 *
-	 * @var WP_Customize_Nav_Menus
-	 */
-	public $nav_menus;
 
 	protected $settings   = array();
 	protected $containers = array();
@@ -67,25 +60,7 @@ final class WP_Customize_Manager {
 	protected $customized;
 
 	/**
-	 * Panel types that may be rendered from JS templates.
-	 *
-	 * @since 4.3.0
-	 * @access protected
-	 * @var array
-	 */
-	protected $registered_panel_types = array();
-
-	/**
-	 * Section types that may be rendered from JS templates.
-	 *
-	 * @since 4.3.0
-	 * @access protected
-	 * @var array
-	 */
-	protected $registered_section_types = array();
-
-	/**
-	 * Control types that may be rendered from JS templates.
+	 * Controls that may be rendered from JS templates.
 	 *
 	 * @since 4.1.0
 	 * @access protected
@@ -111,10 +86,8 @@ final class WP_Customize_Manager {
 		require_once( ABSPATH . WPINC . '/class-wp-customize-section.php' );
 		require_once( ABSPATH . WPINC . '/class-wp-customize-control.php' );
 		require_once( ABSPATH . WPINC . '/class-wp-customize-widgets.php' );
-		require_once( ABSPATH . WPINC . '/class-wp-customize-nav-menus.php' );
 
 		$this->widgets = new WP_Customize_Widgets( $this );
-		$this->nav_menus = new WP_Customize_Nav_Menus( $this );
 
 		add_filter( 'wp_die_handler', array( $this, 'wp_die_handler' ) );
 
@@ -639,29 +612,19 @@ final class WP_Customize_Manager {
 		}
 
 		foreach ( $this->settings as $id => $setting ) {
-			if ( $setting->check_capabilities() ) {
-				$settings['values'][ $id ] = $setting->js_value();
-			}
+			$settings['values'][ $id ] = $setting->js_value();
 		}
-		foreach ( $this->panels as $panel_id => $panel ) {
-			if ( $panel->check_capabilities() ) {
-				$settings['activePanels'][ $panel_id ] = $panel->active();
-				foreach ( $panel->sections as $section_id => $section ) {
-					if ( $section->check_capabilities() ) {
-						$settings['activeSections'][ $section_id ] = $section->active();
-					}
-				}
-			}
-		}
-		foreach ( $this->sections as $id => $section ) {
-			if ( $section->check_capabilities() ) {
+		foreach ( $this->panels as $id => $panel ) {
+			$settings['activePanels'][ $id ] = $panel->active();
+			foreach ( $panel->sections as $id => $section ) {
 				$settings['activeSections'][ $id ] = $section->active();
 			}
 		}
+		foreach ( $this->sections as $id => $section ) {
+			$settings['activeSections'][ $id ] = $section->active();
+		}
 		foreach ( $this->controls as $id => $control ) {
-			if ( $control->check_capabilities() ) {
-				$settings['activeControls'][ $id ] = $control->active();
-			}
+			$settings['activeControls'][ $id ] = $control->active();
 		}
 
 		?>
@@ -684,8 +647,6 @@ final class WP_Customize_Manager {
 	 * Removes the signature in case we experience a case where the Customizer was not properly executed.
 	 *
 	 * @since 3.4.0
-	 *
-	 * @return mixed
 	 */
 	public function remove_preview_signature( $return = null ) {
 		remove_action( 'shutdown', array( $this, 'customize_preview_signature' ), 1000 );
@@ -880,7 +841,7 @@ final class WP_Customize_Manager {
 	 *
 	 * @since 4.2.0
 	 *
-	 * @param array $setting_ids The setting IDs to add.
+	 * @param string $setting_ids The setting IDs to add.
 	 * @return WP_Customize_Setting The settings added.
 	 */
 	public function add_dynamic_settings( $setting_ids ) {
@@ -918,7 +879,7 @@ final class WP_Customize_Manager {
 			 *
 			 * @param string $setting_class WP_Customize_Setting or a subclass.
 			 * @param string $setting_id    ID for dynamic setting, usually coming from `$_POST['customized']`.
-			 * @param array  $setting_args  WP_Customize_Setting or a subclass.
+			 * @param string $setting_args  WP_Customize_Setting or a subclass.
 			 */
 			$setting_class = apply_filters( 'customize_dynamic_setting_class', $setting_class, $setting_id, $setting_args );
 
@@ -936,7 +897,7 @@ final class WP_Customize_Manager {
 	 * @since 3.4.0
 	 *
 	 * @param string $id Customize Setting ID.
-	 * @return WP_Customize_Setting|void The setting, if set.
+	 * @return WP_Customize_Setting
 	 */
 	public function get_setting( $id ) {
 		if ( isset( $this->settings[ $id ] ) ) {
@@ -981,7 +942,7 @@ final class WP_Customize_Manager {
 	 * @access public
 	 *
 	 * @param string $id Panel ID to get.
-	 * @return WP_Customize_Panel|void Requested panel instance, if set.
+	 * @return WP_Customize_Panel Requested panel instance.
 	 */
 	public function get_panel( $id ) {
 		if ( isset( $this->panels[ $id ] ) ) {
@@ -999,35 +960,6 @@ final class WP_Customize_Manager {
 	 */
 	public function remove_panel( $id ) {
 		unset( $this->panels[ $id ] );
-	}
-
-	/**
-	 * Register a customize panel type.
-	 *
-	 * Registered types are eligible to be rendered via JS and created dynamically.
-	 *
-	 * @since 4.3.0
-	 * @access public
-	 *
-	 * @see WP_Customize_Panel
-	 *
-	 * @param string $panel Name of a custom panel which is a subclass of WP_Customize_Panel.
-	 */
-	public function register_panel_type( $panel ) {
-		$this->registered_panel_types[] = $panel;
-	}
-
-	/**
-	 * Render JS templates for all registered panel types.
-	 *
-	 * @since 4.3.0
-	 * @access public
-	 */
-	public function render_panel_templates() {
-		foreach ( $this->registered_panel_types as $panel_type ) {
-			$panel = new $panel_type( $this, 'temp', array() );
-			$panel->print_template();
-		}
 	}
 
 	/**
@@ -1053,7 +985,7 @@ final class WP_Customize_Manager {
 	 * @since 3.4.0
 	 *
 	 * @param string $id Section ID.
-	 * @return WP_Customize_Section|void The section, if set.
+	 * @return WP_Customize_Section
 	 */
 	public function get_section( $id ) {
 		if ( isset( $this->sections[ $id ] ) )
@@ -1069,35 +1001,6 @@ final class WP_Customize_Manager {
 	 */
 	public function remove_section( $id ) {
 		unset( $this->sections[ $id ] );
-	}
-
-	/**
-	 * Register a customize section type.
-	 *
-	 * Registered types are eligible to be rendered via JS and created dynamically.
-	 *
-	 * @since 4.3.0
-	 * @access public
-	 *
-	 * @see WP_Customize_Section
-	 *
-	 * @param string $section Name of a custom section which is a subclass of WP_Customize_Section.
-	 */
-	public function register_section_type( $section ) {
-		$this->registered_section_types[] = $section;
-	}
-
-	/**
-	 * Render JS templates for all registered section types.
-	 *
-	 * @since 4.3.0
-	 * @access public
-	 */
-	public function render_section_templates() {
-		foreach ( $this->registered_section_types as $section_type ) {
-			$section = new $section_type( $this, 'temp', array() );
-			$section->print_template();
-		}
 	}
 
 	/**
@@ -1124,7 +1027,7 @@ final class WP_Customize_Manager {
 	 * @since 3.4.0
 	 *
 	 * @param string $id ID of the control.
-	 * @return WP_Customize_Control|void The control object, if set.
+	 * @return WP_Customize_Control $control The control object.
 	 */
 	public function get_control( $id ) {
 		if ( isset( $this->controls[ $id ] ) )
@@ -1216,7 +1119,7 @@ final class WP_Customize_Manager {
 		$sections = array();
 
 		foreach ( $this->sections as $section ) {
-			if ( ! $section->check_capabilities() ) {
+			if ( ! $section->check_capabilities() || ! $section->controls ) {
 				continue;
 			}
 
@@ -1239,7 +1142,7 @@ final class WP_Customize_Manager {
 		$panels = array();
 
 		foreach ( $this->panels as $panel ) {
-			if ( ! $panel->check_capabilities() ) {
+			if ( ! $panel->check_capabilities() || ! $panel->sections ) {
 				continue;
 			}
 
@@ -1271,17 +1174,12 @@ final class WP_Customize_Manager {
 	 */
 	public function register_controls() {
 
-		/* Panel, Section, and Control Types */
-		$this->register_panel_type( 'WP_Customize_Panel' );
-		$this->register_section_type( 'WP_Customize_Section' );
-		$this->register_section_type( 'WP_Customize_Sidebar_Section' );
+		/* Control Types (custom control classes) */
 		$this->register_control_type( 'WP_Customize_Color_Control' );
 		$this->register_control_type( 'WP_Customize_Media_Control' );
 		$this->register_control_type( 'WP_Customize_Upload_Control' );
 		$this->register_control_type( 'WP_Customize_Image_Control' );
 		$this->register_control_type( 'WP_Customize_Background_Image_Control' );
-		$this->register_control_type( 'WP_Customize_Cropped_Image_Control' );
-		$this->register_control_type( 'WP_Customize_Site_Icon_Control' );
 		$this->register_control_type( 'WP_Customize_Theme_Control' );
 
 		/* Themes */
@@ -1328,10 +1226,10 @@ final class WP_Customize_Manager {
 			) ) );
 		}
 
-		/* Site Identity */
+		/* Site Title & Tagline */
 
 		$this->add_section( 'title_tagline', array(
-			'title'    => __( 'Site Identity' ),
+			'title'    => __( 'Site Title & Tagline' ),
 			'priority' => 20,
 		) );
 
@@ -1357,21 +1255,6 @@ final class WP_Customize_Manager {
 			'section'    => 'title_tagline',
 		) );
 
-		$this->add_setting( 'site_icon', array(
-			'type'       => 'option',
-			'capability' => 'manage_options',
-			'transport'  => 'postMessage', // Previewed with JS in the Customizer controls window.
-		) );
-
-		$this->add_control( new WP_Customize_Site_Icon_Control( $this, 'site_icon', array(
-			'label'       => __( 'Site Icon' ),
-			'description' => __( 'The Site Icon is used as a browser and app icon for your site. Icons must be square, and at least 512px wide and tall.' ),
-			'section'     => 'title_tagline',
-			'priority'    => 60,
-			'height'      => 512,
-			'width'       => 512,
-		) ) );
-
 		/* Colors */
 
 		$this->add_section( 'colors', array(
@@ -1394,7 +1277,6 @@ final class WP_Customize_Manager {
 			'label'    => __( 'Display Header Text' ),
 			'section'  => 'title_tagline',
 			'type'     => 'checkbox',
-			'priority' => 40,
 		) );
 
 		$this->add_control( new WP_Customize_Color_Control( $this, 'header_textcolor', array(
@@ -1513,6 +1395,48 @@ final class WP_Customize_Manager {
 			}
 		}
 
+		/* Nav Menus */
+
+		$locations      = get_registered_nav_menus();
+		$menus          = wp_get_nav_menus();
+		$num_locations  = count( array_keys( $locations ) );
+
+		if ( 1 == $num_locations ) {
+			$description = __( 'Your theme supports one menu. Select which menu you would like to use.' );
+		} else {
+			$description = sprintf( _n( 'Your theme supports %s menu. Select which menu appears in each location.', 'Your theme supports %s menus. Select which menu appears in each location.', $num_locations ), number_format_i18n( $num_locations ) );
+		}
+
+		$this->add_section( 'nav', array(
+			'title'          => __( 'Navigation' ),
+			'theme_supports' => 'menus',
+			'priority'       => 100,
+			'description'    => $description . "\n\n" . __( 'You can edit your menu content on the Menus screen in the Appearance section.' ),
+		) );
+
+		if ( $menus ) {
+			$choices = array( '' => __( '&mdash; Select &mdash;' ) );
+			foreach ( $menus as $menu ) {
+				$choices[ $menu->term_id ] = wp_html_excerpt( $menu->name, 40, '&hellip;' );
+			}
+
+			foreach ( $locations as $location => $description ) {
+				$menu_setting_id = "nav_menu_locations[{$location}]";
+
+				$this->add_setting( $menu_setting_id, array(
+					'sanitize_callback' => 'absint',
+					'theme_supports'    => 'menus',
+				) );
+
+				$this->add_control( $menu_setting_id, array(
+					'label'   => $description,
+					'section' => 'nav',
+					'type'    => 'select',
+					'choices' => $choices,
+				) );
+			}
+		}
+
 		/* Static Front Page */
 		// #WP19627
 
@@ -1589,7 +1513,7 @@ final class WP_Customize_Manager {
 	 * @since 3.4.0
 	 *
 	 * @param string $color
-	 * @return mixed
+	 * @return string
 	 */
 	public function _sanitize_header_textcolor( $color ) {
 		if ( 'blank' === $color )
@@ -1606,13 +1530,13 @@ final class WP_Customize_Manager {
 /**
  * Sanitizes a hex color.
  *
- * Returns either '', a 3 or 6 digit hex color (with #), or nothing.
+ * Returns either '', a 3 or 6 digit hex color (with #), or null.
  * For sanitizing values without a #, see sanitize_hex_color_no_hash().
  *
  * @since 3.4.0
  *
  * @param string $color
- * @return string|void
+ * @return string|null
  */
 function sanitize_hex_color( $color ) {
 	if ( '' === $color )
@@ -1621,6 +1545,8 @@ function sanitize_hex_color( $color ) {
 	// 3 or 6 hex digits, or the empty string.
 	if ( preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) )
 		return $color;
+
+	return null;
 }
 
 /**

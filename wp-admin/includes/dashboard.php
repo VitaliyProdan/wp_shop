@@ -12,10 +12,6 @@
  * Handles POST data, sets up filters.
  *
  * @since 2.5.0
- *
- * @global array $wp_registered_widgets
- * @global array $wp_registered_widget_controls
- * @global array $wp_dashboard_control_callbacks
  */
 function wp_dashboard_setup() {
 	global $wp_registered_widgets, $wp_registered_widget_controls, $wp_dashboard_control_callbacks;
@@ -129,16 +125,6 @@ function wp_dashboard_setup() {
 	do_action( 'do_meta_boxes', $screen->id, 'side', '' );
 }
 
-/**
- *
- * @global array   $wp_dashboard_control_callbacks
- *
- * @param string   $widget_id
- * @param string   $widget_name
- * @param callback $callback
- * @param callback $control_callback
- * @param array    $callback_args
- */
 function wp_add_dashboard_widget( $widget_id, $widget_name, $callback, $control_callback = null, $callback_args = null ) {
 	$screen = get_current_screen();
 	global $wp_dashboard_control_callbacks;
@@ -168,11 +154,6 @@ function wp_add_dashboard_widget( $widget_id, $widget_name, $callback, $control_
 	add_meta_box( $widget_id, $widget_name, $callback, $screen, $location, $priority, $callback_args );
 }
 
-/**
- *
- * @param type $dashboard
- * @param type $meta_box
- */
 function _wp_dashboard_control_callback( $dashboard, $meta_box ) {
 	echo '<form method="post" class="dashboard-widget-control-form">';
 	wp_dashboard_trigger_widget_control( $meta_box['id'] );
@@ -355,9 +336,6 @@ function wp_dashboard_right_now() {
 	<?php endif;
 }
 
-/**
- * @since 3.1.0
- */
 function wp_network_dashboard_right_now() {
 	$actions = array();
 	if ( current_user_can('create_sites') )
@@ -435,16 +413,10 @@ function wp_network_dashboard_right_now() {
  *
  * @since 3.8.0
  *
- * @global int $post_ID
- *
  * @param string $error_msg Optional. Error message. Default false.
  */
 function wp_dashboard_quick_press( $error_msg = false ) {
 	global $post_ID;
-
-	if ( ! current_user_can( 'edit_posts' ) ) {
-		return;
-	}
 
 	/* Check if a new auto-draft (= no new post_ID) is needed or if the old can be used */
 	$last_post_id = (int) get_user_option( 'dashboard_quick_press_last_post_id' ); // Get the last post_ID
@@ -507,8 +479,6 @@ function wp_dashboard_quick_press( $error_msg = false ) {
  * Show recent drafts of the user on the dashboard.
  *
  * @since 2.7.0
- *
- * @param array $drafts
  */
 function wp_dashboard_recent_drafts( $drafts = false ) {
 	if ( ! $drafts ) {
@@ -547,12 +517,6 @@ function wp_dashboard_recent_drafts( $drafts = false ) {
 	echo "</ul>\n</div>";
 }
 
-/**
- * @global object $comment
- *
- * @param object $comment
- * @param bool   $show_date
- */
 function _wp_dashboard_recent_comments_row( &$comment, $show_date = true ) {
 	$GLOBALS['comment'] =& $comment;
 
@@ -631,7 +595,7 @@ function _wp_dashboard_recent_comments_row( &$comment, $show_date = true ) {
 
 			<?php if ( !$comment->comment_type || 'comment' == $comment->comment_type ) : ?>
 
-			<div class="dashboard-comment-wrap has-row-actions">
+			<div class="dashboard-comment-wrap">
 			<h4 class="comment-meta">
 				<?php printf( /* translators: 1: comment author, 2: post link, 3: notification if the comment is pending */__( 'From %1$s on %2$s%3$s' ),
 					'<cite class="comment-author">' . get_comment_author_link() . '</cite>', $comment_post_link.' '.$comment_link, ' <span class="approve">' . __( '[Pending]' ) . '</span>' ); ?>
@@ -651,7 +615,7 @@ function _wp_dashboard_recent_comments_row( &$comment, $show_date = true ) {
 				}
 				$type = esc_html( $type );
 			?>
-			<div class="dashboard-comment-wrap has-row-actions">
+			<div class="dashboard-comment-wrap">
 			<?php /* translators: %1$s is type of comment, %2$s is link to the post */ ?>
 			<h4 class="comment-meta"><?php printf( _x( '%1$s on %2$s', 'dashboard' ), "<strong>$type</strong>", $comment_post_link." ".$comment_link ); ?></h4>
 			<p class="comment-author"><?php comment_author_link(); ?></p>
@@ -802,9 +766,6 @@ function wp_dashboard_recent_comments( $total_items = 5 ) {
 		$comments_query['status'] = 'approve';
 
 	while ( count( $comments ) < $total_items && $possible = get_comments( $comments_query ) ) {
-		if ( ! is_array( $possible ) ) {
-			break;
-		}
 		foreach ( $possible as $comment ) {
 			if ( ! current_user_can( 'read_post', $comment->comment_post_ID ) )
 				continue;
@@ -880,8 +841,7 @@ function wp_dashboard_cached_rss_widget( $widget_id, $callback, $check_urls = ar
 		$check_urls = array( $widgets[$widget_id]['url'] );
 	}
 
-	$locale = get_locale();
-	$cache_key = 'dash_' . md5( $widget_id . '_' . $locale );
+	$cache_key = 'dash_' . md5( $widget_id );
 	if ( false !== ( $output = get_transient( $cache_key ) ) ) {
 		echo $output;
 		return true;
@@ -910,8 +870,6 @@ function wp_dashboard_cached_rss_widget( $widget_id, $callback, $check_urls = ar
  * Calls widget control callback.
  *
  * @since 2.5.0
- *
- * @global array $wp_dashboard_control_callbacks
  *
  * @param int $widget_control_id Registered Widget ID.
  */
@@ -1212,6 +1170,7 @@ function wp_dashboard_quota() {
 	</div>
 	<?php
 }
+add_action( 'activity_box_end', 'wp_dashboard_quota' );
 
 // Display Browser Nag Meta Box
 function wp_dashboard_browser_nag() {
@@ -1255,12 +1214,6 @@ function wp_dashboard_browser_nag() {
 	echo apply_filters( 'browse-happy-notice', $notice, $response );
 }
 
-/**
- * @since 3.2.0
- *
- * @param array $classes
- * @return array
- */
 function dashboard_browser_nag_class( $classes ) {
 	$response = wp_check_browser_version();
 
@@ -1274,8 +1227,6 @@ function dashboard_browser_nag_class( $classes ) {
  * Check if the user needs a browser update
  *
  * @since 3.2.0
- *
- * @global string $wp_version
  *
  * @return array|bool False on failure, array of browser data on success.
  */

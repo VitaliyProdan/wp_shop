@@ -20,11 +20,7 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 	 */
 	public $ftp;
 
-	/**
-	 *
-	 * @param array $opt
-	 */
-	public function __construct( $opt  = '' ) {
+	public function __construct($opt = '') {
 		$this->method = 'ftpsockets';
 		$this->errors = new WP_Error();
 
@@ -56,10 +52,6 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 			$this->options['password'] = $opt['password'];
 	}
 
-	/**
-	 *
-	 * @return bool
-	 */
 	public function connect() {
 		if ( ! $this->ftp )
 			return false;
@@ -171,10 +163,6 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 		return $ret;
 	}
 
-	/**
-	 *
-	 * @return string
-	 */
 	public function cwd() {
 		$cwd = $this->ftp->pwd();
 		if ( $cwd )
@@ -182,11 +170,6 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 		return $cwd;
 	}
 
-	/**
-	 *
-	 * @param string $file
-	 * @return bool
-	 */
 	public function chdir($file) {
 		return $this->ftp->chdir($file);
 	}
@@ -243,9 +226,9 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 		return $dir[$file]['group'];
 	}
 	/**
-	 * @param string   $source
-	 * @param string   $destination
-	 * @param bool     $overwrite
+	 * @param string $source
+	 * @param string $destination
+	 * @param bool $overwrite
 	 * @param int|bool $mode
 	 * @return bool
 	 */
@@ -262,7 +245,7 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 	/**
 	 * @param string $source
 	 * @param string $destination
-	 * @param bool   $overwrite
+	 * @param bool $overwrite
 	 * @return bool
 	 */
 	public function move($source, $destination, $overwrite = false ) {
@@ -270,7 +253,7 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 	}
 	/**
 	 * @param string $file
-	 * @param bool   $recursive
+	 * @param bool $recursive
 	 * @param string $type
 	 * @return bool
 	 */
@@ -376,9 +359,9 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 
 	/**
 	 * @param string $path
-	 * @param mixed  $chmod
-	 * @param mixed  $chown
-	 * @param mixed  $chgrp
+	 * @param mixed $chmod
+	 * @param mixed $chown
+	 * @param mixed $chgrp
 	 * @return bool
 	 */
 	public function mkdir($path, $chmod = false, $chown = false, $chgrp = false ) {
@@ -404,8 +387,8 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 
 	/**
 	 * @param string $path
-	 * @param bool   $include_hidden
-	 * @param bool   $recursive
+	 * @param bool $include_hidden
+	 * @param bool $recursive
 	 * @return bool|array
 	 */
 	public function dirlist($path = '.', $include_hidden = true, $recursive = false ) {
@@ -449,9 +432,6 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 			if ( $struc['islink'] )
 				$struc['name'] = preg_replace( '/(\s*->\s*.*)$/', '', $struc['name'] );
 
-			// Add the Octal representation of the file permissions
-			$struc['permsn'] = $this->getnumchmodfromh( $struc['perms'] );
-
 			$ret[ $struc['name'] ] = $struc;
 		}
 
@@ -460,9 +440,6 @@ class WP_Filesystem_ftpsockets extends WP_Filesystem_Base {
 		return $ret;
 	}
 
-	/**
-	 * @access public
-	 */
 	public function __destruct() {
 		$this->ftp->quit();
 	}

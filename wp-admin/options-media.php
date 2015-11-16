@@ -40,7 +40,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 ?>
 
 <div class="wrap">
-<h1><?php echo esc_html( $title ); ?></h1>
+<h2><?php echo esc_html( $title ); ?></h2>
 
 <form action="options.php" method="post">
 <?php settings_fields('media'); ?>
@@ -84,11 +84,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 <?php do_settings_fields('media', 'default'); ?>
 </table>
 
-<?php
-/**
- * @global array $wp_settings
- */
-if ( isset( $GLOBALS['wp_settings']['media']['embeds'] ) ) : ?>
+<?php if ( isset( $GLOBALS['wp_settings']['media']['embeds'] ) ) : ?>
 <h3 class="title"><?php _e('Embeds') ?></h3>
 <table class="form-table">
 <?php do_settings_fields( 'media', 'embeds' ); ?>

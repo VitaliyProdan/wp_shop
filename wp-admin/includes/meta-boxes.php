@@ -7,8 +7,6 @@
  *
  * @since 2.7.0
  *
- * @global string $action
- *
  * @param object $post
  */
 function post_submit_meta_box($post, $args = array() ) {
@@ -206,10 +204,7 @@ if ( $can_publish ) : // Contributors don't get to choose the date of publish ?>
 	<span id="timestamp">
 	<?php printf($stamp, $date); ?></span>
 	<a href="#edit_timestamp" class="edit-timestamp hide-if-no-js"><span aria-hidden="true"><?php _e( 'Edit' ); ?></span> <span class="screen-reader-text"><?php _e( 'Edit date and time' ); ?></span></a>
-	<fieldset id="timestampdiv" class="hide-if-js">
-	<legend class="screen-reader-text"><?php _e( 'Date and time' ); ?></legend>
-	<?php touch_time( ( $action === 'edit' ), 1 ); ?>
-	</fieldset>
+	<div id="timestampdiv" class="hide-if-js"><?php touch_time(($action == 'edit'), 1); ?></div>
 </div><?php // /misc-pub-section ?>
 <?php endif; ?>
 
@@ -373,13 +368,10 @@ function post_format_meta_box( $post, $box ) {
 			$post_formats[0][] = $post_format;
 	?>
 	<div id="post-formats-select">
-		<fieldset>
-			<legend class="screen-reader-text"><?php _e( 'Post Formats' ); ?></legend>
-			<input type="radio" name="post_format" class="post-format" id="post-format-0" value="0" <?php checked( $post_format, '0' ); ?> /> <label for="post-format-0" class="post-format-icon post-format-standard"><?php echo get_post_format_string( 'standard' ); ?></label>
-			<?php foreach ( $post_formats[0] as $format ) : ?>
-			<br /><input type="radio" name="post_format" class="post-format" id="post-format-<?php echo esc_attr( $format ); ?>" value="<?php echo esc_attr( $format ); ?>" <?php checked( $post_format, $format ); ?> /> <label for="post-format-<?php echo esc_attr( $format ); ?>" class="post-format-icon post-format-<?php echo esc_attr( $format ); ?>"><?php echo esc_html( get_post_format_string( $format ) ); ?></label>
-			<?php endforeach; ?>
-		</fieldset>
+		<input type="radio" name="post_format" class="post-format" id="post-format-0" value="0" <?php checked( $post_format, '0' ); ?> /> <label for="post-format-0" class="post-format-icon post-format-standard"><?php echo get_post_format_string( 'standard' ); ?></label>
+		<?php foreach ( $post_formats[0] as $format ) : ?>
+		<br /><input type="radio" name="post_format" class="post-format" id="post-format-<?php echo esc_attr( $format ); ?>" value="<?php echo esc_attr( $format ); ?>" <?php checked( $post_format, $format ); ?> /> <label for="post-format-<?php echo esc_attr( $format ); ?>" class="post-format-icon post-format-<?php echo esc_attr( $format ); ?>"><?php echo esc_html( get_post_format_string( $format ) ); ?></label>
+		<?php endforeach; ?><br />
 	</div>
 	<?php endif; endif;
 }
@@ -678,8 +670,6 @@ function post_slug_meta_box($post) {
  *
  * @since 2.6.0
  *
- * @global int $user_ID
- *
  * @param object $post
  */
 function post_author_meta_box($post) {
@@ -823,7 +813,7 @@ do_action( 'post_submitbox_start' );
 <div id="delete-action">
 <?php
 if ( !empty($_GET['action']) && 'edit' == $_GET['action'] && current_user_can('manage_links') ) { ?>
-	<a class="submitdelete deletion" href="<?php echo wp_nonce_url("link.php?action=delete&amp;link_id=$link->link_id", 'delete-bookmark_' . $link->link_id); ?>" onclick="if ( confirm('<?php echo esc_js(sprintf(__("You are about to delete this link '%s'\n  'Cancel' to stop, 'OK' to delete."), $link->link_name )); ?>') ) {return true;}return false;"><?php _e('Delete'); ?></a>
+	<a class="submitdelete deletion" href="<?php echo wp_nonce_url("link.php?action=delete&amp;link_id=$link->link_id", 'delete-bookmark_' . $link->link_id); ?>" onclick="if ( confirm('<?php echo esc_js(sprintf(__("You are about to delete this link '%s'\n 'Cancel' to stop, 'OK' to delete."), $link->link_name )); ?>') ) {return true;}return false;"><?php _e('Delete'); ?></a>
 <?php } ?>
 </div>
 
@@ -922,8 +912,6 @@ function link_target_meta_box($link) { ?>
  * Display checked checkboxes attribute for xfn microformat options.
  *
  * @since 1.0.1
- *
- * @global object $link
  *
  * @param string $class
  * @param string $value

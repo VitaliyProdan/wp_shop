@@ -39,10 +39,6 @@ if ( ! $id )
 	wp_die( __('Invalid site ID.') );
 
 $details = get_blog_details( $id );
-if ( ! $details ) {
-	wp_die( __( 'The requested site does not exist.' ) );
-}
-
 if ( !can_edit_network( $details->site_id ) )
 	wp_die( __( 'You do not have permission to access this page.' ), 403 );
 
@@ -79,7 +75,9 @@ if ( isset($_GET['update']) ) {
 		$messages[] = __('Site options updated.');
 }
 
-$title = sprintf( __( 'Edit Site: %s' ), esc_html( $details->blogname ) );
+$site_url_no_http = preg_replace( '#^http(s)?://#', '', get_blogaddress_by_id( $id ) );
+$title_site_url_linked = sprintf( __( 'Edit Site: %s' ), '<a href="' . get_blogaddress_by_id( $id ) . '">' . $site_url_no_http . '</a>' );
+$title = sprintf( __( 'Edit Site: %s' ), $site_url_no_http );
 
 $parent_file = 'sites.php';
 $submenu_file = 'sites.php';
@@ -89,8 +87,7 @@ require( ABSPATH . 'wp-admin/admin-header.php' );
 ?>
 
 <div class="wrap">
-<h1 id="edit-site"><?php echo $title; ?></h1>
-<p class="edit-site-actions"><a href="<?php echo esc_url( get_home_url( $id, '/' ) ); ?>"><?php _e( 'Visit' ); ?></a> | <a href="<?php echo esc_url( get_admin_url( $id ) ); ?>"><?php _e( 'Dashboard' ); ?></a></p>
+<h2 id="edit-site"><?php echo $title_site_url_linked ?></h2>
 <h3 class="nav-tab-wrapper">
 <?php
 $tabs = array(
