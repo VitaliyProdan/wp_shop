@@ -1,0 +1,126 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "WP Add Custom CSS"
+msgstr ""
+
+#. Short description.
+msgid "Add custom css to the whole website and to specific posts and pages."
+msgstr ""
+
+#. Screenshot description.
+msgid "Add custom CSS to the whole website."
+msgstr ""
+
+#. Screenshot description.
+msgid "Add custom CSS to specific posts."
+msgstr ""
+
+#. Screenshot description.
+msgid "Add custom CSS to specific pages."
+msgstr ""
+
+#. Found in description list item.
+msgid "English"
+msgstr ""
+
+#. Found in description list item.
+msgid "German - thanks to <a href=\"http://bodograumann.de/\">Bodo Graumann</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Spanish - thanks to <a href=\"http://www.imaginaweb.es/\">Dave Krul</a>"
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"WP Add Custom CSS allows you to add custom CSS to the whole website and to individual posts and pages.\n"
+"The CSS rules applied to the whole website will override the default stylesheets of your theme and plugins, while the CSS rules applied to specific pages and posts will override the main stylesheet too."
+msgstr ""
+
+#. Found in description paragraph.
+msgid ""
+"You can edit the main stylesheet from the the \"Add custom CSS\" settings page.\n"
+"The plugin also creates a new \"Custom CSS\" box in the editing area to add custom CSS to specific posts and pages."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Available languages:"
+msgstr ""
+
+#. Found in installation header.
+msgid "Automatic installation"
+msgstr ""
+
+#. Found in installation header.
+msgid "Manual installation"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Go to Plugins &gt; Add New &gt; Upload and select the .zip file from your hard disk"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Click the \"Install now\" button"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' menu in WordPress"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the plugin folder to the <code>/wp-content/plugins/</code> directory via ftp"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed minor bug"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed WPML bug"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improved css output for single posts and pages"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed &gt; rendering issue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Minor layout changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed double quotes rendering issue"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "First release"
+msgstr ""
+
+#. Found in faq header.
+msgid "How do I apply custom CSS to the whole website?"
+msgstr ""
+
+#. Found in faq header.
+msgid "How do I apply custom CSS to a specific post or page?"
+msgstr ""
+
+#. Found in faq header.
+msgid "The \"Custom CSS\" box is not displaying, why?"
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Once the plugin is installed and activated, from your dashboard navigate to \"Add custom CSS\", and write the CSS rules in the textarea."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Once the plugin is installed and activated, you will find a new box called \"Custom CSS\" in your post/page editing area."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "Click on the \"Screen option\" link from your post/page editing area and be sure the \"Custom CSS\" option is checked."
+msgstr ""

@@ -1,0 +1,576 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: YITH WooCommerce Order Tracking\n"
+"POT-Creation-Date: 2015-11-04 11:59+0100\n"
+"PO-Revision-Date: 2015-04-22 11:34+0100\n"
+"Last-Translator: \n"
+"Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
+"X-Poedit-KeywordsList: __ ;_e;_n:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: plugin-fw\n"
+
+#: init.php:44
+msgid ""
+"YITH WooCommerce PDF Invoice and Shipping List is enabled but not effective. "
+"It requires WooCommerce in order to work."
+msgstr ""
+
+#: init.php:52
+msgid ""
+"You can't activate the free version of YITH WooCommerce PDF Invoice and "
+"Shipping List while you are using the premium one."
+msgstr ""
+
+#: lib/class.yith-invoice.php:206
+msgid "Invoice From:"
+msgstr ""
+
+#: lib/class.yith-invoice.php:241
+msgid "Invoice To:"
+msgstr ""
+
+#: lib/class.yith-invoice.php:258
+#: lib/class.yith-woocommerce-pdf-invoice.php:445
+#: lib/class.yith-woocommerce-pdf-invoice.php:447
+#: lib/class.yith-woocommerce-pdf-invoice.php:452
+#: lib/class.yith-woocommerce-pdf-invoice.php:499
+msgid "Invoice"
+msgstr ""
+
+#: lib/class.yith-invoice.php:263 lib/class.yith-shipping.php:176
+msgid "Order"
+msgstr ""
+
+#: lib/class.yith-invoice.php:268
+msgid "Invoice date"
+msgstr ""
+
+#: lib/class.yith-invoice.php:272 lib/class.yith-shipping.php:185
+msgid "Order Amount"
+msgstr ""
+
+#: lib/class.yith-shipping.php:124
+msgid "Shipping From:"
+msgstr ""
+
+#: lib/class.yith-shipping.php:159
+msgid "Shipping To:"
+msgstr ""
+
+#: lib/class.yith-shipping.php:181
+msgid "Order date"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:128
+msgid "Show invoice"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:132
+#: lib/class.yith-woocommerce-pdf-invoice.php:451
+msgid "Create invoice"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:149
+msgid "Show shipping list document"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:154
+msgid "Create shipping list document"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:234
+#, php-format
+msgid "Invoice No. %s of %s"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:407
+msgid "YITH PDF Invoice"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:431
+msgid "Invoiced on : "
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:438
+msgid "Invoice number : "
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:444
+msgid "View invoice"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:446
+msgid "Cancel invoice"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:464
+msgid "View shipping list"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:465
+#: lib/class.yith-woocommerce-pdf-invoice.php:468
+#: lib/class.yith-woocommerce-pdf-invoice.php:474
+#: templates/invoice/invoice-details.php:43
+msgid "Shipping"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:467
+msgid "Cancel shipping list"
+msgstr ""
+
+#: lib/class.yith-woocommerce-pdf-invoice.php:473
+msgid "Create shipping list"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:122
+msgid "General"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:125
+msgid "Documents"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:126
+msgid "Template"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:129
+#: lib/class.yith-ywpi-plugin-fw-loader.php:193
+msgid "Premium Version"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:189
+msgid "Settings"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:218
+msgid "Plugin Documentation"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:231
+msgid ""
+"YITH WooCommerce PDF Invoice and Shipping List is available in an "
+"outstanding PREMIUM version with many new options, discover it now."
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:232
+msgid "Premium version"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:239
+#: plugin-options/documents-options.php:24
+msgid "YITH WooCommerce PDF Invoice and Shipping List"
+msgstr ""
+
+#: lib/class.yith-ywpi-plugin-fw-loader.php:240
+msgid ""
+"In YIT Plugins tab you can find YITH WooCommerce PDF Invoice and Shipping "
+"List options.<br> From this menu you can access all settings of YITH plugins "
+"activated."
+msgstr ""
+
+#: plugin-options/documents-options.php:21
+msgid "Upgrade to the PREMIUM VERSION"
+msgstr ""
+
+#: plugin-options/documents-options.php:25
+msgid "Discover Advanced Features"
+msgstr ""
+
+#: plugin-options/documents-options.php:26
+msgid ""
+"Upgrade to the PREMIUM VERSION of YITH WOOCOMMERCE PDF INVOICE AND SHIPPING "
+"LIST to benefit from all features!"
+msgstr ""
+
+#: plugin-options/documents-options.php:30
+msgid ""
+"See YITH WooCommerce PDF Invoice and Shipping List plugin with full premium "
+"features in action."
+msgstr ""
+
+#: plugin-options/documents-options.php:32
+msgid "Get Support and Pro Features"
+msgstr ""
+
+#: plugin-options/documents-options.php:33
+msgid ""
+"By purchasing the premium version of the plugin, you will take advantage of "
+"the advanced features of the product and you will get one year of free "
+"updates and support through our platform available 24h/24."
+msgstr ""
+
+#: plugin-options/documents-options.php:48
+msgid "Invoice settings"
+msgstr ""
+
+#: plugin-options/documents-options.php:53
+msgid "Next invoice number"
+msgstr ""
+
+#: plugin-options/documents-options.php:56
+msgid "Invoice number for next invoice document."
+msgstr ""
+
+#: plugin-options/documents-options.php:60
+msgid "billing year"
+msgstr ""
+
+#: plugin-options/documents-options.php:66
+msgid "Invoice prefix"
+msgstr ""
+
+#: plugin-options/documents-options.php:69
+msgid ""
+"Set a text to be used as prefix in invoice number. Leave it blank if no "
+"prefix has to be used"
+msgstr ""
+
+#: plugin-options/documents-options.php:72
+msgid "Invoice suffix"
+msgstr ""
+
+#: plugin-options/documents-options.php:75
+msgid ""
+"Set a text to be used as suffix in invoice number. Leave it blank if no "
+"suffix has to be used"
+msgstr ""
+
+#: plugin-options/documents-options.php:78
+msgid "Invoice number format"
+msgstr ""
+
+#: plugin-options/documents-options.php:81
+msgid ""
+"Set format for invoice number. Use [number], [prefix] and [suffix] as "
+"placeholders"
+msgstr ""
+
+#: plugin-options/documents-options.php:85
+msgid "Reset on 1st January"
+msgstr ""
+
+#: plugin-options/documents-options.php:88
+msgid "Set restart from 1 on 1st January."
+msgstr ""
+
+#: plugin-options/documents-options.php:92
+msgid "Invoice date format"
+msgstr ""
+
+#: plugin-options/documents-options.php:95
+msgid "Set date format as it should appear on invoices."
+msgstr ""
+
+#: plugin-options/documents-options.php:99
+msgid "Invoice generation"
+msgstr ""
+
+#: plugin-options/documents-options.php:110
+msgid "Generate invoice automatically:"
+msgstr ""
+
+#: plugin-options/documents-options.php:114
+msgid "For new order."
+msgstr ""
+
+#: plugin-options/documents-options.php:115
+msgid "For processing order."
+msgstr ""
+
+#: plugin-options/documents-options.php:116
+msgid "For completed order."
+msgstr ""
+
+#: plugin-options/documents-options.php:122
+msgid "PDF invoice button behaviour:"
+msgstr ""
+
+#: plugin-options/documents-options.php:133
+msgid "Enable shipping list"
+msgstr ""
+
+#: plugin-options/documents-options.php:136
+msgid "Add buttons for shipping list document generation."
+msgstr ""
+
+#: plugin-options/template-options.php:22
+msgid "Invoice template settings"
+msgstr ""
+
+#: plugin-options/template-options.php:27
+msgid "Show company name"
+msgstr ""
+
+#: plugin-options/template-options.php:30
+msgid "Show company name on invoice document."
+msgstr ""
+
+#: plugin-options/template-options.php:34
+msgid "Company name"
+msgstr ""
+
+#: plugin-options/template-options.php:37
+msgid "Set company name to be shown on invoices"
+msgstr ""
+
+#: plugin-options/template-options.php:38
+msgid "Your company name"
+msgstr ""
+
+#: plugin-options/template-options.php:41
+msgid "Show company logo"
+msgstr ""
+
+#: plugin-options/template-options.php:44
+msgid "Show company logo on invoice document."
+msgstr ""
+
+#: plugin-options/template-options.php:48
+msgid "Your company logo"
+msgstr ""
+
+#: plugin-options/template-options.php:51
+msgid "Set a default logo to be shown"
+msgstr ""
+
+#: plugin-options/template-options.php:54
+msgid "Show company details"
+msgstr ""
+
+#: plugin-options/template-options.php:57
+msgid "Show company details on invoice document."
+msgstr ""
+
+#: plugin-options/template-options.php:61
+msgid "Company details"
+msgstr ""
+
+#: plugin-options/template-options.php:65
+msgid "Set company details to be used on invoice document"
+msgstr ""
+
+#: plugin-options/template-options.php:66
+msgid ""
+"Your company details\n"
+"Address\n"
+"City, State"
+msgstr ""
+
+#: plugin-options/template-options.php:71
+msgid "Show notes"
+msgstr ""
+
+#: plugin-options/template-options.php:74
+msgid "Show notes before the footer."
+msgstr ""
+
+#: plugin-options/template-options.php:78
+msgid "Invoice notes"
+msgstr ""
+
+#: plugin-options/template-options.php:82
+msgid "Set notes to show on invoice"
+msgstr ""
+
+#: plugin-options/template-options.php:85
+msgid "Show footer"
+msgstr ""
+
+#: plugin-options/template-options.php:88
+msgid "Show footer."
+msgstr ""
+
+#: plugin-options/template-options.php:92
+msgid "Invoice footer"
+msgstr ""
+
+#: plugin-options/template-options.php:96
+msgid "Set text to show on invoice footer"
+msgstr ""
+
+#: templates/admin/premium.php:192
+#, php-format
+msgid ""
+"Upgrade to %1$spremium version%2$s of %1$sYITH WooCommerce PDF Invoice and "
+"Shipping List%2$s to benefit from all features!"
+msgstr ""
+
+#: templates/admin/premium.php:195 templates/admin/premium.php:315
+msgid "UPGRADE"
+msgstr ""
+
+#: templates/admin/premium.php:196 templates/admin/premium.php:316
+msgid "to the premium version"
+msgstr ""
+
+#: templates/admin/premium.php:202
+msgid "Premium Features"
+msgstr ""
+
+#: templates/admin/premium.php:205
+msgid "pro forma invoice"
+msgstr ""
+
+#: templates/admin/premium.php:210
+msgid "PRO FORMA INVOICE"
+msgstr ""
+
+#: templates/admin/premium.php:213
+#, php-format
+msgid ""
+"While waiting for the invoice of the order, users can ask a %1$spro forma "
+"invoice%2$s for their order and download immediately a summarizing document "
+"of their payment. One click and the requested PDF file will be at their "
+"disposal."
+msgstr ""
+
+#: templates/admin/premium.php:223
+msgid "FILE NAME"
+msgstr ""
+
+#: templates/admin/premium.php:225
+#, php-format
+msgid ""
+"Every name of the created PDF files will be composed following the settings "
+"of the plugin option panel.For every kind of document %1$sPro Forma Invoice, "
+"Invoice, or Shipping%2$s, you can create names with a different structure."
+msgstr ""
+
+#: templates/admin/premium.php:229
+msgid "file name"
+msgstr ""
+
+#: templates/admin/premium.php:236
+msgid "save path"
+msgstr ""
+
+#: templates/admin/premium.php:241
+msgid "SAVE PATH"
+msgstr ""
+
+#: templates/admin/premium.php:243
+#, php-format
+msgid ""
+"If your business is booming, you will create many invoices, and so there "
+"will be many downloads.Choose the file path and decide to sort out the "
+"folders by %1$syear, month or day%2$s in which you save the file."
+msgstr ""
+
+#: templates/admin/premium.php:253
+msgid "AUTOMATIC BACKUP ON DROBOX"
+msgstr ""
+
+#: templates/admin/premium.php:255
+#, php-format
+msgid ""
+"The saving of the created documents can be %1$ssynchronized%2$s with your "
+"Dropbox account; in this way, you will have a backup copy of your details "
+"every time you make a new save."
+msgstr ""
+
+#: templates/admin/premium.php:259
+msgid "automatic backup on dropbox"
+msgstr ""
+
+#: templates/admin/premium.php:266
+msgid "notes and footer in the document"
+msgstr ""
+
+#: templates/admin/premium.php:271
+msgid "NOTES AND FOOTER IN THE DOCUMENT"
+msgstr ""
+
+#: templates/admin/premium.php:273
+#, php-format
+msgid ""
+"In addition to the name of the company and the order details, you can write "
+"a different text %1$seven for every type of PDF file created%2$s to both add "
+"freely a note into the document, and a footer."
+msgstr ""
+
+#: templates/admin/premium.php:283
+msgid "SSN AND VAT"
+msgstr ""
+
+#: templates/admin/premium.php:285
+#, php-format
+msgid ""
+"Once activated, these two options will add two new input fields for the "
+"users during the %1$scheckout%2$s step. These elements can also be showed "
+"into the PDF document."
+msgstr ""
+
+#: templates/admin/premium.php:288
+msgid "ssn and vat"
+msgstr ""
+
+#: templates/admin/premium.php:295
+msgid "templates"
+msgstr ""
+
+#: templates/admin/premium.php:300
+msgid "DIFFERENT TEMPLATES FOR EVERY DOCUMENT TYPE"
+msgstr ""
+
+#: templates/admin/premium.php:302
+#, php-format
+msgid ""
+"For every document created, you can set which kind of information it should "
+"contain: %1$sthe name of your business and its information, notes and footer"
+"%2$s, and even all the order details with the products and the %1$srelated "
+"prices%2$s."
+msgstr ""
+
+#: templates/admin/premium.php:312
+#, php-format
+msgid ""
+"Upgrade to the %1$spremium version%2$s of %1$sYITH WooCommerce Pdf Invoice"
+"%2$s and Shipping List to benefit from all features!"
+msgstr ""
+
+#: templates/invoice/invoice-details.php:6
+msgid "Product"
+msgstr ""
+
+#: templates/invoice/invoice-details.php:7
+msgid "Qty"
+msgstr ""
+
+#: templates/invoice/invoice-details.php:8
+msgid "Price"
+msgstr ""
+
+#: templates/invoice/invoice-details.php:9
+msgid "Line total"
+msgstr ""
+
+#: templates/invoice/invoice-details.php:10
+msgid "Tax"
+msgstr ""
+
+#: templates/invoice/invoice-details.php:83
+msgid "Subtotal"
+msgstr ""
+
+#: templates/invoice/invoice-details.php:88
+msgid "Discount"
+msgstr ""
+
+#: templates/invoice/invoice-details.php:102
+msgid "Total"
+msgstr ""
+
+#: templates/invoice/invoice-footer.php:3
+msgid "Notes"
+msgstr ""

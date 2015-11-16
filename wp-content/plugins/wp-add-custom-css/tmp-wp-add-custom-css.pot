@@ -1,0 +1,77 @@
+# Copyright (C) 2015 WP Add Custom CSS
+# This file is distributed under the same license as the WP Add Custom CSS package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Add Custom CSS 0.9.7\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-add-custom-"
+"css\n"
+"POT-Creation-Date: 2015-11-04 14:11:53+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: wordpress-add-custom-css.php:62
+msgid "Custom CSS"
+msgstr ""
+
+#: wordpress-add-custom-css.php:88
+msgid "Add custom CSS rules for this %s"
+msgstr ""
+
+#: wordpress-add-custom-css.php:94 wordpress-add-custom-css.php:101
+msgid "Wordpress Add Custom CSS"
+msgstr ""
+
+#: wordpress-add-custom-css.php:94
+msgid "Add Custom CSS"
+msgstr ""
+
+#: wordpress-add-custom-css.php:105
+msgid "Save"
+msgstr ""
+
+#: wordpress-add-custom-css.php:107
+msgid "Credits"
+msgstr ""
+
+#: wordpress-add-custom-css.php:109
+msgid "\"WP Add Custom CSS\" is a plugin by"
+msgstr ""
+
+#: wordpress-add-custom-css.php:116
+msgid "Write here the CSS rules you want to apply to the whole website."
+msgstr ""
+
+#: wordpress-add-custom-css.php:131
+msgid "Main CSS"
+msgstr ""
+
+#: wordpress-add-custom-css.php:137
+msgid "CSS rules"
+msgstr ""
+
+#: wordpress-add-custom-css.php:206
+msgid "Settings"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Add Custom CSS"
+msgstr ""
+
+#. #-#-#-#-#  tmp-wp-add-custom-css.pot (WP Add Custom CSS 0.9.7)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  tmp-wp-add-custom-css.pot (WP Add Custom CSS 0.9.7)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://www.danieledesantis.net"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Add custom css to the whole website and to specific posts and pages."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Daniele De Santis"
+msgstr ""
