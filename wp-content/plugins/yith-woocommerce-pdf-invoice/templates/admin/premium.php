@@ -33,6 +33,7 @@
         vertical-align: middle;
         padding: 0;
         font-size: 24px;
+        line-height: 25px;
         font-weight: 700;
         color: #808a97;
         text-transform: uppercase;
@@ -303,13 +304,41 @@
             </div>
         </div>
     </div>
+    <div class="section section-odd clear" style="background: url(<?php echo YITH_YWPI_ASSETS_IMAGES_URL ?>08-bg.png) no-repeat #f1f1f1; background-position: 15% 100%">
+        <div class="landing-container">
+            <div class="col-2">
+                <div class="section-title">
+                    <img src="<?php echo YITH_YWPI_ASSETS_IMAGES_URL ?>08-icon.png" alt="icon-08" />
+                    <h2><?php _e('User information','yith-woocommerce-pdf-invoice');?></h2>
+                </div>
+                <p><?php echo sprintf(__('No more limits for information about order and user to be inserted in the document. All you have to do is obtain the %1$s"meta key"%2$s value and the information will be dynamically inserted. A system that allows you to make documents rich of useful data.','yith-woocommerce-pdf-invoice'),'<b>','</b>');?></p>
+            </div>
+            <div class="col-1">
+                <img src="<?php echo YITH_YWPI_ASSETS_IMAGES_URL ?>08.png" alt=<?php _e('User information','yith-woocommerce-pdf-invoice');?>/>
+            </div>
+        </div>
+    </div>
+    <div class="section section-even clear" style="background: url(<?php echo YITH_YWPI_ASSETS_IMAGES_URL ?>09-bg.png) no-repeat #fff; background-position: 85% 100%">
+        <div class="landing-container">
+            <div class="col-1">
+                <img src="<?php echo YITH_YWPI_ASSETS_IMAGES_URL ?>09.png" alt= <?php _e('templates','yith-woocommerce-pdf-invoice');?>/>
+            </div>
+            <div class="col-2">
+                <div class="section-title">
+                    <img src="<?php echo YITH_YWPI_ASSETS_IMAGES_URL ?>09-icon.png" alt="Icon-09" />
+                    <h2><?php _e('Overwrite template','yith-woocommerce-pdf-invoice');?></h2>
+                </div>
+                <p><?php echo sprintf(__('If you are a developer and you want to change the document template provided by default from the plugin, you can easily copy files of interest in your theme folder.%3$s After changes, enable the %1$spreview mode%2$s: in this way you could generate an invoice sample to check the changes without an increase in numeration.','yith-woocommerce-pdf-invoice'),'<b>','</b>','<br>');?></p>
+            </div>
+        </div>
+    </div>
 
 
     <div class="section section-cta section-odd">
         <div class="landing-container">
             <div class="premium-cta">
                 <p>
-                    U<?php echo sprintf(__('Upgrade to the %1$spremium version%2$s of %1$sYITH WooCommerce Pdf Invoice%2$s and Shipping List to benefit from all features!','yith-woocommerce-pdf-invoice'),'<span class="highlight">','</span>');?>
+                    <?php echo sprintf(__('Upgrade to the %1$spremium version%2$s of %1$sYITH WooCommerce Pdf Invoice and Shipping List%2$s to benefit from all features!','yith-woocommerce-pdf-invoice'),'<span class="highlight">','</span>');?>
                 </p>
                 <a href="<?php echo YITH_YWPI_Plugin_FW_Loader::get_instance()->get_premium_landing_uri(); ?>" target="_blank" class="premium-cta-button button btn">
                     <span class="highlight"><?php _e('UPGRADE','yith-woocommerce-pdf-invoice');?></span>

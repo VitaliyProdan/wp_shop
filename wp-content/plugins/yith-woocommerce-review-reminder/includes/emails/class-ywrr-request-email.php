@@ -56,9 +56,12 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
          */
         public function __construct() {
 
-            $this->title          = __( 'Review reminder', 'yith-woocommerce-review-reminder' );
+            $this->title          = __( 'Review Reminder', 'yith-woocommerce-review-reminder' );
             $this->template_html  = 'emails/review-request.php';
             $this->template_plain = 'emails/plain/review-request.php';
+            $this->id             = 'yith-review-reminder';
+            $this->description    = __( 'Send a review reminder to the customers over WooCommerce.', 'yith-woocommerce-review-reminder' );
+            $this->customer_email = true;
 
             parent::__construct();
         }
@@ -72,15 +75,18 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
          * @param   $item_list array the list of items to review
          * @param   $days_ago  int number of days after order completion
          * @param   $test_email
+         * @param   $template
          *
-         * @return  void
+         * @return  bool
          * @author  Alberto Ruggiero
          */
         public function trigger( $order_id, $item_list, $days_ago, $test_email = '', $template = false ) {
 
+            $lang = get_post_meta( $order_id, 'wpml_language', true );
+
             $this->email_type    = get_option( 'ywrr_mail_type' );
-            $this->heading       = get_option( 'ywrr_mail_subject' );
-            $this->subject       = get_option( 'ywrr_mail_subject' );
+            $this->heading       = apply_filters( 'wpml_translate_single_string', get_option( 'ywrr_mail_subject' ), 'admin_texts_ywrr_mail_subject', 'ywrr_mail_subject', $lang );
+            $this->subject       = apply_filters( 'wpml_translate_single_string', get_option( 'ywrr_mail_subject' ), 'admin_texts_ywrr_mail_subject', 'ywrr_mail_subject', $lang );
             $this->days_ago      = $days_ago;
             $this->item_list     = $item_list;
             $this->template_type = $template;
@@ -102,10 +108,10 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
             }
 
             if ( !$this->get_recipient() ) {
-                return;
+                return false;
             }
 
-            $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), "" );
+            return $this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), "" );
         }
 
         /**
@@ -166,7 +172,8 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
                 'review_list'   => $this->review_list,
                 'template'      => $this->template_type,
                 'sent_to_admin' => false,
-                'plain_text'    => false
+                'plain_text'    => false,
+                'email'         => $this,
             ), YWRR_TEMPLATE_PATH, YWRR_TEMPLATE_PATH );
             return ob_get_clean();
         }
@@ -187,9 +194,36 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
                 'item_list'     => $this->item_list,
                 'review_list'   => $this->review_list,
                 'sent_to_admin' => false,
-                'plain_text'    => true
+                'plain_text'    => true,
+                'email'         => $this,
             ), YWRR_TEMPLATE_PATH, YWRR_TEMPLATE_PATH );
             return ob_get_clean();
+        }
+
+        /**
+         * Get email content type.
+         *
+         * @since   1.1.4
+         * @return  string
+         * @author  Alberto Ruggiero
+         */
+        public function get_content_type() {
+            switch ( get_option( 'ywrr_mail_type' ) ) {
+                case 'html' :
+                    return 'text/html';
+                default :
+                    return 'text/plain';
+            }
+        }
+
+        /**
+         * Checks if this email is enabled and will be sent.
+         * @since   1.1.4
+         * @return  bool
+         * @author  Alberto Ruggiero
+         */
+        public function is_enabled() {
+            return ( get_option( 'ywrr_enable_plugin' ) === 'yes' );
         }
 
         /**
@@ -215,7 +249,7 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
             <table class="form-table">
                 <?php woocommerce_admin_fields( $this->form_fields['mail'] ); ?>
             </table>
-        <?php
+            <?php
 
         }
 

@@ -29,14 +29,6 @@ if ( ! class_exists( 'YITH_WCMG_Admin' ) ) {
         public $options = array();
 
         /**
-         * Plugin version
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        public $version;
-
-        /**
          * Various links
          *
          * @var string
@@ -53,8 +45,7 @@ if ( ! class_exists( 'YITH_WCMG_Admin' ) ) {
          * @access public
          * @since 1.0.0
          */
-        public function __construct( $version ) {
-            $this->version = $version;
+        public function __construct(  ) {
 
             //Actions
             add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles_scripts' ) );

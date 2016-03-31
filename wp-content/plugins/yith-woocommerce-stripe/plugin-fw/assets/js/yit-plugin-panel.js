@@ -165,12 +165,28 @@
                 var attachment = custom_uploader.state().get( 'selection' ).first().toJSON();
 
                 $("#" + id).val( attachment.url );
+                //  Save the id of the selected element to an element which name is the same with
+                // a suffix "-yith-attachment-id"
+                if ($("#" + id + "-yith-attachment-id")) {
+                    $("#" + id + "-yith-attachment-id").val(attachment.id);
+                }
+
                 $('.plugin-option .upload_img_url').trigger('change');
             });
 
             //Open the uploader dialog
             custom_uploader.open();
         });
+
+        $( document).on( 'click', '.plugin-option .upload_button_reset', function(e){
+            var t   = $(this),
+                id = t.attr('id'),
+                input_id = t.attr('id').replace(/-button_reset$/, ''),
+                default_value = $('#' + id).data('default');
+
+            $("#" + input_id).val( default_value );
+            $('.plugin-option .upload_img_url').trigger('change');
+        } );
     }
 
     $('.plugin-option .add_media').on('click', function () {

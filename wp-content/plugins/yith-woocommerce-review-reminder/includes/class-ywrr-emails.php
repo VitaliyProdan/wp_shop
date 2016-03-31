@@ -72,7 +72,7 @@ if ( !class_exists( 'YWRR_Emails' ) ) {
          * @param   $items_to_review
          * @param   $stored_items
          *
-         * @return  void
+         * @return  bool
          * @author  Alberto Ruggiero
          */
         public function send_email( $order_id, $days, $items_to_review = array(), $stored_items = array() ) {
@@ -109,7 +109,7 @@ if ( !class_exists( 'YWRR_Emails' ) ) {
             $wc_email = WC_Emails::instance();
             $email    = $wc_email->emails['YWRR_Request_Mail'];
 
-            $email->trigger( $order_id, $list, $days );
+            return $email->trigger( $order_id, $list, $days );
 
         }
 

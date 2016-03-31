@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: zoom, magnifier, woocommerce, product image, themes, yit, e-commerce, shop, thumbnail, thumbnail slider, zoom image, carousel, image carousel
 Requires at least: 3.5.1
-Tested up to: 4.3.1
-Stable tag: 1.2.12
+Tested up to: 4.4.2
+Stable tag: 1.2.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,58 +59,82 @@ The size of the Zoom Image is automatically setted. If you want to change these 
 
 == Changelog ==
 
-= Version 1.2.12 - RELEASED: OCT 29, 2015 =
+= Version 1.2.17 - Released: Feb 24, 2016 =
+
+* Updated: YITH Plugin FW
+* Fixed: removed trailing comma in JS script that break the page rendering on old IE browser
+
+= Version 1.2.16 - Released: Jan 18, 2016 =
+
+* Updated: YITH Plugin FW loading remove unused YIT constant
+* Added: filter yith_ywzm_zoom_wrap_additional_css for customizing CSS class for the wrapping div
+* Updated: plugin ready for WooCommerce 2.5
+
+= Version 1.2.15 - Released: Jan 04, 2016 =
+
+* Fixed: Cannot redeclare yith_ywzm_install_woocommerce_admin_notice() when the plugin is loaded from YITH Essential Kit
+
+= Version 1.2.14 - Released: Dec 29, 2015 =
+
+* Added: Compatibility with YIT WooCommerce Featured Audio & Video Content
+
+= Version 1.2.13 - Released: Dec 21, 2015 =
+
+* Fixed: multiple wrap of zoom element with the div with class yith_magnifier_zoom_wrap
+* Updated: jquery-ui.css is no more linked as external resource but shipped within the plugin, as wordpress.org asked
+
+= Version 1.2.12 - Released: Oct 29, 2015 =
 
 * Updated: YITH plugin framework
 
-= Version 1.2.11 - RELEASED: OCT 23, 2015 =
+= Version 1.2.11 - Released: Oct 23, 2015 =
 
 * Updated: compatibility with YITH WooCommerce Quick View.
 
-= Version 1.2.10 - RELEASED: SEP 24, 2015 =
+= Version 1.2.10 - Released: Sep 24, 2015 =
 
 * Updated: changed text domain as translate.wordpress.org requisite.
 
-= Version 1.2.9 - RELEASED: SEP 04, 2015 =
+= Version 1.2.9 - Released: Sep 04, 2015 =
 
 * Updated: Languages file
-* Fix: Changed plugin text domain from yit to ywmz
-* Fix: featured image shown one time on slider.
-* Fix: div not shown if loading text is empty.
+* Fixed: Changed plugin text domain from yit to ywmz
+* Fixed: featured image shown one time on slider.
+* Fixed: div not shown if loading text is empty.
 
-= Version 1.2.8 - RELEASED: SEP 01, 2015 =
+= Version 1.2.8 - Released: Sep 01, 2015 =
 
-* Fix: removed deprecated woocommerce_update_option_X hook.
+* Fixed: removed deprecated woocommerce_update_option_X hook.
 
-= Version 1.2.7 - RELEASED: AUG 27, 2015 =
+= Version 1.2.7 - Released: Aug 27, 2015 =
 
-* Fix: resolved XSS vulnerability.
+* Fixed: resolved XSS vulnerability.
 
-= Version 1.2.6 - RELEASED: AUG 12, 2015 =
+= Version 1.2.6 - Released: Aug 12, 2015 =
 
 * Tweak: update YITH Plugin framework.
 
-= Version 1.2.5 - RELEASED: JUL 23, 2015 =
+= Version 1.2.5 - Released: Jul 23, 2015 =
 
 * Added: italian language.
 
-= Version 1.2.4 - RELEASED: JUN 26, 2015 =
+= Version 1.2.4 - Released: Jun 26, 2015 =
 
 * Added: support to srcset and src-orig attributes.
 
-= Version 1.2.3 - RELEASED: MAY 29, 2015 =
+= Version 1.2.3 - Released: May 29, 2015 =
 
 * Added: included jquery-migrate as prerequisite.
 
-= Version 1.2.2 - RELEASED: MAY 22, 2015 =
+= Version 1.2.2 - Released: May 22, 2015 =
 
 * Fixed: CSS fix for EssentialGrid conflicts.
 
-= Version 1.2.1 - RELEASED: MAY 04, 2015 =
+= Version 1.2.1 - Released: May 04, 2015 =
 
 * Fixed: removed z-index that made the zoom area hiding other elements in certain themes.
 
-= Version 1.2.0 - RELEASED: APR 22, 2015 =
+= Version 1.2.0 - Released: Apr 22, 2015 =
 
 * Fix : security issue (https://make.wordpress.org/plugins/2015/04/20/fixing-add_query_arg-and-remove_query_arg-usage/)
 * Tweak : support up to Wordpress 4.2

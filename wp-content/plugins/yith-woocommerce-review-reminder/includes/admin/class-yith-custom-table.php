@@ -160,6 +160,22 @@ if ( !class_exists( 'YITH_Custom_Table' ) ) {
             $count_table = $this->options['count_table'];
             $count_where = $this->options['count_where'] != '' ? 'WHERE ' . $this->options['count_where'] : '';
 
+            if ( !empty( $this->options['search_where'] ) && isset( $_REQUEST['s'] ) ) {
+
+                $search_where = array();
+
+                foreach ( $this->options['search_where'] as $search_param ) {
+
+                    $search_where[] = $search_param . " LIKE '%{$wpdb->esc_like( $_REQUEST['s'] )}%'";
+
+                }
+
+                $select_where .= ( $this->options['select_where'] != '' ? ' AND (' : 'WHERE (' ) . implode( ' OR ', $search_where ) . ') ';
+                $count_where .= ( $this->options['count_where'] != '' ? ' AND (' : 'WHERE (' ) . implode( ' OR ', $search_where ) . ') ';
+
+            }
+
+
             $view_columns     = $this->get_columns();
             $hidden_columns   = $this->options['hidden_columns'];
             $sortable_columns = $this->get_sortable_columns();
@@ -180,14 +196,17 @@ if ( !class_exists( 'YITH_Custom_Table' ) ) {
             $order_dir = ( $this->options['select_order_dir'] != '' ) ? $this->options['select_order_dir'] : 'asc';
             $order     = ( isset( $_GET['order'] ) && in_array( $_GET['order'], array( 'asc', 'desc' ) ) ) ? $_GET['order'] : $order_dir;
 
-            $this->items = $wpdb->get_results( $wpdb->prepare( "
-                        SELECT $select_columns
-                        FROM $select_table
-                        $select_where
-                        $select_group
-                        ORDER BY $orderby $order
-                        LIMIT %d OFFSET %d
-                        ", $select_limit, $paged ), ARRAY_A );
+            $sql = "
+                    SELECT $select_columns
+                    FROM $select_table
+                    $select_where
+                    $select_group
+                    ORDER BY $orderby $order
+                    LIMIT $select_limit
+                    OFFSET $paged
+                    ";
+
+            $this->items = $wpdb->get_results( $sql, ARRAY_A );
 
             $this->set_pagination_args( array(
                                             'total_items' => $total_items,

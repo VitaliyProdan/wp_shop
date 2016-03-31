@@ -11,7 +11,7 @@ if ( !defined( 'YITH_WCWL' ) ) { exit; } // Exit if accessed directly
 
 if( !function_exists( 'yith_wcwl_is_wishlist' ) ){
     /**
-     * Check if current page is wishlist
+     * Check if we're printing wishlist shortcode
      *
      * @param string $path
      * @param array $var
@@ -22,6 +22,24 @@ if( !function_exists( 'yith_wcwl_is_wishlist' ) ){
         global $yith_wcwl_is_wishlist;
 
         return $yith_wcwl_is_wishlist;
+    }
+}
+
+if( !function_exists( 'yith_wcwl_is_wishlist_page' ) ){
+    /**
+     * Check if current page is wishlist
+     *
+     * @return bool
+     * @since 2.0.13
+     */
+    function yith_wcwl_is_wishlist_page(){
+        $wishlist_page_id = yith_wcwl_object_id( get_option( 'yith_wcwl_wishlist_page_id' ) );
+
+        if( ! $wishlist_page_id ){
+            return false;
+        }
+
+        return is_page( $wishlist_page_id );
     }
 }
 
@@ -102,6 +120,30 @@ if( !function_exists( 'yith_wcwl_count_products' ) ) {
      */
     function yith_wcwl_count_products( $wishlist_token = false ) {
         return YITH_WCWL()->count_products( $wishlist_token );
+    }
+}
+
+if( !function_exists( 'yith_wcwl_count_all_products' ) ) {
+    /**
+     * Retrieve the number of products in all the wishlists.
+     *
+     * @return int
+     * @since 2.0.13
+     */
+    function yith_wcwl_count_all_products() {
+        return YITH_WCWL()->count_all_products();
+    }
+}
+
+if( !function_exists( 'yith_wcwl_count_add_to_wishlist' ) ){
+    /**
+     * Count number of times a product was added to users wishlists
+     *
+     * @return int Number of times the product was added to wishlists
+     * @since 2.0.13
+     */
+    function yith_wcwl_count_add_to_wishlist( $product_id = false ){
+        return YITH_WCWL()->count_add_to_wishlist( $product_id );
     }
 }
 

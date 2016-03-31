@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: woocommerce, orders, woocommerce order, pdf, invoice, pdf invoice, delivery note, pdf invoices, automatic invoice, download, download invoice, bill order, billing, automatic billing, order invoice, billing invoice, new order, processing order, shipping list, shipping document, delivery, packing slip, transport document,  delivery, shipping, order, shop, shop invoice, customer, sell, invoices, email invoice, packing slips
 Requires at least: 4.0
-Tested up to: 4.3.1
-Stable tag: 1.1.6
+Tested up to: 4.4.2
+Stable tag: 1.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,52 +54,61 @@ YITH WooCommerce PDF Invoice and Shipping List will add a new tab called "PDF In
 
 == Changelog ==
 
-= Version 1.1.6 - RELEASED: NOV 04, 2015 =
+= Version 1.1.8 - Released: Mar 31, 2016 =
+
+* Updated : YITH Plugin framework
+* Fixed : now shipping informations shown on shipping list document instead of the billing informations
+
+= Version 1.1.7 - Released: Feb 22, 2016 =
+
+* Updated : YITH Plugin framework
+
+= Version 1.1.6 - Released: Nov 04, 2015 =
 
 * Fixed: invoice generated and attached to emails not related to orders
 * Updated : text-domain changed from ywpi to yith-woocommerce-pdf-invoice
 
-= Version 1.1.5 - RELEASED: SEP 04, 2015 =
+= Version 1.1.5 - Released: Sep 04, 2015 =
 
 * Fixed: removed deprecated woocommerce_update_option_X hook.
 
-= Version 1.1.4 - RELEASED: AUG 12, 2015 =
+= Version 1.1.4 - Released: Aug 12, 2015 =
 
 * Updated: update YITH Plugin framework.
 
-= Version 1.1.3 - RELEASED: MAY 27, 2015 =
+= Version 1.1.3 - Released: May 27, 2015 =
 
 * Fixed : localization issue.
 
-= Version 1.1.2 - RELEASED: MAY 22, 2015 =
+= Version 1.1.2 - Released: May 22, 2015 =
 
 * Added : improved unicode support.
 
-= Version 1.1.1 - RELEASED: MAY 07, 2015 =
+= Version 1.1.1 - Released: May 07, 2015 =
 
 * Added : shipping cost details are shown on invoices.
 
-= Version 1.1.0 - RELEASED: APR 22, 2015 =
+= Version 1.1.0 - Released: Apr 22, 2015 =
 
 * Fixed : security issue (https://make.wordpress.org/plugins/2015/04/20/fixing-add_query_arg-and-remove_query_arg-usage/)
 
-= Version 1.0.3 - RELEASED: APR 07, 2015 =
+= Version 1.0.3 - Released: Apr 07, 2015 =
 
 * Fixed : documents with greek text could not be rendered correctly.
 
-= Version 1.0.2 - RELEASED: MAR 05, 2015 =
+= Version 1.0.2 - Released: Mar 05, 2015 =
 
 * Fixed: PDF generation failed sometimes.
 * Added: support to WPML.
 
-= Version 1.0.1 - RELEASED: FEB 20, 2015 =
+= Version 1.0.1 - Released: Feb 20, 2015 =
 
 * Added: Create PDF shipping list document
 * Added: Shipping list customizable template
 * Added: Buttons for generating/viewing invoices and shipping list from back-end order page and single order page.
 * Added: Woocommerce 2.3 support
 
-= Version 1.0.0 - RELEASED: FEB 13, 2015 =
+= Version 1.0.0 - Released: Feb 13, 2015 =
 
 * Initial release
 

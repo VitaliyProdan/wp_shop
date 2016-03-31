@@ -3,7 +3,7 @@
  * Plugin Name: YITH WooCommerce Stripe
  * Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-stripe/
  * Description: Allows you to add Stripe gateway payment to WooCommerce
- * Version: 1.2.0
+ * Version: 1.2.5
  * Author: YIThemes
  * Author URI: http://yithemes.com/
  * Text Domain: yith-stripe
@@ -11,7 +11,7 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Stripe
- * @version 1.1.0
+ * @version 1.2.5
  */
 /*  Copyright 2013  Your Inspiration Themes  (email : plugins@yithemes.com)
 
@@ -78,7 +78,7 @@ if ( ! defined( 'YITH_WCSTRIPE' ) ) {
 if ( defined( 'YITH_WCSTRIPE_VERSION' ) ) {
 	return;
 }else{
-	define( 'YITH_WCSTRIPE_VERSION', '1.2.0' );
+	define( 'YITH_WCSTRIPE_VERSION', '1.2.5' );
 }
 
 if ( ! defined( 'YITH_WCSTRIPE_FILE' ) ) {
@@ -100,6 +100,12 @@ if ( ! defined( 'YITH_WCSTRIPE_DIR' ) ) {
 if ( ! defined( 'YITH_WCSTRIPE_INC' ) ) {
 	define( 'YITH_WCSTRIPE_INC', YITH_WCSTRIPE_DIR . 'includes/' );
 }
+
+/* Plugin Framework Version Check */
+if( ! function_exists( 'yit_maybe_plugin_fw_loader' ) && file_exists( YITH_WCSTRIPE_DIR . 'plugin-fw/init.php' ) ) {
+	require_once( YITH_WCSTRIPE_DIR . 'plugin-fw/init.php' );
+}
+yit_maybe_plugin_fw_loader( YITH_WCSTRIPE_DIR  );
 
 if ( ! function_exists( 'YITH_WCStripe' ) ) {
 	/**

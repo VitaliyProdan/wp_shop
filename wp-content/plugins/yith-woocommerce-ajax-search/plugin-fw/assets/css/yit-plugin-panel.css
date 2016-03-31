@@ -631,6 +631,10 @@
     width: 6em;
 }
 
+#wpwrap h2.nav-tab-wrapper {
+    border-bottom: 1px solid #ccc;
+}
+
 /* === YIT FRAMEWORK === */
 .plugin-card .plugin-icon img {
     max-width: 100%;

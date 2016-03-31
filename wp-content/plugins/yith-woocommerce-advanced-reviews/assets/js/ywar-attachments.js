@@ -2,11 +2,11 @@ jQuery(document).ready(function ($) {
     $('#commentform').attr('enctype', "multipart/form-data");
 
     $('#do_uploadFile').click(function () {
-        $('#uploadFile').click();
+        $('#ywar-uploadFile').click();
     })
 
-    $('#uploadFile').on('change', function () {
-        var input = document.getElementById("uploadFile");
+    $('#ywar-uploadFile').on('change', function () {
+        var input = document.getElementById("ywar-uploadFile");
         if ((attach.limit_multiple_upload > 0) && (input.files.length > attach.limit_multiple_upload)) {
             alert('Too many files selected.');
             this.value = '';
@@ -41,7 +41,7 @@ jQuery(document).ready(function ($) {
 
     // Prevent submission if limit is exceeded.
     $('#commentform').submit(function () {
-        var input = document.getElementById("uploadFile");
+        var input = document.getElementById("ywar-uploadFile");
         if ((attach.limit_multiple_upload > 0) && (input.files.length > attach.limit_multiple_upload))
             return false;
     });

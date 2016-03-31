@@ -64,6 +64,32 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
         var $_email_templates = array();
 
         /**
+         * Single instance of the class
+         *
+         * @var \YWRR_Review_Reminder
+         * @since 1.1.5
+         */
+        protected static $instance;
+
+        /**
+         * Returns single instance of the class
+         *
+         * @return \YWRR_Review_Reminder
+         * @since 1.1.5
+         */
+        public static function get_instance() {
+
+            if ( is_null( self::$instance ) ) {
+
+                self::$instance = new self;
+
+            }
+
+            return self::$instance;
+
+        }
+
+        /**
          * Constructor
          *
          * Initialize plugin and registers actions and filters to be used
@@ -79,15 +105,9 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
             }
 
             $this->_email_types = array(
-                'request'     => array(
+                'request' => array(
                     'class' => 'YWRR_Request_Mail',
                     'file'  => 'class-ywrr-request-email.php',
-                    'hide'  => false,
-                ),
-                'unsubscribe' => array(
-                    'class' => 'YWRR_Unsubscribe_Mail',
-                    'file'  => 'class-ywrr-unsubscribe-email.php',
-                    'hide'  => true,
                 ),
             );
 
@@ -95,10 +115,7 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
             add_action( 'plugins_loaded', array( $this, 'plugin_fw_loader' ), 12 );
 
             //Add action links
-            add_filter( 'plugin_action_links_' . plugin_basename( YWRR_DIR . '/' . basename( YWRR_FILE ) ), array(
-                $this,
-                'action_links'
-            ) );
+            add_filter( 'plugin_action_links_' . plugin_basename( YWRR_DIR . '/' . basename( YWRR_FILE ) ), array( $this, 'action_links' ) );
             add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 4 );
 
             // Include required files
@@ -109,35 +126,31 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
             add_action( 'yith_review_reminder_premium', array( $this, 'premium_tab' ) );
 
             if ( is_admin() ) {
-                add_filter( 'set-screen-option', 'YWRR_Blocklist_Table::set_options', 10, 3 );
 
-                add_action( 'woocommerce_admin_field_customtext', 'YWRR_Custom_Textarea::output' );
-                add_filter( 'woocommerce_admin_settings_sanitize_option', array( $this, 'save_ywrr_textarea' ), 10, 3 );
-
-                add_action( 'ywrr_blocklist', 'YWRR_Blocklist_Table::output' );
-                add_action( 'current_screen', 'YWRR_Blocklist_Table::add_options' );
+                add_action( 'admin_enqueue_scripts', array( $this, 'ywrr_admin_scripts' ) );
+                add_action( 'ywrr_howto', array( $this, 'get_howto_content' ) );
+                add_action( 'ywrr_blocklist', array( YWRR_Blocklist_Table(), 'output' ) );
                 add_action( 'admin_notices', array( $this, 'ywrr_protect_unsubscribe_page_notice' ) );
                 add_action( 'wp_trash_post', array( $this, 'ywrr_protect_unsubscribe_page' ), 10, 1 );
                 add_action( 'before_delete_post', array( $this, 'ywrr_protect_unsubscribe_page' ), 10, 1 );
             }
             else {
-                add_action( 'template_redirect', array( YWRR_Form_Handler(), 'unsubscribe_review_request' ) );
+
+                add_action( 'template_redirect', array( $this, 'unsubscribe_review_request' ) );
                 add_shortcode( 'ywrr_unsubscribe', array( $this, 'ywrr_unsubscribe' ) );
                 add_filter( 'wp_get_nav_menu_items', array( $this, 'ywrr_hide_unsubscribe_page' ), 10, 3 );
+
             }
 
-            if ( get_option( 'ywrr_enable_plugin' ) == 'yes' ) {
+           /* if ( get_option( 'ywrr_enable_plugin' ) == 'yes' ) {
 
-                add_action( 'woocommerce_order_status_completed', array( YWRR_Schedule(), 'schedule_mail' ) );
+                add_action( 'woocommerce_order_status_completed', array( YWRR_Schedule(), 'schedule_mail' ), 10, 2 );
                 add_action( 'ywrr_daily_send_mail_job', array( YWRR_Schedule(), 'daily_schedule' ) );
 
-            }
-
-            add_action( 'init', array( $this, 'ywrr_post_status' ) );
+            }*/
             add_action( 'init', array( $this, 'ywrr_create_pages' ) );
 
             add_filter( 'woocommerce_email_classes', array( $this, 'ywrr_custom_email' ) );
-            add_filter( 'woocommerce_get_sections_email', array( $this, 'ywrr_hide_sections' ) );
 
             add_option( 'ywrr_mail_schedule_day', 7 );
             add_option( 'ywrr_mail_template', 'base' );
@@ -162,37 +175,125 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
 
             if ( is_admin() ) {
                 include_once( 'includes/admin/class-yith-custom-table.php' );
-                include_once( 'templates/admin/custom-textarea.php' );
+                include_once( 'includes/admin/class-ywrr-ajax.php' );
+                include_once( 'templates/admin/class-yith-wc-custom-textarea.php' );
+                include_once( 'templates/admin/class-ywrr-custom-send.php' );
                 include_once( 'templates/admin/blocklist-table.php' );
-            }
-
-            if ( !is_admin() || defined( 'DOING_AJAX' ) ) {
-                include_once( 'includes/class-ywrr-form-handler.php' );
             }
 
         }
 
         /**
-         * Saves custom textarea content
+         * Initializes Javascript with localization
          *
-         * @since   1.0.6
-         *
-         * @param $value
-         * @param $option
-         * @param $raw_value
-         *
-         * @return string
-         * @author  Alberto ruggiero
+         * @since   1.1.5
+         * @return  void
+         * @author  Alberto Ruggiero
          */
-        public function save_ywrr_textarea( $value, $option, $raw_value ) {
+        public function ywrr_admin_scripts() {
+            global $post;
 
-            if ( $option['type'] == 'customtext' ) {
-                $value = wp_kses_post( trim( $raw_value ) );
+            $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-            }
+            wp_enqueue_style( 'ywrr-admin', YWRR_ASSETS_URL . 'css/ywrr-admin.css' );
 
-            return $value;
+            wp_enqueue_script( 'ywrr-admin', YWRR_ASSETS_URL . 'js/ywrr-admin' . $suffix . '.js' );
 
+            $params = apply_filters( 'ywrr_admin_scripts_filter', array(
+                'ajax_url'               => admin_url( 'admin-ajax.php' ),
+                'after_send_test_email'  => __( 'Test email has been sent successfully!', 'yith-woocommerce-review-reminder' ),
+                'test_mail_wrong'        => __( 'Please insert a valid email address', 'yith-woocommerce-review-reminder' ),
+                'before_send_test_email' => __( 'Sending test email...', 'yith-woocommerce-review-reminder' ),
+            ), $post );
+
+            wp_localize_script( 'ywrr-admin', 'ywrr_admin', $params );
+
+        }
+
+        /**
+         * Get placeholder reference content.
+         *
+         * @since   1.1.5
+         * @return  void
+         * @author  Alberto Ruggiero
+         */
+        public function get_howto_content() {
+
+            ?>
+            <div id="plugin-fw-wc">
+                <h3>
+                    <?php _e( 'Placeholder reference', 'yith-woocommerce-review-reminder' ); ?>
+                </h3>
+                <table class="form-table">
+                    <tbody>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{customer_name}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with the customer\'s name', 'yith-woocommerce-review-reminder' ) ?>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{customer_email}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with the customer\'s email', 'yith-woocommerce-review-reminder' ) ?>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{site_title}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with the site title', 'yith-woocommerce-review-reminder' ); ?>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{order_id}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with the order ID', 'yith-woocommerce-review-reminder' ); ?>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{order_date}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with the date and time of the order', 'yith-woocommerce-review-reminder' ) ?>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{order_date_completed}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with the date the order was marked completed', 'yith-woocommerce-review-reminder' ) ?>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{order_list}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with a list of products purchased but not reviewed (Do not forget it!!!)', 'yith-woocommerce-review-reminder' ) ?>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{days_ago}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with the days ago the order was made', 'yith-woocommerce-review-reminder' ) ?>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <?php
         }
 
         /**
@@ -284,7 +385,7 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
             }
             elseif ( defined( 'YITH_WCET_PREMIUM' ) && get_option( 'ywrr_mail_template_enable' ) == 'yes' ) {
 
-                $style = include( YITH_WCET_TEMPLATE_PATH . '/emails/email-items-list.php' );
+                $style = include( YITH_WCET_TEMPLATE_PATH . '/emails/woocommerce2.4/emails/email-items-list.php' );
 
             }
             else {
@@ -311,22 +412,34 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
          * @see     plugin-fw/lib/yit-plugin-panel.php
          */
         public function add_menu_page() {
+
             if ( !empty( $this->_panel ) ) {
                 return;
             }
 
-            $admin_tabs = array(
-                'mail'      => __( 'Mail Settings', 'yith-woocommerce-review-reminder' ),
-                'blocklist' => __( 'Blocklist', 'yith-woocommerce-review-reminder' )
-            );
+            $admin_tabs = array();
 
-            if ( defined( 'YWRR_PREMIUM' ) ) {
-                $admin_tabs['settings'] = __( 'Request Settings', 'yith-woocommerce-review-reminder' );
-                $admin_tabs['mandrill'] = __( 'Mandrill Settings', 'yith-woocommerce-review-reminder' );
-                $admin_tabs['schedule'] = __( 'Schedule List', 'yith-woocommerce-review-reminder' );
+            if ( defined( 'YWRR_PREMIUM' ) && YWRR_PREMIUM ) {
+
+                $admin_tabs['premium-mail'] = __( 'Mail Settings', 'yith-woocommerce-review-reminder' );
+                $admin_tabs['settings']     = __( 'Request Settings', 'yith-woocommerce-review-reminder' );
+                $admin_tabs['mandrill']     = __( 'Mandrill Settings', 'yith-woocommerce-review-reminder' );
+                $admin_tabs['schedule']     = __( 'Schedule List', 'yith-woocommerce-review-reminder' );
+
             }
             else {
+
+                $admin_tabs['mail'] = __( 'Mail Settings', 'yith-woocommerce-review-reminder' );
+
+            }
+
+            $admin_tabs['blocklist'] = __( 'Blocklist', 'yith-woocommerce-review-reminder' );
+            $admin_tabs['howto']     = __( 'How-To', 'yith-woocommerce-review-reminder' );
+
+            if ( !defined( 'YWRR_PREMIUM' ) || !YWRR_PREMIUM ) {
+
                 $admin_tabs['premium-landing'] = __( 'Premium Version', 'yith-woocommerce-review-reminder' );
+
             }
 
             $args = array(
@@ -346,44 +459,6 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
         }
 
         /**
-         * Hides custom email settings from WooCommerce panel
-         *
-         * @since   1.0.0
-         *
-         * @param   $sections
-         *
-         * @return  array
-         * @author  Andrea Grillo
-         */
-        public function ywrr_hide_sections( $sections ) {
-            foreach ( $this->_email_types as $type => $email_type ) {
-                $class_name = strtolower( $email_type['class'] );
-                if ( isset( $sections[$class_name] ) && $email_type['hide'] == true ) {
-                    unset( $sections[$class_name] );
-                }
-            }
-
-            return $sections;
-        }
-
-        /**
-         * Creates a custom post status for unsubscribe page in order to avoid visibility of page in automatic menus
-         *
-         * @since   1.0.0
-         * @return  void
-         * @author  Alberto Ruggiero
-         */
-        public function ywrr_post_status() {
-            register_post_status( 'ywrr-unsubscribe', array(
-                'label'                     => __( 'Unsubscribe Page', 'yith-woocommerce-review-reminder' ),
-                'public'                    => true,
-                'exclude_from_search'       => true,
-                'show_in_admin_all_list'    => false,
-                'show_in_admin_status_list' => false
-            ) );
-        }
-
-        /**
          * Creates the unsubscribe page
          *
          * @since   1.0.0
@@ -392,28 +467,24 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
          */
         public function ywrr_create_pages() {
 
-            if ( !function_exists( 'wc_create_page' ) ) {
+            if ( get_option( 'ywrr_unsubscribe_page_id' ) ) {
                 return;
             }
 
-            $pages = apply_filters( 'woocommerce_create_pages', array(
-                'unsubscribe' => array(
-                    'name'    => _x( 'unsubscribe', 'Page slug', 'yith-woocommerce-review-reminder' ),
-                    'title'   => _x( 'Unsubscribe', 'Page title', 'yith-woocommerce-review-reminder' ),
-                    'content' => '[ywrr_unsubscribe]'
-                )
-            ) );
-
-            foreach ( $pages as $key => $page ) {
-                wc_create_page( esc_sql( $page['name'] ), 'ywrr_' . $key . '_page_id', $page['title'], $page['content'], !empty( $page['parent'] ) ? wc_get_page_id( $page['parent'] ) : '' );
-            }
-
-            $unsubscribe_page = array(
-                'ID'          => get_option( 'ywrr_unsubscribe_page_id' ),
-                'post_status' => 'ywrr-unsubscribe'
+            $page_data = array(
+                'post_status'    => 'publish',
+                'post_type'      => 'page',
+                'post_author'    => 1,
+                'post_name'      => _x( 'unsubscribe', 'Page slug', 'yith-woocommerce-review-reminder' ),
+                'post_title'     => _x( 'Unsubscribe', 'Page title', 'yith-woocommerce-review-reminder' ),
+                'post_content'   => '[ywrr_unsubscribe]',
+                'post_parent'    => 0,
+                'comment_status' => 'closed'
             );
+            $page_id   = wp_insert_post( $page_data );
 
-            wp_update_post( $unsubscribe_page );
+            update_option( 'ywrr_unsubscribe_page_id', $page_id );
+
         }
 
         /**
@@ -515,6 +586,56 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
             wc_get_template( 'unsubscribe.php', array(), YWRR_TEMPLATE_PATH, YWRR_TEMPLATE_PATH );
 
             echo '</div>';
+        }
+
+        /**
+         * Handles the unsubscribe form
+         *
+         * @since   1.0.0
+         * @return  void
+         * @author  Alberto Ruggiero
+         */
+        public function unsubscribe_review_request() {
+
+            if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+                return;
+            }
+
+            if ( empty( $_POST['action'] ) || 'unsubscribe_review_request' !== $_POST['action'] || empty( $_POST['_wpnonce'] ) || !wp_verify_nonce( $_POST['_wpnonce'], 'unsubscribe_review_request' ) ) {
+                return;
+            }
+            $customer_id    = !empty( $_POST['account_id'] ) ? $_POST['account_id'] : 0;
+            $customer_email = !empty( $_POST['account_email'] ) ? sanitize_email( $_POST['account_email'] ) : '';
+
+            if ( empty( $customer_email ) || !is_email( $customer_email ) ) {
+                wc_add_notice( __( 'Please provide a valid email address.', 'yith-woocommerce-review-reminder' ), 'error' );
+            }
+            elseif ( $customer_email !== urldecode( base64_decode( $_GET['email'] ) ) ) {
+                wc_add_notice( __( 'Please retype the email address as provided.', 'yith-woocommerce-review-reminder' ), 'error' );
+            }
+
+            if ( wc_notice_count( 'error' ) === 0 ) {
+
+                if ( true == YWRR_Blocklist()->check_blocklist( $customer_id, $customer_email ) ) {
+
+                    try {
+                        YWRR_Blocklist()->add_to_blocklist( $customer_id, $customer_email );
+                        wc_add_notice( __( 'Unsubscribe was successful.', 'yith-woocommerce-review-reminder' ) );
+                        wp_safe_redirect( get_permalink( get_option( 'ywrr_unsubscribe_page_id' ) ) );
+                        exit;
+
+                    } catch ( Exception $e ) {
+
+                        wc_add_notice( __( 'An error has occurred', 'yith-woocommerce-review-reminder' ), 'error' );
+
+                    }
+
+                }
+                else {
+                    wc_add_notice( __( 'You have already unsubscribed', 'yith-woocommerce-review-reminder' ), 'error' );
+                }
+
+            }
         }
 
         /**

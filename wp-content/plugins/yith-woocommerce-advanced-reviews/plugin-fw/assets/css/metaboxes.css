@@ -237,6 +237,27 @@
 .chosen .select_wrapper .chosen-container .chosen-drop .chosen-search input{
     width: 100%!important;
 }
+.select_wrapper span {
+    height: 26px;
+    line-height: 26px;
+    padding-left: 6px;
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.the-metabox .select_wrapper select {
+    cursor: pointer;
+    height: 28px;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: relative;
+    width: inherit;
+    z-index: 4;
+    background-color: #FAFAFA;
+}
+
 
 /* typography */
 .the-metabox.typography .select_wrapper.font-family { width:200px; }

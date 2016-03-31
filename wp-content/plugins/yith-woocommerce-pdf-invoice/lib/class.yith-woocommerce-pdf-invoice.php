@@ -109,6 +109,14 @@ if ( ! class_exists ( 'YITH_WooCommerce_Pdf_Invoice' ) ) {
             }
         }
 
+        /**
+         * Create a new invoice for the order, generated automatically if the plugin settings permit
+         *
+         * @param int $order_id
+         *
+         * @author Lorenzo Giuffrida
+         * @since  1.0.0
+         */
         public function new_automatic_invoice ( $order_id ) {
             $document = $this->get_document_by_type ( $order_id, YITH_YWPI_INVOICE_ARG_NAME );
 
@@ -214,12 +222,16 @@ if ( ! class_exists ( 'YITH_WooCommerce_Pdf_Invoice' ) ) {
             ), 99 );
         }
 
-        /*
+        /**
          * Append invoice information on order_title column, if current order has an invoice associated
+         *
+         * @param string $column
+         *
+         * @return mixed
+         * @author Lorenzo Giuffrida
+         * @since  1.0.0
          */
-        public function show_invoice_custom_column_data (
-            $column
-        ) {
+        public function show_invoice_custom_column_data ( $column ) {
             global $post;
 
             if ( 'order_title' != $column ) {
@@ -254,6 +266,13 @@ if ( ! class_exists ( 'YITH_WooCommerce_Pdf_Invoice' ) ) {
             }
         }
 
+        /**
+         * @param $document
+         *
+         * @return bool
+         * @author Lorenzo Giuffrida
+         * @since  1.0.0
+         */
         private function check_invoice_url_for_action ( $document ) {
 
             //  Check if the document is for a valid order
@@ -428,27 +447,32 @@ if ( ! class_exists ( 'YITH_WooCommerce_Pdf_Invoice' ) ) {
             <div class="invoice-information">
                 <?php if ( ( null != $invoice ) && $invoice->exists ) : ?>
                     <div style="overflow: hidden; padding: 5px 0">
-                        <span style="float:left"><?php _e ( 'Invoiced on : ', 'yith-woocommerce-pdf-invoice' ); ?></span>
+                        <span
+                            style="float:left"><?php _e ( 'Invoiced on : ', 'yith-woocommerce-pdf-invoice' ); ?></span>
                         <strong><span
                                 style="float:right"><?php echo $invoice->get_formatted_date (); ?></span></strong>
                     </div>
 
                     <div style="overflow: hidden; padding: 5px 0">
 
-                        <span style="float:left"><?php _e ( 'Invoice number : ', 'yith-woocommerce-pdf-invoice' ); ?></span>
+                        <span
+                            style="float:left"><?php _e ( 'Invoice number : ', 'yith-woocommerce-pdf-invoice' ); ?></span>
                         <strong><span
                                 style="float:right"><?php echo $invoice->get_formatted_invoice_number (); ?></span></strong>
                     </div>
 
                     <div style="clear: both; margin-top: 15px">
-                        <a class="button tips ywpi_view_invoice" data-tip="<?php _e ( "View invoice", 'yith-woocommerce-pdf-invoice' ); ?>"
+                        <a class="button tips ywpi_view_invoice"
+                           data-tip="<?php _e ( "View invoice", 'yith-woocommerce-pdf-invoice' ); ?>"
                            href="<?php echo ywpi_document_nonce_url ( YITH_YWPI_VIEW_INVOICE_ARG_NAME, $invoice ); ?>"><?php _e ( "Invoice", 'yith-woocommerce-pdf-invoice' ); ?></a>
-                        <a class="button tips ywpi_cancel_invoice" data-tip="<?php _e ( "Cancel invoice", 'yith-woocommerce-pdf-invoice' ); ?>"
+                        <a class="button tips ywpi_cancel_invoice"
+                           data-tip="<?php _e ( "Cancel invoice", 'yith-woocommerce-pdf-invoice' ); ?>"
                            href="<?php echo ywpi_document_nonce_url ( YITH_YWPI_RESET_INVOICE_ARG_NAME, $invoice ); ?>"><?php _e ( "Invoice", 'yith-woocommerce-pdf-invoice' ); ?></a>
                     </div>
                 <?php else : ?>
                     <p>
-                        <a class="button tips ywpi_create_invoice" data-tip="<?php _e ( "Create invoice", 'yith-woocommerce-pdf-invoice' ); ?>"
+                        <a class="button tips ywpi_create_invoice"
+                           data-tip="<?php _e ( "Create invoice", 'yith-woocommerce-pdf-invoice' ); ?>"
                            href="<?php echo ywpi_document_nonce_url ( YITH_YWPI_CREATE_INVOICE_ARG_NAME, $invoice ); ?>"><?php _e ( "Invoice", 'yith-woocommerce-pdf-invoice' ); ?></a>
                     </p>
                     <?php

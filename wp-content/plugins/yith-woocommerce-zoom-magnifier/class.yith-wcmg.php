@@ -16,13 +16,7 @@ if( !class_exists( 'YITH_WCMG' ) ) {
      * @since 1.0.0
      */
     class YITH_WCMG {
-        /**
-         * Plugin version
-         *
-         * @var string
-         * @since 1.0.0
-         */
-        public $version = '1.2.12';
+
         
         /**
          * Plugin object
@@ -44,9 +38,9 @@ if( !class_exists( 'YITH_WCMG' ) ) {
 			add_action( 'init', array( $this, 'init' ) );
 			
 			if( is_admin() ) {
-				$this->obj = new YITH_WCMG_Admin( $this->version );
+				$this->obj = new YITH_WCMG_Admin(  );
 			} else {
-				$this->obj = new YITH_WCMG_Frontend( $this->version );
+				$this->obj = new YITH_WCMG_Frontend(  );
 			}
 			
 			return $this->obj;

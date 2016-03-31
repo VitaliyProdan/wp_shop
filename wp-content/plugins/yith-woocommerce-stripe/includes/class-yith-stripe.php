@@ -72,9 +72,13 @@ if( ! class_exists( 'YITH_WCStripe' ) ){
 		 * @since 1.0.0
 		 */
 		public function plugin_fw_loader() {
-			if ( ! defined( 'YIT' ) || ! defined( 'YIT_CORE_PLUGIN' ) ) {
-				require_once( YITH_WCSTRIPE_DIR . '/plugin-fw/yit-plugin.php' );
-			}
+			if ( ! defined( 'YIT_CORE_PLUGIN' ) ) {
+		        global $plugin_fw_data;
+		        if( ! empty( $plugin_fw_data ) ){
+		            $plugin_fw_file = array_shift( $plugin_fw_data );
+		            require_once( $plugin_fw_file );
+		        }
+		    }
 		}
 
 		/**
@@ -84,10 +88,7 @@ if( ! class_exists( 'YITH_WCStripe' ) ){
 		 * @since 1.0.0
 		 */
 		public function __construct() {
-			add_action( 'after_setup_theme', array( $this, 'plugin_fw_loader' ), 1 );
-
-			// includes
-			include_once( 'class-yith-stripe-gateway.php' );
+			add_action( 'plugins_loaded', array( $this, 'plugin_fw_loader' ), 15 );
 
 			// capture charge if completed, only if set the option
 			add_action( 'woocommerce_order_status_processing_to_completed', array( $this, 'capture_charge' ) );
@@ -114,6 +115,7 @@ if( ! class_exists( 'YITH_WCStripe' ) ){
 		 * @since 1.0.0
 		 */
 		public function add_to_gateways( $methods ) {
+			include_once( 'class-yith-stripe-gateway.php' );
 			$methods[] = 'YITH_WCStripe_Gateway';
 
 			return $methods;

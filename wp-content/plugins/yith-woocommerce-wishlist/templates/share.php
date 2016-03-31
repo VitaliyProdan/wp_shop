@@ -4,8 +4,12 @@
  *
  * @author Your Inspiration Themes
  * @package YITH WooCommerce Wishlist
- * @version 2.0.9
+ * @version 2.0.13
  */
+
+if ( ! defined( 'YITH_WCWL' ) ) {
+    exit;
+} // Exit if accessed directly
 ?>
 
 <div class="yith-wcwl-share">
@@ -37,7 +41,7 @@
 
         <?php if( $share_email_enabled ): ?>
             <li style="list-style-type: none; display: inline-block;">
-                <a class="email" href="mailto:?subject=I%20wanted%20you%20to%20see%20this%20site&amp;body=<?php echo $share_link_url ?>&amp;title=<?php echo $share_link_title ?>" title="<?php _e( 'Email', 'yith-woocommerce-wishlist' ) ?>"></a>
+                <a class="email" href="mailto:?subject=<?php echo urlencode( apply_filters( 'yith_wcwl_email_share_subject', __( 'I wanted you to see this site', 'yith-woocommerce-wishlist' ) ) )?>&amp;body=<?php echo apply_filters( 'yith_wcwl_email_share_body', $share_link_url ) ?>&amp;title=<?php echo $share_link_title ?>" title="<?php _e( 'Email', 'yith-woocommerce-wishlist' ) ?>"></a>
             </li>
         <?php endif; ?>
     </ul>

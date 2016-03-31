@@ -3,8 +3,8 @@ Contributors: numeeja
 Donate link: http://cubecolour.co.uk/wp
 Tags: tabs, tab, responsive, accordion, shortcode
 Requires at least: 3.7
-Tested up to: 4.3
-Stable tag: 1.2.2
+Tested up to: 4.4
+Stable tag: 1.2.3
 License: GPLv2 / MIT
 
 Create responsive tabs inside your posts, pages or custom post content by adding simple shortcodes inside the post editor.
@@ -25,6 +25,9 @@ The Tabby Responsive Tabs plugin is designed to be an easy and lightweight way t
 
 > The [Tabby Link to Tab](http://cubecolour.co.uk/downloads/tabby-link-to-tab/ "Tabby Link to Tab") add-on provides a simple shortcode to create links to specific tabs which can appear anywhere on the same page as the tabgroup without the page needing to reload.
 
+> The [Tabby Tab to URL Link](http://cubecolour.co.uk/downloads/tabby-tab-to-url-link/ "Tabby Tab to URL Link") add-on enables you to set one or more of your tabs to act as a link to any URL.
+
+> The [Tabby Load Accordion Closed](http://cubecolour.co.uk/downloads/tabby-load-accordion-closed/ "Tabby Load Accordion Closed") add-on changes the default behaviour when the tabs are displayed as an accordion so no accordion sections are open when the page initially loads.
 = Usage: =
 
 There are two shortcodes which should both be used `[tabby]` and `[tabbyending]`
@@ -98,11 +101,10 @@ The [Tabby Responsive Tabs Customiser](http://cubecolour.co.uk/tabby-responsive-
 
 
 = Controlling which tab is open when linking to the page =
-You can use a 'target' URL parameter to set which tab will be open when the page initially loads. The value of this parameter is based on the tab title specified in the tabby shortcode, but formatted with punctuation & special characters removed and with dashes replacing the spaces.
+You can use a 'target' URL parameter to set which tab will be open when the page initially loads. The value of this parameter is based on the tab title specified in the tabby shortcode, but formatted with punctuation & special characters removed, accents removed, and with dashes replacing the spaces.
 
 If you want to link to a 'contacts' page with a tab titled 'Phone Numbers' open, the url you use to link to this page would look like:
 `
-
 yoursite.com/contact/?target=phone-numbers
 
 `
@@ -110,7 +112,10 @@ If you want a tab with the title 'email addresses' to be open, the url would loo
 `
 yoursite.com/contact/?target=email-addresses
 `
-
+If you want a tab with the title 'entr&eacute;es' to be open (with an acute accent over the second e), the url would look like:
+`
+yoursite.com/contact/?target=entrees
+`
 == Installation ==
 
 1. Upload the Tabby Responsive Tabs plugin folder to your '/wp-content/plugins/' directory
@@ -139,7 +144,6 @@ If you require a greater level of support than can be provided on the plugin sup
 
 = How can I remove extra paragraph tags which appear at the beginning or end of the tab content? =
 These extra tags are often be added by WordPress's wpautop function. It is recommended to leave a blank line before and after each tabby shortcode to prevent these from appearing.
-
 
 = Pasted-in shortcodes aren't working or the tabs have a 'stepped' appearance =
 If you are copying & pasting the example shortcodes into the visual editor and the shortcodes don't seem to be working or the tabs appear in a stepped configuration, look at the page in the text editor to be sure that you aren't adding in any extra markup that isn't visible in the visual editor. Delete any opening and closing &lt;pre&gt; and/or &lt;code&gt; tags pairs surrounding the tab shortcodes. (this would apply to any plugin using shortcodes).
@@ -274,11 +278,7 @@ For more details please see: [Tabby Link to Tab plugin](http://cubecolour.co.uk/
 
 = How much do the Tabby Responsive Tabs Customiser & Tabby Link to Tab add-ons cost? =
 
-These cost 19GBP each for use on a single site. A developer option for each is also available or 99GBP which can be used on all the sites you own or control.
-
-== Other Notes ==
-
-The plugin is licenced under [GNU GPLv2](http://opensource.org/licenses/GPL-2.0 "GNU GPLv2"), however as the original responsive tabs script was [hosted at codepen as a public pen](http://blog.codepen.io/legal/licensing/ "hosted at codepen as a public pen"), the GPL compatible [MIT license](http://opensource.org/licenses/MIT "MIT license") applies to that component.
+These cost 19GBP each for use on a single site. A developer option for each is also available or 79GBP which can be used on all the sites you own or control.
 
 == Screenshots ==
 
@@ -287,6 +287,10 @@ The plugin is licenced under [GNU GPLv2](http://opensource.org/licenses/GPL-2.0 
 3. The basic print styles are intended to present the tab titles & content appropriately when printed out.
 
 == Changelog ==
+
+= 1.2.3 =
+
+* Enable targeting the tab from url query string when the title contains an accent
 
 = 1.2.2 =
 
@@ -330,6 +334,10 @@ The plugin is licenced under [GNU GPLv2](http://opensource.org/licenses/GPL-2.0 
 * Initial Version
 
 == Upgrade Notice ==
+
+= 1.2.3 =
+
+* Enable targeting the tab from url query string when the title contains an accent
 
 = 1.2.2 =
 

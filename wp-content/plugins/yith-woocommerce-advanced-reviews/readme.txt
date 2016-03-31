@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: reviews, woocommerce, products, themes, yit, yith, e-commerce, shop, advanced reviews, reviews attachments, rating summary, product comment, review replies, advanced comments, product comments, vote review, vote comment, amazon, amazon style, amazon reviews, review report, review reports, most voted reviews, best reviews, rate review, rate product
 Requires at least: 4.0
-Tested up to: 4.3.1
-Stable tag: 1.1.9
+Tested up to: 4.4.2
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,83 +83,90 @@ You can customize some visual attribute from the plugin option. For better integ
 
 == Changelog ==
 
-= Version 1.1.9 - RELEASED: NOV 12, 2015 =
+= Version 1.2.0 - Released: Feb 26, 2016 =
+
+* Fixed: conflict with YITH WooCommerce Gift Cards that prevents the sending of attachments
+* Fixed: prevent a function from being declared twice
+* Added: filter yith_advanced_reviews_review_content_elements to let third party plugin or theme change the elements to be shown
+* Updated: YITH plugin FW
+
+= Version 1.1.9 - Released: Nov 12, 2015 =
 
 * Update: changed action used for YITH plugin framework loading
 
-= Version 1.1.8 - RELEASED: OCT 29, 2015 =
+= Version 1.1.8 - Released: Oct 29, 2015 =
 
 * Update: YITH plugin framework
 
-= Version 1.1.7 - RELEASED: OCT 07, 2015 =
+= Version 1.1.7 - Released: Oct 07, 2015 =
 
 * Update: changed text-domain to yith-woocommerce-advanced-reviews
 
-= Version 1.1.6 - RELEASED: SEP 23, 2015 =
+= Version 1.1.6 - Released: Sep 23, 2015 =
 
 * Added: improved query performance for low resources server.
 * Fix: sometimes items was not shown clicking on a view on reviews back end page.
 
-= Version 1.1.5 - RELEASED: SEP 04, 2015 =
+= Version 1.1.5 - Released: Sep 04, 2015 =
 
 * Fix: CSS issue on pages other than "Reviews" page.
 
-= Version 1.1.4 - RELEASED: AUG 12, 2015 =
+= Version 1.1.4 - Released: Aug 12, 2015 =
 
 * Tweak: update YITH Plugin framework.
 
-= Version 1.1.3 - RELEASED: MAY 12 , 2015 =
+= Version 1.1.3 - Released: May 12 , 2015 =
 
 * Fix: when the review author is unknown, it was shown admin user as content author.
 
-= Version 1.1.2 - RELEASED: MAY 11 , 2015 =
+= Version 1.1.2 - Released: May 11 , 2015 =
 
 * New: Custom template are fully overwritable from theme files.
 
-= Version 1.1.1 - RELEASED: MAY 07 , 2015 =
+= Version 1.1.1 - Released: May 07 , 2015 =
 
 * Fixed: Call to undefined function session_status for previous PHP version.
 
-= Version 1.1.0 - RELEASED: MAY 06 , 2015 =
+= Version 1.1.0 - Released: May 06 , 2015 =
 
 * Added: advanced reviews custom post type.
 * Added: check the review status from a single page.
 * Added: filter the reviews by status or update the status with bulk actions
 
-= Version 1.0.8 - RELEASED: APR 14, 2015 =
+= Version 1.0.8 - Released: Apr 14, 2015 =
 
 * Added: updated documentation
 
-= Version 1.0.7 - RELEASED: FEB 12, 2015 =
+= Version 1.0.7 - Released: Feb 12, 2015 =
 
 * Added: Woocommerce 2.3 support
 * Tweak: String translation
 
-= Version 1.0.6 - RELEASED: FEB 06, 2015 = 
+= Version 1.0.6 - Released: Feb 06, 2015 = 
 
 * Tweak: Buttons with WooCommerce style
 * Fixed: "Load more" button style strong appearance
 * Tweak: Review summary overwritten by theme
 * Tweak: Theme compatibility improvement
 
-= VERSION 1.0.5 - RELEASED: FEB 04, 2015 =
+= VERSION 1.0.5 - Released: Feb 04, 2015 =
 
 * Tweak: Plugin core framework
 
-= VERSION 1.0.4 - RELEASED: FEB 02, 2015 =
+= VERSION 1.0.4 - Released: Feb 02, 2015 =
 
 * Fixed: Minor bugs
 
-= VERSION 1.0.3 - RELEASED: JAN 30, 2015 =
+= VERSION 1.0.3 - Released: Jan 30, 2015 =
 
 * Tweak: Plugin core framework
 * Tweak: Theme integration
 
-= VERSION 1.0.2 - RELEASED: DEC 29, 2014 =
+= VERSION 1.0.2 - Released: Dec 29, 2014 =
 
 * Fixed: Yit_Plugin_Panel_WooCommerce class do not exists.
 
-= VERSION 1.0.1 - RELEASED: DEC 23, 20141.0.1 =
+= VERSION 1.0.1 - Released: Dec 23, 20141.0.1 =
 
 * Updated: Plugin core framework
 * Tweak: Plugin options page

@@ -126,6 +126,7 @@ $magnifier_settings = array(
 		'default' => __( 'Loading...', 'yith-woocommerce-zoom-magnifier' ),
 		'type'    => 'text',
 	),
+
 	array(
 		'name'    => __( 'Lens Opacity', 'yith-woocommerce-zoom-magnifier' ),
 		'desc'    => '',

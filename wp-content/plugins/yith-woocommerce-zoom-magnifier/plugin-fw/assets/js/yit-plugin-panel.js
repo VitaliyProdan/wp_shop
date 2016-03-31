@@ -177,6 +177,16 @@
             //Open the uploader dialog
             custom_uploader.open();
         });
+
+        $( document).on( 'click', '.plugin-option .upload_button_reset', function(e){
+            var t   = $(this),
+                id = t.attr('id'),
+                input_id = t.attr('id').replace(/-button_reset$/, ''),
+                default_value = $('#' + id).data('default');
+
+            $("#" + input_id).val( default_value );
+            $('.plugin-option .upload_img_url').trigger('change');
+        } );
     }
 
     $('.plugin-option .add_media').on('click', function () {

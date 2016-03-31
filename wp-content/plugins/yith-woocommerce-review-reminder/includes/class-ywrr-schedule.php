@@ -60,6 +60,13 @@ if ( !class_exists( 'YWRR_Schedule' ) ) {
          */
         public function __construct() {
 
+            if ( get_option( 'ywrr_enable_plugin' ) == 'yes' ) {
+
+                add_action( 'woocommerce_order_status_completed', array( $this, 'schedule_mail' ) );
+                add_action( 'ywrr_daily_send_mail_job', array( $this, 'daily_schedule' ) );
+
+            }
+
         }
 
         /**
@@ -171,12 +178,17 @@ if ( !class_exists( 'YWRR_Schedule' ) ) {
             foreach ( $orders as $item ) {
                 $list = maybe_unserialize( $item->request_items );
 
-                $today    = new DateTime( current_time( 'mysql' ) );
-                $pay_date = new DateTime( $item->order_date );
-                $days     = $pay_date->diff( $today );
+                $today        = new DateTime( current_time( 'mysql' ) );
+                $pay_date     = new DateTime( $item->order_date );
+                $days         = $pay_date->diff( $today );
+                $email_result = YWRR_Emails()->send_email( $item->order_id, $days->days, array(), $list );
 
-                YWRR_Emails()->send_email( $item->order_id, $days->days, array(), $list );
-                $this->change_schedule_status( $item->order_id, 'sent' );
+                if ( $email_result ) {
+
+                    $this->change_schedule_status( $item->order_id, 'sent' );
+
+                }
+
             }
 
         }
@@ -191,5 +203,7 @@ if ( !class_exists( 'YWRR_Schedule' ) ) {
     function YWRR_Schedule() {
         return YWRR_Schedule::get_instance();
     }
+
+    new YWRR_Schedule();
 
 }

@@ -60,7 +60,7 @@ class SiteReader
             $goods_page = file_get_html("http://tiande-shop.net/page/$i/?min_price=0&max_price=9999");
             //$i = 0;//TODO delete me
             foreach ($goods_page->find('ul.products li.product') as $product_link) {
-                //if ($++i == 10) {break;} //TODO delete me
+                if ($i == 10) {break;} //TODO delete me
                 $url = $product_link->children(0)->href;
                 if (empty($url)) {
                     continue;

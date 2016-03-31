@@ -47,7 +47,7 @@ class getid3_quicktime extends getid3_handler
 			$atomsize = getid3_lib::BigEndian2Int(substr($AtomHeader, 0, 4));
 			$atomname = substr($AtomHeader, 4, 4);
 
-			// 64-bit MOV patch by jlegate√?ktnc*com
+			// 64-bit MOV patch by jlegate√òktnc*com
 			if ($atomsize == 1) {
 				$atomsize = getid3_lib::BigEndian2Int($this->fread(8));
 			}
@@ -468,7 +468,7 @@ class getid3_quicktime extends getid3_handler
 
 
 			case 'cmvd': // Compressed MooV Data atom
-				// Code by ubergeek√?ubergeek*tv based on information from
+				// Code by ubergeek√òubergeek*tv based on information from
 				// http://developer.apple.com/quicktime/icefloe/dispatch012.html
 				$atom_structure['unCompressedSize'] = getid3_lib::BigEndian2Int(substr($atom_data, 0, 4));
 

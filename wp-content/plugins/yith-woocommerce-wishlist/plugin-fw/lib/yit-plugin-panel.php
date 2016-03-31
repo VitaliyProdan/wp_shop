@@ -76,9 +76,9 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 
                 add_action( 'admin_init', array( $this, 'register_settings' ) );
                 add_action( 'admin_menu', array( $this, 'add_setting_page' ), 20 );
+                add_action( 'admin_menu', array( $this, 'add_premium_version_upgrade_to_menu' ), 100 );
                 add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_menu' ), 100 );
                 add_action( 'admin_init', array( $this, 'add_fields' ) );
-
             }
 
             add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
@@ -92,8 +92,12 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
          * @author   Andrea Grillo <andrea.grillo@yithemes.com>
          */
         public function add_menu_page() {
-            $position = apply_filters( 'yit_plugins_menu_item_position', '62.32' );
-            add_menu_page( 'yit_plugin_panel', __( 'YIT Plugins', 'yith-plugin-fw' ), 'manage_options', 'yit_plugin_panel', NULL, YIT_CORE_PLUGIN_URL . '/assets/images/yithemes-icon.png', $position );
+           global $admin_page_hooks;
+
+            if( ! isset( $admin_page_hooks['yit_plugin_panel'] ) ){
+                $position = apply_filters( 'yit_plugins_menu_item_position', '62.32' );
+                add_menu_page( 'yit_plugin_panel', __( 'YITH Plugins', 'yith-plugin-fw' ), 'manage_options', 'yit_plugin_panel', NULL, YIT_CORE_PLUGIN_URL . '/assets/images/yithemes-icon.png', $position );
+            }
         }
 
         /**
@@ -121,27 +125,40 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
          */
         public function admin_enqueue_scripts() {
 
-	        global $wp_scripts, $pagenow;
+            global $wp_scripts, $pagenow;
 
             //scripts
-           wp_enqueue_media();
-           wp_enqueue_script( 'jquery-ui' );
-           wp_enqueue_script( 'jquery-ui-core' );
-           wp_enqueue_script( 'jquery-ui-slider' );
-           wp_enqueue_script( 'jquery-ui-dialog' );
-           wp_enqueue_script( 'jquery-chosen', YIT_CORE_PLUGIN_URL . '/assets/js/chosen/chosen.jquery.js', array( 'jquery' ), '1.1.0', true );
-           wp_enqueue_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel.js', array( 'jquery', 'jquery-chosen' ), $this->version, true );
-           wp_register_script( 'codemirror', YIT_CORE_PLUGIN_URL . '/assets/js/codemirror/codemirror.js', array( 'jquery' ), $this->version, true );
-           wp_register_script( 'codemirror-javascript', YIT_CORE_PLUGIN_URL . '/assets/js/codemirror/javascript.js', array( 'jquery', 'codemirror' ), $this->version, true );
+            wp_enqueue_media();
+            wp_enqueue_script( 'jquery-ui' );
+            wp_enqueue_script( 'jquery-ui-core' );
+            wp_enqueue_script( 'jquery-ui-slider' );
+            wp_enqueue_script( 'jquery-ui-dialog' );
+            wp_enqueue_script( 'jquery-chosen', YIT_CORE_PLUGIN_URL . '/assets/js/chosen/chosen.jquery.js', array( 'jquery' ), '1.1.0', true );
+            wp_register_script( 'yit-plugin-panel', YIT_CORE_PLUGIN_URL . '/assets/js/yit-plugin-panel.js', array( 'jquery', 'jquery-chosen' ), $this->version, true );
+            wp_register_script( 'codemirror', YIT_CORE_PLUGIN_URL . '/assets/js/codemirror/codemirror.js', array( 'jquery' ), $this->version, true );
+            wp_register_script( 'codemirror-javascript', YIT_CORE_PLUGIN_URL . '/assets/js/codemirror/javascript.js', array( 'jquery', 'codemirror' ), $this->version, true );
+            wp_register_script( 'colorbox', YIT_CORE_PLUGIN_URL . '/assets/js/jquery.colorbox.js', array( 'jquery' ), '1.6.3', true );
 
             //styles
-	        $jquery_version = isset( $wp_scripts->registered['jquery-ui-core']->ver ) ? $wp_scripts->registered['jquery-ui-core']->ver : '1.9.2';
+            $jquery_version = isset( $wp_scripts->registered['jquery-ui-core']->ver ) ? $wp_scripts->registered['jquery-ui-core']->ver : '1.9.2';
             wp_register_style( 'codemirror', YIT_CORE_PLUGIN_URL . '/assets/css/codemirror/codemirror.css' );
-            wp_enqueue_style( 'jquery-ui-overcast', YIT_CORE_PLUGIN_URL . '/assets/css/overcast/jquery-ui-1.8.9.custom.css', false, '1.8.9', 'all' );
-            wp_enqueue_style( 'yit-plugin-style', YIT_CORE_PLUGIN_URL . '/assets/css/yit-plugin-panel.css', $this->version );
+            wp_enqueue_style( 'jquery-ui-overcast', YIT_CORE_PLUGIN_URL . '/assets/css/overcast/jquery-ui-custom/jquery-ui-1.8.9.custom.css', false, '1.8.9', 'all' );
+            wp_register_style( 'yit-plugin-style', YIT_CORE_PLUGIN_URL . '/assets/css/yit-plugin-panel.css', array(), $this->version );
             wp_enqueue_style( 'raleway-font', '//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,100,200,300,900' );
             wp_enqueue_style( 'jquery-chosen', YIT_CORE_PLUGIN_URL . '/assets/css/chosen/chosen.css' );
             wp_enqueue_style( 'yit-jquery-ui-style', '//code.jquery.com/ui/' . $jquery_version . '/themes/smoothness/jquery-ui.css', array(), $jquery_version );
+            wp_register_style( 'colorbox', YIT_CORE_PLUGIN_URL . '/assets/css/colorbox.css', array(), $this->version );
+            wp_register_style( 'yit-upgrade-to-pro', YIT_CORE_PLUGIN_URL . '/assets/css/yit-upgrade-to-pro.css', array( 'colorbox' ), $this->version );
+
+             if( ( 'admin.php' == $pagenow && strpos( get_current_screen()->id, 'yith-plugins_page' ) !== false ) || apply_filters( 'yit_plugin_panel_asset_loading', false ) ){
+                 wp_enqueue_style( 'yit-plugin-style' );
+                 wp_enqueue_script( 'yit-plugin-panel' );
+            }
+
+            if( 'admin.php' == $pagenow && strpos( get_current_screen()->id, 'yith_upgrade_premium_version' ) !== false ){
+                wp_enqueue_style( 'yit-upgrade-to-pro' );
+                wp_enqueue_script( 'colorbox' );
+            }
         }
 
         /**
@@ -241,6 +258,23 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
             /* === Duplicate Items Hack === */
             $this->remove_duplicate_submenu_page();
             do_action( 'yit_after_add_settings_page' );
+
+
+        }
+
+        /**
+         * Add Premium Version upgrade menu item
+         *
+         * @return   void
+         * @since    2.9.13
+         * @author   Andrea Grillo <andrea.grillo@yithemes.com>
+         */
+        public function add_premium_version_upgrade_to_menu(){
+            global $_parent_pages;
+
+            if( apply_filters( 'yit_show_upgrade_to_premium_version', ! isset( $_parent_pages['yith_upgrade_premium_version'] ) ) ){
+                add_submenu_page( 'yit_plugin_panel', __( 'Premium version upgrade', 'yith-plugin-fw' ), __( 'Premium version upgrade', 'yith-plugin-fw' ), 'install_plugins', 'yith_upgrade_premium_version', array( $this, 'show_premium_version_upgrade' ) );
+            }
         }
 
         /**
@@ -789,6 +823,15 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
 		    $this->add_videobox( $args );
 	    }
 
+        /**
+         * Show the upgrade to pro version page
+         *
+         * @return   void
+         * @since    2.9.13
+         * @author   Andrea Grillo <andrea.grillo@yithemes.com>
+         */
+        public function show_premium_version_upgrade() {
+            yit_plugin_get_template ( YIT_CORE_PLUGIN_PATH, 'upgrade/upgrade-to-pro-version.php', array( 'core_plugin_url' => YIT_CORE_PLUGIN_URL ) ) ;
+        }
     }
-
 }

@@ -18,3 +18,19 @@ require_once('core/load.php');
 //---------------------------------------------
 // Everybody changes above will lose his hands
 //---------------------------------------------
+
+add_filter( 'woocommerce_currencies', 'add_my_currency' );
+
+function add_my_currency( $currencies ) {
+     $currencies['GRN'] = __( 'UA GRIVNA', 'woocommerce' );
+     return $currencies;
+}
+
+add_filter('woocommerce_currency_symbol', 'add_my_currency_symbol', 10, 2);
+
+function add_my_currency_symbol( $currency_symbol, $currency ) {
+     switch( $currency ) {
+          case 'GRN': $currency_symbol = 'грн.'; break;
+     }
+     return $currency_symbol;
+}

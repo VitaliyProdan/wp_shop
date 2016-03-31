@@ -46,6 +46,7 @@
     .section .section-title h2 {
         display: table-cell;
         vertical-align: middle;
+        line-height: 25px;
     }
 
     .section-title {
@@ -227,7 +228,7 @@
                 <p>
                     <?php echo sprintf(__('Upgrade to the %1$spremium version%2$s of %1$sYITH WooCommerce Review Reminder%2$s to benefit from all features!','yith-woocommerce-review-reminder'),'<span class="highlight">','</span>');?>
                 </p>
-                <a href="http://yithemes.com/themes/plugins/yith-woocommerce-review-reminder/" target="_blank" class="premium-cta-button button btn">
+                <a href="<?php echo $this->get_premium_landing_uri(); ?>" target="_blank" class="premium-cta-button button btn">
                     <?php echo sprintf(__('%1$sUPGRADE%2$s %3$sto the premium%2$s','yith-woocommerce-review-reminder'),'<span class="highlight">','</span>','<span>');?>
                 </a>
             </div>
@@ -325,13 +326,43 @@
             </div>
         </div>
     </div>
+    <div class="section section-even clear" style="background: url(<?php echo YWRR_ASSETS_URL ?>/images/07-bg.png) no-repeat #fff; background-position: 85% 75%">
+        <div class="landing-container">
+            <div class="col-1">
+                <img src="<?php echo YWRR_ASSETS_URL ?>/images/07.png" alt="<?php _e('Google Analytics','yith-woocommerce-review-reminder');?>" />
+            </div>
+            <div class="col-2">
+                <div class="section-title">
+                    <img src="<?php echo YWRR_ASSETS_URL ?>/images/07-icon.png" alt="icon-07" />
+
+                    <h2><?php _e('GOOGLE ANALYTICS','yith-woocommerce-review-reminder');?></h2>
+                </div>
+                <p><?php echo sprintf (__('Configure the requested parameters to track, through %1$sGoogle Analytics%2$s, all emails sent from the plugin. This allows you to develop interesting market statistics for your shop.','yith-woocommerce-review-reminder'),'<b>','</b>');?></p>
+            </div>
+        </div>
+    </div>
+    <div class="section section-odd clear" style="background: url(<?php echo YWRR_ASSETS_URL ?>/images/08-bg.png) no-repeat #f1f1f1; background-position: 15% 100%">
+        <div class="landing-container">
+            <div class="col-2">
+                <div class="section-title">
+                    <img src="<?php echo YWRR_ASSETS_URL ?>/images/08-icon.png" alt="icon-08" />
+
+                    <h2><?php _e('YITH WOOCOMMERCE EMAIL TEMPLATES','yith-woocommerce-review-reminder');?></h2>
+                </div>
+                <p><?php echo sprintf (__('Thanks to full compatibility between the two plugins, you could configure customized email layouts, with %1$sYITH WooCommerce Email Templates%2$s, for all emails sent from YITH WooCommerce Review Reminder.','yith-woocommerce-review-reminder'),'<b>','</b>');?></p>
+            </div>
+            <div class="col-1">
+                <img src="<?php echo YWRR_ASSETS_URL ?>/images/08.png" alt="<?php _e('YITH WooCommerce Email Templates','yith-woocommerce-review-reminder');?>" />
+            </div>
+        </div>
+    </div>
     <div class="section section-cta section-odd">
         <div class="landing-container">
             <div class="premium-cta">
                 <p>
                     <?php echo sprintf (__('Upgrade to the %1$spremium version%2$s of %1$sYITH WooCommerce Review Reminder%2$s to benefit from all features!','yith-woocommerce-review-reminder'),'<span class="highlight">','</span>');?>
                 </p>
-                <a href="http://yithemes.com/themes/plugins/yith-woocommerce-review-reminder/" target="_blank" class="premium-cta-button button btn">
+                <a href="<?php echo $this->get_premium_landing_uri(); ?>" target="_blank" class="premium-cta-button button btn">
                     <?php echo sprintf (__('%1$sUPGRADE%2$s %3$sto the premium version%2$s','yith-woocommerce-review-reminder'),'<span class="highlight">','</span>','<span>');?>
                 </a>
             </div>

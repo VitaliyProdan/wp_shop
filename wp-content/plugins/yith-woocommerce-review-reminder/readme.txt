@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: reviews, woocommerce, products, themes, yit, yith, e-commerce, shop, review, email remainder, request review, product review, woocommerce review
 Requires at least: 4.0
-Tested up to: 4.3.1
-Stable tag: 1.1.1
+Tested up to: 4.4.2
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,64 +46,94 @@ YITH WooCommerce Review Reminder will add a new tab called "Review Reminder" ins
 
 == Changelog ==
 
-= 1.1.1 =
+= 1.1.7 - Released: Feb 12, 2016 =
+
+* Fixed: email not scheduling
+
+= 1.1.6 - Released: Feb 3, 2016 =
+
+* Fixed: get email status on sending
+
+= 1.1.5 - Released: Feb 1, 2016 =
+
+* New feature: test email sending
+* Added: search field on "Blocklist" tab
+* Updated: language files
+* Updated: plugin core framework
+* Fixed: JS code improvements
+* Fixed: minor bugs
+
+= 1.1.4 - Released: Jan 22, 2016 =
+
+* Added: compatibility with WooCommerce 2.5
+
+= 1.1.3 - Released: Dec 28, 2015 =
+
+* Fixed: italian translation file
+
+= 1.1.2 - Released: Dec 11, 2015 =
+
+* Fixed: unsubscribe page initialization makes conflict with some plugin
+* Updated: plugin core framework
+
+= 1.1.1 - Released: Nov 02, 2015 =
 
 * Updated: changed text domain from ywrr to yith-woocommerce-review-reminder
 * Updated: changed all language file for the new text domain
 
-= 1.1.0 =
+= 1.1.0 - Released: Oct 29, 2015 =
 
 * Updated: plugin core framework
 
-= 1.0.9 =
+= 1.0.9 - Released: Oct 10, 2015 =
 
 * Added: italian language file
 * Updated: core framework
 
-= 1.0.8 =
+= 1.0.8 - Released: Sept 10, 2015 =
 
 * Added: new file class-yith-custom-table.php
 * Removed: old file class-yith-ywrr-custom-table.php
 
-= 1.0.7 =
+= 1.0.7 - Released: Sept 02, 2015 =
 
 * Fixed: class-yith-ywrr-custom-table.php not found error
 
-= 1.0.6 =
+= 1.0.6 - Released: Sept 01, 2015 =
 
 * Fixed: minor bugs
 
-= 1.0.5 =
+= 1.0.5 - Released: Aug 25, 2015 =
 
 * Added: compatibility with YITH Essential Kit for WooCommerce #1
 
-= 1.0.4 =
+= 1.0.4 - Released: Aug 13, 2015 =
 
 * Added: Support to WooCommerce 2.4
 * Updated: Plugin core framework
 * Fixed: minor bugs
 
-= 1.0.3 =
+= 1.0.3 - Released: May 25, 2015 =
 
 * Added: Screen options for Blocklist table
 
-= 1.0.2 =
+= 1.0.2 - Released: Apr 17, 2015 =
 
 * Fixed: Redirection bug in "Blocklist" tab bulk actions
 * Fixed: E-mail template management
 
-= 1.0.1 =
+= 1.0.1 - Released: Feb 12, 2015 =
 
 * Added: Woocommerce 2.3 support
 * Tweak: String translation
 
-= 1.0.0 =
+= 1.0.0 - Released: Feb 06, 2015 =
 
 * Initial release
 
 == Upgrade Notice ==
 
-Last Stable Tag 1.1.1
+Last Stable Tag 1.1.7
 
 == Suggestions ==
 

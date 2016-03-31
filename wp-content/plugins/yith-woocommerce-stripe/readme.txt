@@ -2,9 +2,9 @@
 
 Contributors: yithemes
 Tags: stripe, simple stripe checkout, stripe checkout, credit cards, online payment, payment, payments, recurring billing, subscribe, subscriptions, bitcoin, gateway, yithemes, woocommerce, shop, ecommerce, e-commerce
-Requires at least: 4.0
-Tested up to: 4.2.4
-Stable tag: 1.2.0
+Requires at least: 4.2
+Tested up to: 4.4.1
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,30 +61,48 @@ Yes, an SSL certificate should always be used with Stripe. All pages that includ
 
 == Changelog ==
 
-= 1.2.0 =
+= 1.2.5 - Released on Feb 16, 2016 =
+
+* Fixed: stripe library loading causing fatal error in some servers
+
+= 1.2.4 - Released on Jan 19, 2016 =
+
+* Added: compatibility with WooCommerce 2.5
+* Added: language support for "Stripe checkout" mode
+* Updated: Stripe API library with latest version
+
+= 1.2.3 - Released on Dec 14, 2015 =
+
+* Fixed: no errors for wrong cards during checkout
+
+= 1.2.2 - Released on Dec 10, 2015 =
+
+* Added: compatibility to multi currency plugin
+
+= 1.2.0 - Released on Aug 12, 2015 =
 
 * Added: Support to WooCommerce 2.4
 * Updated: Plugin core framework
 * Updated: Language pot file
 
-= 1.1.0 =
+= 1.1.0 - Released: Apr 22, 2015 =
 
 * Added: support to WordPress 4.2
 
-= 1.0.4 =
+= 1.0.4 - Released: Apr 21, 2015 =
 
 * Updated: Languages pot catalog
 
-= 1.0.3 =
+= 1.0.3 - Released: Apr 15, 2015 =
 
 * Updated: Stripe API
 * Fixed: minor bugs
 
-= 1.0.2 =
+= 1.0.2 - Released: Mar 04, 2015 =
 
 * Updated: Plugin core framework
 
-= 1.0.1 =
+= 1.0.1 - Released: Mar 03, 2015 =
 
 * Fixed: minor bugs
 

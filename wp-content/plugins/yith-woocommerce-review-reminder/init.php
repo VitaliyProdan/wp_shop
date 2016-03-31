@@ -3,9 +3,9 @@
 Plugin Name: YITH WooCommerce Review Reminder
 Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-review-reminder
 Description: Send a review reminder to the customers over WooCommerce.
-Author: Yithemes
+Author: YIThemes
 Text Domain: yith-woocommerce-review-reminder
-Version: 1.1.1
+Version: 1.1.7
 Author URI: http://yithemes.com/
 */
 
@@ -22,7 +22,7 @@ function ywrr_install_woocommerce_admin_notice() {
     <div class="error">
         <p><?php _e( 'YITH WooCommerce Review Reminder is enabled but not effective. It requires WooCommerce in order to work.', 'yith-woocommerce-review-reminder' ); ?></p>
     </div>
-<?php
+    <?php
 }
 
 function ywrr_install_free_admin_notice() {
@@ -30,11 +30,11 @@ function ywrr_install_free_admin_notice() {
     <div class="error">
         <p><?php _e( 'You can\'t activate the free version of YITH WooCommerce Review Reminder while you are using the premium one.', 'yith-woocommerce-review-reminder' ); ?></p>
     </div>
-<?php
+    <?php
 }
 
 if ( !defined( 'YWRR_VERSION' ) ) {
-    define( 'YWRR_VERSION', '1.1.1' );
+    define( 'YWRR_VERSION', '1.1.7' );
 }
 
 if ( !defined( 'YWRR_FREE_INIT' ) ) {
@@ -72,15 +72,13 @@ function ywrr_init() {
     /* Load YWRR text domain */
     load_plugin_textdomain( 'yith-woocommerce-review-reminder', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
-    global $YWRR_Review_Reminder;
-    $YWRR_Review_Reminder = new YWRR_Review_Reminder();
+    YITH_WRR();
+
 }
 
 add_action( 'ywrr_init', 'ywrr_init' );
 
 function ywrr_install() {
-
-    require_once( YWRR_DIR . 'class.yith-woocommerce-review-reminder.php' );
 
     if ( !function_exists( 'WC' ) ) {
         add_action( 'admin_notices', 'ywrr_install_woocommerce_admin_notice' );
@@ -103,8 +101,35 @@ if ( !function_exists( 'yith_plugin_registration_hook' ) ) {
     require_once 'plugin-fw/yit-plugin-registration-hook.php';
 }
 
-
 register_activation_hook( __FILE__, 'yith_plugin_registration_hook' );
+
+if ( !function_exists( 'YITH_WRR' ) ) {
+
+    /**
+     * Unique access to instance of YWRR_Review_Reminder
+     *
+     * @since   1.1.5
+     * @return  YWRR_Review_Reminder|YWRR_Review_Reminder
+     * @author  Alberto Ruggiero
+     */
+    function YITH_WRR() {
+
+        // Load required classes and functions
+        require_once( YWRR_DIR . 'class.yith-woocommerce-review-reminder.php' );
+
+        if ( defined( 'YWRR_PREMIUM' ) && file_exists( YWRR_DIR . 'class.yith-woocommerce-review-reminder-premium.php' ) ) {
+
+
+            require_once( YWRR_DIR . 'class.yith-woocommerce-review-reminder-premium.php' );
+            return YWRR_Review_Reminder_Premium::get_instance();
+        }
+
+        return YWRR_Review_Reminder::get_instance();
+
+    }
+
+}
+
 register_activation_hook( __FILE__, 'ywrr_create_tables' );
 register_activation_hook( __FILE__, 'ywrr_create_schedule_job' );
 register_deactivation_hook( __FILE__, 'ywrr_create_unschedule_job' );

@@ -10,6 +10,8 @@ use \Stripe\Stripe;
 use \Stripe\Charge;
 use \Stripe\Error;
 use \Stripe\Customer;
+use \Stripe\Plan;
+use \Stripe\Subscription;
 
 class YITH_Stripe_API {
 
@@ -19,10 +21,13 @@ class YITH_Stripe_API {
 	 * Set the Stripe library
 	 *
 	 * @param $key
+	 *
 	 * @since 1.0.0
 	 */
 	public function __construct( $key ) {
-		include_once( 'third-party/stripe.php' );
+		if ( ! class_exists( 'Stripe' ) ) {
+			include_once( dirname( dirname( __FILE__ ) ) . '/vendor/autoload.php' );
+		}
 
 		$this->private_key = $key;
 		Stripe::setApiKey( $this->private_key );
@@ -74,6 +79,28 @@ class YITH_Stripe_API {
 	}
 
 	/**
+	 * Change a charge
+	 *
+	 * @param $transaction_id
+	 * @param array $params
+	 *
+	 * @return Charge
+	 * @since 1.0.0
+	 */
+	public function update_charge( $transaction_id, $params = array() ) {
+		$charge = $this->get_charge( $transaction_id );
+
+		foreach ( $params as $param => $value ) {
+			if ( isset( $charge->{$param} ) ) {
+				$charge->{$param} = $value;
+			}
+		}
+
+		$charge->save();
+		return $charge;
+	}
+
+	/**
 	 * Perform a refund
 	 *
 	 * @param $transaction_id
@@ -84,6 +111,7 @@ class YITH_Stripe_API {
 	 */
 	public function refund( $transaction_id, $params ) {
 		$deposit = $this->get_charge( $transaction_id );
+
 		return $deposit->refunds->create( $params );
 	}
 
@@ -148,6 +176,7 @@ class YITH_Stripe_API {
 	 */
 	public function create_card( $customer, $token ) {
 		$customer = $this->get_customer( $customer );
+
 		return $customer->sources->create(
 			array(
 				'card' => $token
@@ -166,7 +195,7 @@ class YITH_Stripe_API {
 	 * @since 1.0.0
 	 */
 	public function delete_card( $customer, $card_id ) {
-		$customer = $this->get_customer( $customer );
+		$customer    = $this->get_customer( $customer );
 		$customer_id = $customer->id;
 
 		// delete card
@@ -205,6 +234,104 @@ class YITH_Stripe_API {
 		$customer = $this->get_customer( $customer );
 
 		return $customer->sources->all( $params )->data;
+	}
+
+	/**
+	 * Create a plan
+	 *
+	 * @param array $params
+	 *
+	 * @return Plan
+	 */
+	public function create_plan( $params = array() ) {
+		return Plan::create( $params );
+	}
+
+	/**
+	 * Create a plan
+	 *
+	 * @param $plan_id
+	 *
+	 * @return Plan
+	 *
+	 */
+	public function delete_plan( $plan_id ) {
+		$plan = $this->get_plan( $plan_id );
+		$plan->delete();
+	}
+
+	/**
+	 * Get a plan
+	 *
+	 * @param $plan_id
+	 *
+	 * @return Plan
+	 */
+	public function get_plan( $plan_id ) {
+		try{
+			return Plan::retrieve( $plan_id );
+		} catch ( \Stripe\Error\InvalidRequest $e ) {
+			return false;
+		}
+	}
+
+	/**
+	 * Create a subscription
+	 *
+	 * @param $customer
+	 * @param $plan_id
+	 *
+	 * @return Subscription
+	 */
+	public function create_subscription( $customer, $plan_id, $params = array() ) {
+		$customer = $this->get_customer( $customer );
+		return $customer->subscriptions->create( array_merge( array( "plan" => $plan_id ), $params ) );
+	}
+
+	/**
+	 * Create a subscription
+	 *
+	 * @param $customer
+	 * @param $subscription_id
+	 *
+	 * @return Subscription
+	 */
+	public function get_subscription( $customer, $subscription_id ) {
+		$customer = $this->get_customer( $customer );
+		return $customer->subscriptions->retrieve( $subscription_id );
+	}
+
+	/**
+	 * Modify a subscription on stripe
+	 *
+	 * @param $customer
+	 * @param $subscription_id
+	 *
+	 * @return Subscription
+	 */
+	public function update_subscription( $customer, $subscription_id, $params = array() ) {
+		$subscription = $this->get_subscription( $customer, $subscription_id );
+
+		foreach ( $params as $param => $value ) {
+			if ( isset( $subscription->{$param} ) ) {
+				$subscription->{$param} = $value;
+			}
+		}
+
+		return $subscription->save();
+	}
+
+	/**
+	 * Cancel a subscription
+	 *
+	 * @param $customer
+	 * @param $subscription_id
+	 *
+	 * @return Subscription
+	 */
+	public function cancel_subscription( $customer, $subscription_id ) {
+		$subscription = $this->get_subscription( $customer, $subscription_id );
+		return $subscription->cancel();
 	}
 
 	/**

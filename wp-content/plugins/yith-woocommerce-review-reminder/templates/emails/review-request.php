@@ -20,12 +20,10 @@ if ( !defined( 'ABSPATH' ) ) {
  * @since   1.0.0
  * @author  Your Inspiration Themes
  */
-global $YWRR_Review_Reminder;
 
 if ( !$order ) {
 
-    global $current_user;
-    get_currentuserinfo();
+    $current_user = wp_get_current_user();
 
     $billing_email      = $current_user->user_email;
     $order_date         = current_time( 'mysql' );
@@ -53,7 +51,7 @@ $query_args  = array(
 $unsubscribe = esc_url( add_query_arg( $query_args, get_permalink( get_option( 'ywrr_unsubscribe_page_id' ) ) ) );
 
 
-$review_list = $YWRR_Review_Reminder->ywrr_email_items_list( $item_list, $template );
+$review_list = YITH_WRR()->ywrr_email_items_list( $item_list, $template );
 
 $find = array(
     '{customer_name}',
@@ -77,12 +75,13 @@ $replace = array(
     '<b>' . $days_ago . '</b>'
 );
 
-$mail_body = str_replace( $find, $replace, get_option( 'ywrr_mail_body' ) );
+$lang      = get_post_meta( $order_id, 'wpml_language', true );
+$mail_body = str_replace( $find, $replace, apply_filters( 'wpml_translate_single_string', get_option( 'ywrr_mail_body' ), 'admin_texts_ywrr_mail_body', 'ywrr_mail_body', $lang ) );
 
 
 if ( defined( 'YITH_WCET_PREMIUM' ) && get_option( 'ywrr_mail_template_enable' ) == 'yes' ) {
 
-    do_action( 'yith_wcet_email_header', $email_heading, 'yith-review-reminder' );
+    do_action( 'woocommerce_email_header', $email_heading, $email );
 
 }
 else {
@@ -99,7 +98,7 @@ else {
 
 if ( defined( 'YITH_WCET_PREMIUM' ) && get_option( 'ywrr_mail_template_enable' ) == 'yes' ) {
 
-    do_action( 'yith_wcet_email_footer', 'yith-review-reminder', array( '<a class="ywrr-unsubscribe-link" href="' . $unsubscribe . '">' . get_option( 'ywrr_mail_unsubscribe_text' ) . '</a>' ) );
+    do_action( 'woocommerce_email_footer', $email, array( '<a class="ywrr-unsubscribe-link" href="' . $unsubscribe . '">' . get_option( 'ywrr_mail_unsubscribe_text' ) . '</a>' ) );
 
 }
 else {

@@ -7,7 +7,8 @@
  * MIT License.
  */
 
-;(function (window, $, undefined) {
+;
+(function (window, $, undefined) {
     'use strict';
 
     //include imagesLoaded plugin
@@ -22,7 +23,8 @@
         /*jshint curly: true, eqeqeq: true, noempty: true, strict: true, undef: true, browser: true */
         /*global jQuery: false */
 
-        ;(function ($, undefined) {
+        ;
+        (function ($, undefined) {
             'use strict';
 
             // blank image data-uri bypasses webkit log warning (thx doug jones)
@@ -304,9 +306,17 @@
             self.zoomImage = self.options.elements.zoomImage;
 
             //wrap the zoom image with a div
-            //if( !self.zoom.parent().hasClass('yith_magnifier_zoom_wrap') ) {
-            self.zoom.wrap('<div class="yith_magnifier_zoom_wrap"></div>');
-            //}
+            var zoom_wrap_css_class = "yith_magnifier_zoom_wrap";
+
+
+			if (self.options.zoom_wrap_additional_css) {
+            	if ( !$('.' + zoom_wrap_css_class).length ) {
+
+					zoom_wrap_css_class += " " + self.options.zoom_wrap_additional_css;
+				}
+            }
+
+            self.zoom.wrap('<div class="' + zoom_wrap_css_class + '"></div>');
 
             self.IMG_zoomImage = new Image();
             self.IMG_zoomImage.src = self.zoom.attr('href');

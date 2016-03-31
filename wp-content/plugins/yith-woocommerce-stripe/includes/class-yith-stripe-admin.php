@@ -48,7 +48,7 @@ if( ! class_exists( 'YITH_WCStripe_Admin' ) ){
 			// register panel
 			$action = 'yith_wcstripe_gateway';
 			if ( defined( 'YITH_WCSTRIPE_PREMIUM' ) ) {
-				$action .= '_advanced';
+				$action .= YITH_WCStripe_Premium::addons_installed() ? '_addons' : '_advanced';
 			}
 			add_action( $action . '_settings_tab', array( $this, 'print_panel' ) );
 			add_action( 'woocommerce_admin_order_data_after_order_details', array( $this, 'capture_status' ) );
@@ -114,7 +114,7 @@ if( ! class_exists( 'YITH_WCStripe_Admin' ) ){
 			$current_section = 'yith_wcstripe_gateway';
 
 			if ( defined( 'YITH_WCSTRIPE_PREMIUM' ) ) {
-				$current_section .= '_advanced';
+				$current_section .= YITH_WCStripe_Premium::addons_installed() ? '_addons' : '_advanced';
 			}
 
 			WC_Admin_Settings::get_settings_pages();

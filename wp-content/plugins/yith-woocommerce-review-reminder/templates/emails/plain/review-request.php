@@ -23,8 +23,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 if ( !$order ) {
 
-    global $current_user;
-    get_currentuserinfo();
+    $current_user = wp_get_current_user();
 
     $billing_email      = $current_user->user_email;
     $order_date         = current_time( 'mysql' );
