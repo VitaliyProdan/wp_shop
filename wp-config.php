@@ -35,8 +35,8 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
 define('WP_ALLOW_MULTISITE', true);
-define('WP_HOME','http://sumy-tiande.rhcloud.com');
-define('WP_SITEURL','http://sumy-tiande.rhcloud.com');
+define('WP_HOME','http://tiande.xyz');
+define('WP_SITEURL','http://tiande.xyz');
 
 /**#@+
  * Уникальные ключи и соли для аутентификации.
