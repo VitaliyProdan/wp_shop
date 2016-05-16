@@ -124,7 +124,7 @@ return array(
 
                     /* Common options  ____________________________________________________________________________*/
                     'ywcm_message_button' => array(
-                        'label' => __( 'Button Text (optional)', 'yith-woocommerce-cart-messages' ),
+                        'label' => __( 'Text Button (optional)', 'yith-woocommerce-cart-messages' ),
                         'desc'  => __( 'The text of the button for the action call. Leave it empty if you do not want to show it.', 'yith-woocommerce-cart-messages' ),
                         'type'  => 'text',
                         'std'   => '' ),
@@ -136,7 +136,7 @@ return array(
                         'std'   => '' ),
 
                     'ywcm_message_expire' => array(
-                        'label' => __( 'Expire date (optional)', 'yith-woocommerce-cart-messages' ),
+                        'label' => __( 'Expiration date (optional)', 'yith-woocommerce-cart-messages' ),
                         'desc'  => __( 'Choose a date until this message will appear', 'yith-woocommerce-cart-messages' ),
                         'type'  => 'datepicker',
                         'std'   => '' ),

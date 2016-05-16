@@ -116,12 +116,18 @@ if ( !class_exists( 'YWCM_Cart_Message' ) ) {
         }
 
         public function  add_metabox() {
-            $args = require_once( 'plugin-options/metabox/ywcm_metabox.php' );
-            if ( !function_exists( 'YIT_Metabox' ) ) {
-                require_once( 'plugin-fw/yit-plugin.php' );
+            $post = isset( $_REQUEST['post'] ) ? $_REQUEST['post'] : ( isset( $_REQUEST['post_ID'] ) ? $_REQUEST['post_ID'] : 0 );
+            $post = get_post( $post );
+
+            if ( $post && $post->post_type == $this->post_type_name ) {
+                $args = require_once( 'plugin-options/metabox/ywcm_metabox.php' );
+                if ( !function_exists( 'YIT_Metabox' ) ) {
+                    require_once( 'plugin-fw/yit-plugin.php' );
+                }
+                $metabox = YIT_Metabox( 'yit-cart-messages-info' );
+                $metabox->init( $args );
             }
-            $metabox = YIT_Metabox( 'yit-cart-messages-info' );
-            $metabox->init( $args );
+
         }
 
 

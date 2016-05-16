@@ -247,7 +247,42 @@
             </div>
         </div>
     </div>
+    <div class="section section-even clear" style="background: url(<?php echo YITH_YWOT_ASSETS_IMAGES_URL ?>05-bg.png) no-repeat #fff; background-position: 85% 100%">
+        <div class="landing-container">
+            <div class="col-1">
+                <img src="<?php echo YITH_YWOT_ASSETS_IMAGES_URL ?>05.png" alt=<?php _e('Csv Import','yith-woocommerce-order-tracking');?> />
+            </div>
+            <div class="col-2">
+                <div class="section-title">
+                    <img src="<?php echo YITH_YWOT_ASSETS_IMAGES_URL ?>05-icon.png" alt="icon-05" />
+                    <h2><?php _e('Csv Import','yith-woocommerce-order-tracking');?></h2>
 
+                </div>
+                <p>
+                    <?php echo sprintf( __('You would like to switch to %1$sYITH Woocommerce Order Tracking%2$s, but you are afraid you might lose tracking data generated so far by a similar plugin? No problem, this will not happen.','yith-woocommerce-order-tracking'),'<b>','</b>');?>
+                </p>
+                <p>
+                    <?php echo sprintf( __('Collect existing data in a CSV file and a simple upload will be enough to bring them back. Thanks to the %1$sadvanced import tool%2$s included in the plugin, none of your data will be lost and you’ll be able to enjoy YITH WooCommerce Order Tracking without any inconveniences.  ','yith-woocommerce-order-tracking'),'<b>','</b>');?>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="section section-odd clear" style="background: url(<?php echo YITH_YWOT_ASSETS_IMAGES_URL ?>06-bg.png) no-repeat #f1f1f1; background-position: 15% 100%">
+        <div class="landing-container">
+            <div class="col-2">
+                <div class="section-title">
+                    <img src="<?php echo YITH_YWOT_ASSETS_IMAGES_URL ?>06-icon.png" alt="icon-06" />
+                    <h2><?php _e('Completed order','yith-woocommerce-order-tracking');?></h2>
+
+                </div>
+                <p>
+                    <?php echo sprintf( __('You inserted tracking data: do you consider the order as completed? Well, maybe the system could consider it in a different way, since it sees your order as still processing. %3$s No need to worry though. The plugin allows to automatize this action, by applying the %1$s"Completed" status soon after inserting tracking data%2$s.','yith-woocommerce-order-tracking'),'<b>','</b>','<br>');?></p>
+            </div>
+            <div class="col-1">
+                <img src="<?php echo YITH_YWOT_ASSETS_IMAGES_URL ?>06.png" alt=<?php _e('Email text','yith-woocommerce-order-tracking');?> />
+            </div>
+        </div>
+    </div>
     <div class="section section-cta section-odd">
         <div class="landing-container">
             <div class="premium-cta">

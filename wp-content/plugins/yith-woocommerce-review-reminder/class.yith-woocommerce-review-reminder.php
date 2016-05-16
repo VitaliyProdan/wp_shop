@@ -142,12 +142,12 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
 
             }
 
-           /* if ( get_option( 'ywrr_enable_plugin' ) == 'yes' ) {
+            /* if ( get_option( 'ywrr_enable_plugin' ) == 'yes' ) {
 
-                add_action( 'woocommerce_order_status_completed', array( YWRR_Schedule(), 'schedule_mail' ), 10, 2 );
-                add_action( 'ywrr_daily_send_mail_job', array( YWRR_Schedule(), 'daily_schedule' ) );
+                 add_action( 'woocommerce_order_status_completed', array( YWRR_Schedule(), 'schedule_mail' ), 10, 2 );
+                 add_action( 'ywrr_daily_send_mail_job', array( YWRR_Schedule(), 'daily_schedule' ) );
 
-            }*/
+             }*/
             add_action( 'init', array( $this, 'ywrr_create_pages' ) );
 
             add_filter( 'woocommerce_email_classes', array( $this, 'ywrr_custom_email' ) );
@@ -195,7 +195,7 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
 
             $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-            wp_enqueue_style( 'ywrr-admin', YWRR_ASSETS_URL . 'css/ywrr-admin.css' );
+            wp_enqueue_style( 'ywrr-admin', YWRR_ASSETS_URL . 'css/ywrr-admin' . $suffix . '.css' );
 
             wp_enqueue_script( 'ywrr-admin', YWRR_ASSETS_URL . 'js/ywrr-admin' . $suffix . '.js' );
 
@@ -290,6 +290,14 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
                             <?php _e( 'Replaced with the days ago the order was made', 'yith-woocommerce-review-reminder' ) ?>
                         </td>
                     </tr>
+                    <tr valign="top">
+                        <th scope="row" class="titledesc">
+                            <b>{unsubscribe_link}</b>
+                        </th>
+                        <td class="forminp">
+                            <?php _e( 'Replaced with the link to the unsubscribe page (If you use standard WooCommerce template, do not forget it!)', 'yith-woocommerce-review-reminder' ) ?>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -314,13 +322,15 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
             }
 
             if ( array_key_exists( $template, $this->_email_templates ) ) {
+
                 $path   = $this->_email_templates[$template]['path'];
                 $folder = $this->_email_templates[$template]['folder'];
 
-                wc_get_template( $folder . '/email-header.php', array( 'email_heading' => $email_heading ), $path, $path );
+                wc_get_template( $folder . '/email-header.php', array( 'email_heading' => $email_heading ), '', $path );
 
             }
             else {
+
                 wc_get_template( 'emails/email-header.php', array( 'email_heading' => $email_heading, 'mail_type' => 'yith-review-reminder' ) );
 
             }
@@ -345,15 +355,17 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
             }
 
             if ( array_key_exists( $template, $this->_email_templates ) ) {
+
                 $path   = $this->_email_templates[$template]['path'];
                 $folder = $this->_email_templates[$template]['folder'];
 
-                wc_get_template( $folder . '/email-footer.php', array( 'unsubscribe' => $unsubscribe ), $path, $path );
+                wc_get_template( $folder . '/email-footer.php', array( 'unsubscribe' => $unsubscribe ), '', $path );
 
             }
             else {
-                echo '<p><a href="' . $unsubscribe . '">' . get_option( 'ywrr_mail_unsubscribe_text' ) . '</a></p>';
+
                 wc_get_template( 'emails/email-footer.php', array( 'mail_type' => 'yith-review-reminder' ) );
+
             }
 
         }
@@ -380,19 +392,20 @@ if ( !class_exists( 'YWRR_Review_Reminder' ) ) {
                 $path   = $this->_email_templates[$template]['path'];
                 $folder = $this->_email_templates[$template]['folder'];
 
-                $style = include( $path . $folder . '/email-items-list.php' );
+                $style = wc_get_template_html( $folder . '/email-items-list.php', array( 'item_list' => $item_list ), '', $path );
 
             }
             elseif ( defined( 'YITH_WCET_PREMIUM' ) && get_option( 'ywrr_mail_template_enable' ) == 'yes' ) {
 
-                $style = include( YITH_WCET_TEMPLATE_PATH . '/emails/woocommerce2.4/emails/email-items-list.php' );
+                $style = wc_get_template_html( '/emails/woocommerce2.4/emails/email-items-list.php', array( 'item_list' => $item_list ), '', YITH_WCET_TEMPLATE_PATH );
 
             }
             else {
 
-                $style = include( YWRR_TEMPLATE_PATH . '/emails/email-items-list.php' );
+                $style = wc_get_template_html( 'emails/email-items-list.php', array( 'item_list' => $item_list ), '', YWRR_TEMPLATE_PATH );
 
             }
+
 
             return $style;
 

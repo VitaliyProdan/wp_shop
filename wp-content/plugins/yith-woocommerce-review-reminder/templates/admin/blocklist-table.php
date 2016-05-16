@@ -212,7 +212,7 @@ if ( !class_exists( 'YWRR_Blocklist_Table' ) ) {
                         );
                         $add_form_url     = esc_url( add_query_arg( $query_args, admin_url( 'admin.php' ) ) );
                         ?>
-                        <a class="add-new-h2" href="<?php echo $add_form_url ?>"><?php _e( 'Add New', 'yith-woocommerce-review-reminder' ); ?></a>
+                        <a class="page-title-action" href="<?php echo $add_form_url ?>"><?php _e( 'Add New', 'yith-woocommerce-review-reminder' ); ?></a>
                     <?php endif; ?>
                 </h1>
                 <?php

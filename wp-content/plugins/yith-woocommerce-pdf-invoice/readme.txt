@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: woocommerce, orders, woocommerce order, pdf, invoice, pdf invoice, delivery note, pdf invoices, automatic invoice, download, download invoice, bill order, billing, automatic billing, order invoice, billing invoice, new order, processing order, shipping list, shipping document, delivery, packing slip, transport document,  delivery, shipping, order, shop, shop invoice, customer, sell, invoices, email invoice, packing slips
 Requires at least: 4.0
-Tested up to: 4.4.2
-Stable tag: 1.1.8
+Tested up to: 4.5
+Stable tag: 1.1.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,21 @@ YITH WooCommerce PDF Invoice and Shipping List will add a new tab called "PDF In
 7. A basic, fully customizable template for invoices. 
 
 == Changelog ==
+
+= Version 1.1.11 - Released: May 10, 2016 =
+
+* Added: filter 'yith_ywpi_new_invoice_number' that lets you manage the invoice number for new documents
+* Added: filter 'yith_ywpi_get_formatted_invoice_number' that let you manage how the invoice number and prefix/suffix should be shown
+
+= Version 1.1.10 - Released: May 04, 2016 =
+
+* Fixed: missing YITH Plugin FW files
+
+= Version 1.1.9.1 - Released: May 02, 2016 =
+
+* Updated: plugin compatible with WordPress 4.5
+* Updated: plugin author name
+* Updated: YITH Plugin Framework
 
 = Version 1.1.8 - Released: Mar 31, 2016 =
 

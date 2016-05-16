@@ -100,7 +100,7 @@ if ( ! class_exists( 'YIT_Plugin_SubPanel' ) ) {
 
             if( ! isset( $admin_page_hooks['yit_plugin_panel'] ) ) {
                 $position = apply_filters( 'yit_plugins_menu_item_position', '62.32' );
-                add_menu_page( 'yit_plugin_panel', __( 'YIT Plugins', 'yith-plugin-fw' ), 'nosuchcapability', 'yit_plugin_panel', NULL, $logo, $position );
+                add_menu_page( 'yit_plugin_panel', __( 'YITH Plugins', 'yith-plugin-fw' ), 'nosuchcapability', 'yit_plugin_panel', NULL, $logo, $position );
             }
 
             add_submenu_page( 'yit_plugin_panel', $this->settings['label'], $this->settings['label'], 'manage_options', $this->settings['page'], array( $this, 'yit_panel' ) );

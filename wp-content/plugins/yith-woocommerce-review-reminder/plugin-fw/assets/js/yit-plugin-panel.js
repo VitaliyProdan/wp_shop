@@ -65,7 +65,7 @@
     $('.plugin-option .chosen .select_wrapper select').chosen();
 
     // on-off
-    $('.plugin-option .on_off_container span').on('click', function () {
+    $('.plugin-option .onoff_container span').on('click', function () {
         var input   = $(this).prev('input');
         var checked = input.prop('checked');
 

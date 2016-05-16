@@ -12,13 +12,16 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 } // Exit if accessed directly
 
-$review_list = '';
+?>
+<ul>
+    <?php foreach ( $item_list as $item ) : ?>
+
+        <li>
+            <a href="<?php echo apply_filters( 'ywrr_product_permalink', get_permalink( $item['id'] ) ); ?>"><?php echo $item['name'] ?></a>
+        </li>
+
+    <?php endforeach; ?>
+
+</ul>
 
 
-foreach ( $item_list as $item ) {
-    $product_link = apply_filters( 'ywrr_product_permalink', get_permalink( $item['id'] ) );
-
-    $review_list .= '<li><a href="' . $product_link . '">' . $item['name'] . '</a></li>';
-}
-
-return '<ul>' . $review_list . '</ul>';

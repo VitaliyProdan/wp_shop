@@ -3,9 +3,9 @@
 Plugin Name: YITH WooCommerce Cart Messages
 Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-cart-messages
 Description: WooCommerce plugin for add custom messages to your customers
-Author: Yithemes
+Author: YITHEMES
 Text Domain: yith-woocommerce-cart-messages
-Version: 1.1.4
+Version: 1.1.5
 Author URI: http://yithemes.com/
 */
 
@@ -55,7 +55,7 @@ register_activation_hook( __FILE__, 'yith_plugin_registration_hook' );
 if ( defined( 'YITH_YWCM_VERSION' ) ) {
 	return;
 }else{
-    define( 'YITH_YWCM_VERSION', '1.1.4' );
+    define( 'YITH_YWCM_VERSION', '1.1.5' );
 }
 
 if ( ! defined( 'YITH_YWCM_FREE_INIT' ) ) {

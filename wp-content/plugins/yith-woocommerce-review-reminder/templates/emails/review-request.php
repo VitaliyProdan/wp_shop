@@ -44,12 +44,12 @@ else {
 
 }
 
-$query_args  = array(
+$query_args       = array(
     'id'    => urlencode( base64_encode( !empty( $customer_id ) ? $customer_id : 0 ) ),
     'email' => urlencode( base64_encode( $billing_email ) )
 );
-$unsubscribe = esc_url( add_query_arg( $query_args, get_permalink( get_option( 'ywrr_unsubscribe_page_id' ) ) ) );
-
+$unsubscribe      = esc_url( add_query_arg( $query_args, get_permalink( get_option( 'ywrr_unsubscribe_page_id' ) ) ) );
+$unsubscribe_link = ( array_key_exists( $template, YITH_WRR()->_email_templates ) || defined( 'YITH_WCET_PREMIUM' ) && get_option( 'ywrr_mail_template_enable' ) == 'yes' ) ? '' : '<a href="' . $unsubscribe . '">' . get_option( 'ywrr_mail_unsubscribe_text' ) . '</a>';
 
 $review_list = YITH_WRR()->ywrr_email_items_list( $item_list, $template );
 
@@ -61,7 +61,8 @@ $find = array(
     '{order_date}',
     '{order_date_completed}',
     '{order_list}',
-    '{days_ago}'
+    '{days_ago}',
+    '{unsubscribe_link}'
 );
 
 $replace = array(
@@ -72,7 +73,8 @@ $replace = array(
     '<b>' . $order_date . '</b>',
     '<b>' . $modified_date . '</b>',
     $review_list,
-    '<b>' . $days_ago . '</b>'
+    '<b>' . $days_ago . '</b>',
+    $unsubscribe_link
 );
 
 $lang      = get_post_meta( $order_id, 'wpml_language', true );

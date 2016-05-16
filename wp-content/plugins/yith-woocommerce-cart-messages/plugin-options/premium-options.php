@@ -17,7 +17,8 @@ return array(
     'premium' => array(
         'home' => array(
             'type'   => 'custom_tab',
-            'action' => 'yith_woocommerce_cart_messages_premium'
+            'action' => 'yith_woocommerce_cart_messages_premium',
+            'hide_sidebar' => true
         )
     )
 );

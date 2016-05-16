@@ -52,7 +52,7 @@
             <?php _e( 'If everything worked allright, your plugin is now correctly installed on your website. Enjoy it :-)', 'yith-plugin-fw' ); ?>
         </li>
         <li class="step">
-             <?php _e( 'The last step is the activation of the plugin through its license key you received after the purchase. Click on "License Activation" that you find in "YITH Plugins" and insert the license key and the email address you used during the purchas.', 'yith-plugin-fw' ); ?>
+             <?php _e( 'The last step is the activation of the plugin through its license key you received after the purchase. Click on "License Activation" that you find in "YITH Plugins" and insert the license key and the email address you used during the purchase.', 'yith-plugin-fw' ); ?>
             <a class="image-lightbox" href="<?php echo $core_plugin_url; ?>/assets/images/upgrade-page/08.jpg" title="Activate license">
                 <img class="img-responsive" src="<?php echo $core_plugin_url; ?>/assets/images/upgrade-page/08.jpg" alt="Activate license">
             </a>

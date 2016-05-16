@@ -5,13 +5,13 @@ Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-pdf-invoice/
 Description: Generate PDF invoices for WooCommerce orders. Set manual or automatic invoice generation and shipping list document. Come with fully customizable document template.
 Author: YITHEMES
 Text Domain: yith-woocommerce-pdf-invoice
-Version: 1.1.8
+Version: 1.1.11
 Author URI: http://yithemes.com/
 Domain Path: /languages/
 
 @author YITHEMES
 @package YITH WooCommerce PDF Invoice
-@version 1.1.8
+@version 1.1.11
 */
 
 /*  Copyright 2015  Your Inspiration Themes  (email : plugins@yithemes.com)
@@ -66,7 +66,7 @@ if ( ! defined( 'YITH_YWPI_FREE_INIT' ) ) {
 }
 
 if ( ! defined( 'YITH_YWPI_VERSION' ) ) {
-	define( 'YITH_YWPI_VERSION', '1.1.8' );
+	define( 'YITH_YWPI_VERSION', '1.1.11' );
 }
 
 if ( ! defined( 'YITH_YWPI_FILE' ) ) {

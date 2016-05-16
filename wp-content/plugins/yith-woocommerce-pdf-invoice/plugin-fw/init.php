@@ -1,7 +1,7 @@
 <?php
 /**
  * Framework Name: YIT Plugin Framework
- * Version: 2.9.21
+ * Version: 2.9.22
  * Author: Yithemes
  * Text Domain: yith-plugin-fw
  * Domain Path: /languages/

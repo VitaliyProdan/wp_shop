@@ -537,13 +537,11 @@ if ( ! class_exists( 'YITH_WCStripe_Gateway' ) ) {
 				$currency = get_woocommerce_currency();
 			}
 
-			if ( in_array( $currency, $this->zero_decimals ) ) {
-				$total = absint( $total );
-			} else {
+			if ( ! in_array( $currency, $this->zero_decimals ) ) {
 				$total *= 100;
 			}
 
-			return $total;
+			return absint( $total );
 		}
 
 		/**

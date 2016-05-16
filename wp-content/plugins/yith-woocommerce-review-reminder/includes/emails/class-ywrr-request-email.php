@@ -89,7 +89,7 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
             $this->subject       = apply_filters( 'wpml_translate_single_string', get_option( 'ywrr_mail_subject' ), 'admin_texts_ywrr_mail_subject', 'ywrr_mail_subject', $lang );
             $this->days_ago      = $days_ago;
             $this->item_list     = $item_list;
-            $this->template_type = $template;
+            $this->template_type = ( !$template ) ? get_option( 'ywrr_mail_template' ) : $template;
 
             $this->find['site-title']    = '{site_title}';
             $this->replace['site-title'] = $this->get_blogname();
@@ -156,6 +156,54 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
         }
 
         /**
+         * Apply inline styles to dynamic content.
+         *
+         * @since   1.1.8
+         *
+         * @param   string|null $content
+         *
+         * @return  string
+         * @author  Alberto Ruggiero
+         */
+        public function style_inline( $content ) {
+
+            // make sure we only inline CSS for html emails
+            if ( in_array( $this->get_content_type(), array( 'text/html', 'multipart/alternative' ) ) && class_exists( 'DOMDocument' ) ) {
+
+                ob_start();
+
+                if ( array_key_exists( $this->template_type, YITH_WRR()->_email_templates ) ) {
+
+                    $path   = YITH_WRR()->_email_templates[$this->template_type]['path'];
+                    $folder = YITH_WRR()->_email_templates[$this->template_type]['folder'];
+
+                    wc_get_template( $folder . '/email-styles.php', array(), '', $path );
+                    $css = ob_get_clean();
+
+                }
+                else {
+
+                    wc_get_template( 'emails/email-styles.php' );
+                    $css = apply_filters( 'woocommerce_email_styles', ob_get_clean() );
+
+                }
+
+                // apply CSS styles inline for picky email clients
+                try {
+                    $emogrifier = new Emogrifier( $content, $css );
+                    $content    = $emogrifier->emogrify();
+                } catch ( Exception $e ) {
+                    $logger = new WC_Logger();
+                    $logger->add( 'emogrifier', $e->getMessage() );
+                }
+
+            }
+
+            return $content;
+
+        }
+
+        /**
          * Get HTML content
          *
          * @since   1.0.0
@@ -174,7 +222,7 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
                 'sent_to_admin' => false,
                 'plain_text'    => false,
                 'email'         => $this,
-            ), YWRR_TEMPLATE_PATH, YWRR_TEMPLATE_PATH );
+            ), '', YWRR_TEMPLATE_PATH );
             return ob_get_clean();
         }
 
@@ -196,7 +244,7 @@ if ( !class_exists( 'YWRR_Request_Mail' ) ) {
                 'sent_to_admin' => false,
                 'plain_text'    => true,
                 'email'         => $this,
-            ), YWRR_TEMPLATE_PATH, YWRR_TEMPLATE_PATH );
+            ), '', YWRR_TEMPLATE_PATH );
             return ob_get_clean();
         }
 

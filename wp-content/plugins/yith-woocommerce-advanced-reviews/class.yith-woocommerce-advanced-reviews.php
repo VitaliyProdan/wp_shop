@@ -1618,8 +1618,6 @@ if ( ! class_exists ( 'YITH_WooCommerce_Advanced_Reviews' ) ) {
                     );
                     $reviews = get_posts ( $args );
 
-                    error_log ( 'import->reviews: ' . print_r ( $reviews, true ) );
-
                     if ( ! empty( $reviews ) ) {
                         $review = $reviews[ 0 ];
 

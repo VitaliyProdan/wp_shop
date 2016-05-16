@@ -84,6 +84,7 @@ if( ! class_exists( 'YITH_WCStripe_Admin' ) ){
 				'capability'    => 'manage_options',
 				'parent'        => '',
 				'parent_page'   => 'yit_plugin_panel',
+				'links'         => $this->get_panel_sidebar_link(),
 				'page'          => 'yith_wcstripe_panel',
 				'admin-tabs'    => $admin_tabs,
 				'options-path'  => YITH_WCSTRIPE_INC . 'plugin-options'
@@ -95,6 +96,39 @@ if( ! class_exists( 'YITH_WCStripe_Admin' ) ){
 			}
 
 			$this->_panel = new YIT_Plugin_Panel_WooCommerce( $args );
+		}
+
+		/**
+		 * Add the widget of "Important Links" inside the admin sidebar
+		 * @return array
+		 */
+		public function get_panel_sidebar_link() {
+			return array(
+				array(
+					'url'   => $this->_official_documentation,
+					'title' => __( 'Plugin Documentation', 'yith-woocommerce-stripe' )
+				),
+				array(
+					'url'   => $this->_premium_landing,
+					'title' => __( 'Discovery premium version', 'yith-woocommerce-stripe' )
+				),
+				array(
+					'url'   => $this->_premium_landing.'#tab-free_vs_premium_tab',
+					'title' => __( 'Free Vs Premium', 'yith-woocommerce-stripe' )
+				),
+				array(
+					'url'   => 'http://plugins.yithemes.com/yith-woocommerce-request-a-quote/',
+					'title' => __( 'Premium live demo', 'yith-woocommerce-stripe' )
+				),
+				array(
+					'url'   => 'https://wordpress.org/support/plugin/yith-woocommerce-request-a-quote',
+					'title' => __( 'WordPress support forum', 'yith-woocommerce-stripe' )
+				),
+				array(
+					'url'   => $this->_official_documentation . '/05-changelog.html',
+					'title' => sprintf( __( 'Changelog (current version %s)', 'yith-woocommerce-stripe' ), YITH_WCSTRIPE_VERSION )
+				),
+			);
 		}
 
 		/**

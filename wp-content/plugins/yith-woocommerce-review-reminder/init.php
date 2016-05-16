@@ -3,9 +3,9 @@
 Plugin Name: YITH WooCommerce Review Reminder
 Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-review-reminder
 Description: Send a review reminder to the customers over WooCommerce.
-Author: YIThemes
+Author: YITHEMES
 Text Domain: yith-woocommerce-review-reminder
-Version: 1.1.7
+Version: 1.2.0
 Author URI: http://yithemes.com/
 */
 
@@ -34,7 +34,7 @@ function ywrr_install_free_admin_notice() {
 }
 
 if ( !defined( 'YWRR_VERSION' ) ) {
-    define( 'YWRR_VERSION', '1.1.7' );
+    define( 'YWRR_VERSION', '1.2.0' );
 }
 
 if ( !defined( 'YWRR_FREE_INIT' ) ) {
@@ -89,6 +89,7 @@ function ywrr_install() {
     }
     else {
         do_action( 'ywrr_init' );
+        ywrr_create_tables();
     }
 }
 
@@ -144,31 +145,31 @@ if ( !function_exists( 'ywrr_create_tables' ) ) {
      * @author  Alberto Ruggiero
      */
     function ywrr_create_tables() {
-        global $wpdb;
+        
+        $current_version = get_option( 'ywrr_db_version' );
 
-        $wpdb->hide_errors();
+        if ( $current_version != YWRR_VERSION ) {
 
-        $collate = '';
 
-        if ( $wpdb->has_cap( 'collation' ) ) {
-            if ( !empty( $wpdb->charset ) ) {
-                $collate .= "DEFAULT CHARACTER SET $wpdb->charset";
-            }
-            if ( !empty( $wpdb->collate ) ) {
-                $collate .= " COLLATE $wpdb->collate";
-            }
-        }
+            global $wpdb;
 
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+            $wpdb->hide_errors();
 
-        $ywrr_tables = "
-            CREATE TABLE {$wpdb->prefix}ywrr_email_blocklist (
+            $collate = $wpdb->get_charset_collate();
+
+            $blocklist_table_name = $wpdb->prefix . 'ywrr_email_blocklist';
+            $schedule_table_name  = $wpdb->prefix . 'ywrr_email_schedule';
+
+            $blocklist_table_sql = "
+            CREATE TABLE $blocklist_table_name (
               id int NOT NULL AUTO_INCREMENT,
               customer_email longtext NOT NULL,
               customer_id bigint(20) NOT NULL DEFAULT 0,
               PRIMARY KEY (id)
-            ) $collate;
-            CREATE TABLE {$wpdb->prefix}ywrr_email_schedule (
+            ) $collate;";
+
+            $schedule_table_sql = "
+            CREATE TABLE $schedule_table_name (
               id int NOT NULL AUTO_INCREMENT,
               order_id bigint(20) NOT NULL,
               order_date date NOT NULL DEFAULT '0000-00-00',
@@ -176,10 +177,18 @@ if ( !function_exists( 'ywrr_create_tables' ) ) {
               request_items longtext NOT NULL DEFAULT '',
               mail_status varchar(15) NOT NULL DEFAULT 'pending',
               PRIMARY KEY (id)
-            ) $collate;
-            ";
+            ) $collate;";
 
-        dbDelta( $ywrr_tables );
+            if ( !function_exists( 'dbDelta' ) ) {
+                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+            }
+
+            dbDelta( $blocklist_table_sql );
+            dbDelta( $schedule_table_sql );
+
+            update_option( 'ywrr_db_version', YWRR_VERSION );
+        }
+        
     }
 }
 
@@ -209,6 +218,23 @@ if ( !function_exists( 'ywrr_create_unschedule_job' ) ) {
      */
     function ywrr_create_unschedule_job() {
         wp_clear_scheduled_hook( 'ywrr_daily_send_mail_job' );
+    }
+
+}
+
+if ( !function_exists( 'wc_get_template_html' ) ) {
+
+    /**
+     * Added for backward compatibility
+
+     * Like wc_get_template, but returns the HTML instead of outputting.
+     * @see   wc_get_template
+     * @since 2.5.0
+     */
+    function wc_get_template_html( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+        ob_start();
+        wc_get_template( $template_name, $args, $template_path, $default_path );
+        return ob_get_clean();
     }
 
 }

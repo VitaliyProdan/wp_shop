@@ -27,6 +27,7 @@ $ph_order_date           = ' <b>{order_date}</b>';
 $ph_order_date_completed = ' <b>{order_date_completed}</b>';
 $ph_order_list           = ' <b>{order_list}</b>';
 $ph_days_ago             = ' <b>{days_ago}</b>';
+$ph_unsubscribe_link     = ' <b>{unsubscribe_link}</b>';
 
 return array(
     'mail' => array(
@@ -98,7 +99,7 @@ return array(
         'review_reminder_mail_body'             => array(
             'name'              => __( 'Email content', 'yith-woocommerce-review-reminder' ),
             'type'              => 'yith-wc-textarea',
-            'desc'              => $placeholders_text . $ph_site_title . $ph_customer_name . $ph_customer_email . $ph_order_id . $ph_order_date . $ph_order_date_completed . $ph_order_list . $ph_days_ago . $ph_reference_link,
+            'desc'              => $placeholders_text . $ph_site_title . $ph_customer_name . $ph_customer_email . $ph_order_id . $ph_order_date . $ph_order_date_completed . $ph_order_list . $ph_days_ago . $ph_unsubscribe_link . $ph_reference_link,
             'id'                => 'ywrr_mail_body',
             'default'           => __( 'Hello {customer_name},
 Thank you for purchasing items from the {site_title} shop!
@@ -110,7 +111,10 @@ Click the link below for each product and review the product under the \'Reviews
 
 Much appreciated,
 
-{site_title}.', 'yith-woocommerce-review-reminder' ),
+{site_title}.
+
+
+{unsubscribe_link}', 'yith-woocommerce-review-reminder' ),
             'class'             => 'ywrr-textarea',
             'custom_attributes' => array(
                 'required' => 'required'

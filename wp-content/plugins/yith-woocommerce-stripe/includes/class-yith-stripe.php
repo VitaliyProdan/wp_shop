@@ -117,18 +117,17 @@ if( ! class_exists( 'YITH_WCStripe' ) ){
 		public function add_to_gateways( $methods ) {
 			include_once( 'class-yith-stripe-gateway.php' );
 			$methods[] = 'YITH_WCStripe_Gateway';
-
 			return $methods;
 		}
 
 		/**
 		 * Get the gateway object
 		 *
-		 * @return YITH_WCStripe_Gateway|YITH_WCStripe_Gateway_Advanced
+		 * @return YITH_WCStripe_Gateway|YITH_WCStripe_Gateway_Advanced|YITH_WCStripe_Gateway_Addons
 		 * @since 1.0.0
 		 */
 		public function get_gateway() {
-			if ( ! is_a( $this->gateway, 'YITH_WCStripe_Gateway' ) && ! is_a( $this->gateway, 'YITH_WCStripe_Gateway_Advanced' ) ) {
+			if ( ! is_a( $this->gateway, 'YITH_WCStripe_Gateway' ) && ! is_a( $this->gateway, 'YITH_WCStripe_Gateway_Advanced' ) && ! is_a( $this->gateway, 'YITH_WCStripe_Gateway_Addons' ) ) {
 				$gateways = WC()->payment_gateways()->get_available_payment_gateways();
 
 				if ( ! isset( $gateways[ self::$gateway_id ] ) ) {
@@ -176,12 +175,12 @@ if( ! class_exists( 'YITH_WCStripe' ) ){
 
 			try {
 
+				// init Stripe api
+				$gateway->init_stripe_sdk();
+
 				if ( ! $transaction_id ) {
 					throw new \Stripe\Error\Api( __( 'Stripe Credit Card Refund failed because the Transaction ID is missing.', 'yith-stripe' ) );
 				}
-
-				// init Stripe api
-				$gateway->init_stripe_sdk();
 
 				// capture
 				$charge = $gateway->api->capture_charge( $transaction_id );

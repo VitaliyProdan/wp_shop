@@ -3,8 +3,8 @@
 * Plugin Name: YITH WooCommerce Wishlist
 * Plugin URI: http://yithemes.com/themes/plugins/yith-woocommerce-wishlist/
 * Description: YITH WooCommerce Wishlist allows you to add Wishlist functionality to your e-commerce.
-* Version: 2.0.14
-* Author: Yithemes
+* Version: 2.0.15
+* Author: YITHEMES
 * Author URI: http://yithemes.com/
 * Text Domain: yith-woocommerce-wishlist
 * Domain Path: /languages/

@@ -46,6 +46,16 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
          */
         private $_main_array_options = array();
 
+        /**
+         * @var YIT_Plugin_Panel_Sidebar
+         */
+        public $sidebar;
+
+        /**
+         * @var array
+         */
+        public $links;
+
 	    /**
 	     * Constructor
 	     *
@@ -74,12 +84,19 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
                     $this->add_menu_page();
                 }
 
+                if ( !empty( $this->settings[ 'links' ] ) ) {
+                    $this->links = $this->settings[ 'links' ];
+                }
+
                 add_action( 'admin_init', array( $this, 'register_settings' ) );
                 add_action( 'admin_menu', array( $this, 'add_setting_page' ), 20 );
                 add_action( 'admin_menu', array( $this, 'add_premium_version_upgrade_to_menu' ), 100 );
                 add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_menu' ), 100 );
                 add_action( 'admin_init', array( $this, 'add_fields' ) );
             }
+
+            /* add YIT Plugin sidebar */
+            $this->sidebar = YIT_Plugin_Panel_Sidebar::instance( $this );
 
             add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
         }
@@ -109,7 +126,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
          * @since    1.0
          * @author   Andrea Grillo <andrea.grillo@yithemes.com>
          */
-        public function remove_duplicate_submenu_page() { 
+        public function remove_duplicate_submenu_page() {
             /* === Duplicate Items Hack === */
             remove_submenu_page( 'yit_plugin_panel', 'yit_plugin_panel' );
         }
@@ -158,7 +175,7 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
             if( 'admin.php' == $pagenow && strpos( get_current_screen()->id, 'yith_upgrade_premium_version' ) !== false ){
                 wp_enqueue_style( 'yit-upgrade-to-pro' );
                 wp_enqueue_script( 'colorbox' );
-            }
+        }
         }
 
         /**
@@ -304,14 +321,19 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
             </h2>
             <?php
             $custom_tab_action = $this->is_custom_tab( $yit_options, $current_tab );
+            $hide_sidebar        = $this->hide_sidebar();
             if ( $custom_tab_action ) {
-                $this->print_custom_tab( $custom_tab_action );
+                $this->print_custom_tab( $custom_tab_action, $hide_sidebar );
                 return;
             }
             ?>
 	        <?php $this->print_video_box(); ?>
-            <div id="wrap" class="plugin-option">
+            <?php
+            $panel_content_class = !$hide_sidebar ? apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap' ) : 'yit-admin-panel-content-wrap-no-sidebar';
+            ?>
+            <div id="wrap" class="plugin-option yit-admin-panel-container">
                 <?php $this->message(); ?>
+                <div class="<?php echo $panel_content_class; ?>">
                 <h2><?php echo $this->get_tab_title() ?></h2>
                 <?php if ( $this->is_show_form() ) : ?>
                     <form method="post" action="options.php">
@@ -328,6 +350,14 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
                     </form>
                     <p>&nbsp;</p>
                 <?php endif ?>
+                </div>
+                <?php
+                /**
+                 *  Add panel Sidebar
+                 */
+                if ( !$hide_sidebar )
+                    $this->print_panel_sidebar();
+                ?>
             </div>
         <?php
         }
@@ -341,20 +371,74 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
                     return false;
                 }
             }
+            return false;
+        }
+
+        /**
+         * Print the panel sidebar
+         *
+         * @return void
+         * @since    1.0
+         * @author   Leanza Francesco      <leanzafrancesco@gmail.com>
+         */
+        public function print_panel_sidebar() {
+            $this->sidebar->print_panel_sidebar();
+        }
+
+        /**
+         * @param $options
+         * @param $current_tab
+         *
+         * @return bool
+         *
+         * @author   Leanza Francesco <leanzafrancesco@gmail.com>
+         */
+        public function hide_sidebar( $options = '', $current_tab = '' ) {
+            if ( $options === '' )
+                $options = $this->get_main_array_options();
+            if ( $current_tab === '' )
+                $current_tab = $this->get_current_tab();
+
+            $hide = false;
+
+            foreach ( $options[ $current_tab ] as $section => $option ) {
+                if ( isset( $option[ 'hide_sidebar' ] ) ) {
+                    $hide = !!$option[ 'hide_sidebar' ];
+                }
+                break;
+            }
+
+            $page = isset( $this->settings[ 'page' ] ) ? $this->settings[ 'page' ] : '';
+
+            return apply_filters( 'yit_panel_hide_sidebar', $hide, $page );
         }
 
         /**
          * Fire the action to print the custom tab
          *
          *
-         * @param $action Action to fire
+         * @param string $action Action to fire
+         * @param bool   $hide_sidebar
          *
          * @return void
          * @since    1.0
          * @author   Andrea Grillo <andrea.grillo@yithemes.com>
+         * @author   Leanza Francesco <leanzafrancesco@gmail.com>
          */
-        public function print_custom_tab( $action ) {
-            do_action( $action );
+        public function print_custom_tab( $action, $hide_sidebar = false ) {
+            if ( !$hide_sidebar ) {
+                $panel_content_class = apply_filters( 'yit_admin_panel_content_class', 'yit-admin-panel-content-wrap' ) ;
+                echo "<div class='yit-admin-panel-container'>";
+                echo "<div class='$panel_content_class'>";
+
+                do_action( $action );
+
+                echo "</div>";
+                $this->print_panel_sidebar();
+                echo "</div>";
+            } else {
+                do_action( $action );
+            }
         }
 
         /**
@@ -832,6 +916,6 @@ if ( ! class_exists( 'YIT_Plugin_Panel' ) ) {
          */
         public function show_premium_version_upgrade() {
             yit_plugin_get_template ( YIT_CORE_PLUGIN_PATH, 'upgrade/upgrade-to-pro-version.php', array( 'core_plugin_url' => YIT_CORE_PLUGIN_URL ) ) ;
-        }
+    }
     }
 }

@@ -4,7 +4,7 @@ Contributors: yithemes
 Tags: wishlist, woocommerce, products, themes, yit, e-commerce, shop, ecommerce wishlist, yith, woocommerce wishlist, woocommerce 2.3 ready, shop wishlist
 Requires at least: 4.0
 Tested up to: 4.4
-Stable tag: 2.0.14
+Stable tag: 2.0.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,13 @@ you should ask theme developers to update custom templates and replace the old t
 
 == Changelog ==
 
+= 2.0.15 - Released: Apr, 04 - 2016 =
+
+* Added: filter yith_wcwl_is_product_in_wishlist to choose whether a product is in wishlist or not
+* Added: filter yith_wcwl_cookie_expiration to set default wishlist cookie expiration time in seconds
+* Tweak: updated plugin-fw
+* Fixed: get_products query returning product multiple times when product has more then one visibility meta
+
 = 2.0.14 - Released: Mar, 21 - 2016 =
 
 * Added: Dutch translation (thanks to w.vankuipers)
@@ -117,8 +124,8 @@ you should ask theme developers to update custom templates and replace the old t
 * Added: check over existance of $.prettyPhoto.close before using it
 * Added: method count_add_to_wishlist to YITH_WCWL class
 * Added: function yith_wcwl_count_add_to_wishlist
-* Twaek: Changed ajax url to "relative"
-* Twaek: Removed yit-common (old plugin-fw) deprecated since 2.0
+* Tweak: Changed ajax url to "relative"
+* Tweak: Removed yit-common (old plugin-fw) deprecated since 2.0
 * Tweak: Removed deprecated WC functions
 * Tweak: Skipped removed_from_wishlist query arg adding, when external product
 * Tweak: Added transients for wishist counts
@@ -377,23 +384,9 @@ Full documentation is available [here](http://yithemes.com/docs-plugins/yith-woo
 
 == Upgrade notice ==
 
-= 2.0.14 - Released: Mar, 18 - 2016 =
+= 2.0.15 - Released: Apr, 04 - 2016 =
 
-* Added: Dutch translation (thanks to w.vankuipers)
-* Added: Danish translation (thanks to Morten)
-* Added: yith_wcwl_is_wishlist_page function to identify if current page is wishlist page
-* Added: filter yith_wcwl_settings_panel_capability for panel capability
-* Added: filter yith_wcwl_current_wishlist_view_params for shortcode view params
-* Added: "defined YITH_WCWL" check before every template
-* Added: check over existance of $.prettyPhoto.close before using it
-* Added: method count_add_to_wishlist to YITH_WCWL class Added function yith_wcwl_count_add_to_wishlist
-* Twaek: Changed ajax url to "relative"
-* Twaek: Removed yit-common (old plugin-fw) deprecated since 2.0
-* Tweak: Removed deprecated WC functions
-* Tweak: Skipped removed_from_wishlist query arg adding, when external product
-* Tweak: Added transients for wishist counts
-* Tweak: Removed DOM structure dependencies from js for wishlist table handling
-* Tweak: All methods/functions that prints/counts products in wishlist now skip trashed or not visible products
-* Fixed: shortcode callback setting global product in some conditions
-* Fixed: typo in hook yith_wccl_table_after_product_name (now set to yith_wcwl_table_after_product_name)
-* Fixed: notice appearing when wishlist page slug is empty
+* Added: filter yith_wcwl_is_product_in_wishlist to choose whether a product is in wishlist or not
+* Added: filter yith_wcwl_cookie_expiration to set default wishlist cookie expiration time in seconds
+* Tweak: updated plugin-fw
+* Fixed: get_products query returning product multiple times when product has more then one visibility meta

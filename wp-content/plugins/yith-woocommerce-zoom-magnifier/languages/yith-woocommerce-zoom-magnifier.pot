@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Order Tracking\n"
-"POT-Creation-Date: 2015-10-07 15:48+0200\n"
+"POT-Creation-Date: 2016-05-04 10:49+0200\n"
 "PO-Revision-Date: 2015-04-22 12:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -19,21 +19,21 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: plugin-fw\n"
 
-#: class.yith-wcmg-admin.php:90
+#: class.yith-wcmg-admin.php:81
 msgid "Image Size"
 msgstr ""
 
-#: class.yith-wcmg-admin.php:91 plugin-options/general-options.php:17
+#: class.yith-wcmg-admin.php:82 plugin-options/general-options.php:17
 msgid "The size of the images used within the magnifier box"
 msgstr ""
 
-#: init.php:43
+#: init.php:50
 msgid ""
 "YITH WooCommerce Zoom Magnifier is enabled but not effective. It requires "
 "WooCommerce in order to work."
 msgstr ""
 
-#: init.php:52
+#: init.php:66
 msgid ""
 "You can't activate the free version of YITH WooCommerce Zoom Magnifier while "
 "you are using the premium one."
@@ -75,7 +75,7 @@ msgid "Premium version"
 msgstr ""
 
 #: lib/class.yith-ywzm-plugin-fw-loader.php:237
-#: plugin-options/general-options.php:216
+#: plugin-options/general-options.php:217
 msgid "YITH WooCommerce Zoom Magnifier"
 msgstr ""
 
@@ -185,92 +185,92 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: plugin-options/general-options.php:130
+#: plugin-options/general-options.php:131
 msgid "Lens Opacity"
 msgstr ""
 
-#: plugin-options/general-options.php:141
+#: plugin-options/general-options.php:142
 msgid "Blur"
 msgstr ""
 
-#: plugin-options/general-options.php:142
+#: plugin-options/general-options.php:143
 msgid "Add a blur effect to the small image on mouse hover."
 msgstr ""
 
-#: plugin-options/general-options.php:153
+#: plugin-options/general-options.php:154
 msgid "Slider Settings"
 msgstr ""
 
-#: plugin-options/general-options.php:159
+#: plugin-options/general-options.php:160
 msgid "Activate Slider"
 msgstr ""
 
-#: plugin-options/general-options.php:160
+#: plugin-options/general-options.php:161
 msgid "Activate Thumbnail Slider."
 msgstr ""
 
-#: plugin-options/general-options.php:167
+#: plugin-options/general-options.php:168
 msgid "Activate Responsive Slider"
 msgstr ""
 
-#: plugin-options/general-options.php:168
+#: plugin-options/general-options.php:169
 msgid ""
 "This option fits the thumbnails within the available space. Disable it if "
 "you want to manage freely the thumbnails (eg. add margins, paddings, etc.)"
 msgstr ""
 
-#: plugin-options/general-options.php:175
+#: plugin-options/general-options.php:176
 msgid "Items"
 msgstr ""
 
-#: plugin-options/general-options.php:176
+#: plugin-options/general-options.php:177
 msgid "Number of items to show"
 msgstr ""
 
-#: plugin-options/general-options.php:186
+#: plugin-options/general-options.php:187
 msgid "Circular carousel"
 msgstr ""
 
-#: plugin-options/general-options.php:187
+#: plugin-options/general-options.php:188
 msgid "It defines whether the carousel should be circular."
 msgstr ""
 
-#: plugin-options/general-options.php:194
+#: plugin-options/general-options.php:195
 msgid "Infinite carousel"
 msgstr ""
 
-#: plugin-options/general-options.php:195
+#: plugin-options/general-options.php:196
 msgid ""
 "It defines whether the carousel should be infinite. Note: It is possible to "
 "create a non-circular, infinite carousel, but it is not possible to create a "
 "circular, non-infinite carousel."
 msgstr ""
 
-#: plugin-options/general-options.php:213
+#: plugin-options/general-options.php:214
 msgid "Upgrade to the PREMIUM VERSION"
 msgstr ""
 
-#: plugin-options/general-options.php:217
+#: plugin-options/general-options.php:218
 msgid "Discover The Advanced Features"
 msgstr ""
 
-#: plugin-options/general-options.php:218
+#: plugin-options/general-options.php:219
 msgid ""
 "Upgrade to the PREMIUM VERSION of YITH WOOCOMMERCE ZOOM MAGNIFIER to benefit "
 "from all features!"
 msgstr ""
 
-#: plugin-options/general-options.php:222
+#: plugin-options/general-options.php:223
 msgid ""
 "See YITH WooCommerce Zoom Magnifier plugin with full premium features in "
 "action"
 msgstr ""
 
-#: plugin-options/general-options.php:224
+#: plugin-options/general-options.php:225
 msgid "Get Support and Pro Features"
 msgstr ""
 
-#: plugin-options/general-options.php:225
+#: plugin-options/general-options.php:226
 msgid ""
 "Purchasing the premium version of the plugin, you will take advantage of the "
 "advanced features of the product, and you will get one year of free updates "
@@ -340,62 +340,62 @@ msgstr ""
 msgid "%1$sUPGRADE%2$s %3$sto the premium version%2$s"
 msgstr ""
 
-#: yit-common/yith-panel.php:418
+#: yit-common/yith-panel.php:429
 msgid "Select a date"
 msgstr ""
 
-#: yit-common/yith-panel.php:419
+#: yit-common/yith-panel.php:430
 msgid "Hours"
 msgstr ""
 
-#: yit-common/yith-panel.php:420 yit-common/yith-panel.php:421
+#: yit-common/yith-panel.php:431 yit-common/yith-panel.php:432
 msgid "Minutes"
 msgstr ""
 
-#: yit-common/yith-panel.php:429
+#: yit-common/yith-panel.php:440
 msgid "Upload"
 msgstr ""
 
-#: yit-common/yith-panel.php:466
+#: yit-common/yith-panel.php:477
 msgid "px"
 msgstr ""
 
-#: yit-common/yith-panel.php:468
+#: yit-common/yith-panel.php:479
 msgid "em"
 msgstr ""
 
-#: yit-common/yith-panel.php:470
+#: yit-common/yith-panel.php:481
 msgid "pt"
 msgstr ""
 
-#: yit-common/yith-panel.php:472
+#: yit-common/yith-panel.php:483
 msgid "rem"
 msgstr ""
 
-#: yit-common/yith-panel.php:484
+#: yit-common/yith-panel.php:495
 msgid "Select a font family"
 msgstr ""
 
-#: yit-common/yith-panel.php:494
+#: yit-common/yith-panel.php:505
 msgid "Regular"
 msgstr ""
 
-#: yit-common/yith-panel.php:496
+#: yit-common/yith-panel.php:507
 msgid "Bold"
 msgstr ""
 
-#: yit-common/yith-panel.php:498
+#: yit-common/yith-panel.php:509
 msgid "Extra bold"
 msgstr ""
 
-#: yit-common/yith-panel.php:500
+#: yit-common/yith-panel.php:511
 msgid "Italic"
 msgstr ""
 
-#: yit-common/yith-panel.php:502
+#: yit-common/yith-panel.php:513
 msgid "Italic bold"
 msgstr ""
 
-#: yit-common/yith-panel.php:518
+#: yit-common/yith-panel.php:529
 msgid "Click to preview"
 msgstr ""

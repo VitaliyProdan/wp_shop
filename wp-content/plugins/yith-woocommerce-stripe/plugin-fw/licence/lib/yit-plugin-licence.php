@@ -101,7 +101,7 @@ if ( !class_exists( 'YIT_Plugin_Licence' ) ) {
         }
 
         /**
-         * Add "Activation" submenu page under YIT Plugins
+         * Add "Activation" submenu page under YITH Plugins
          *
          * @return void
          * @since  1.0

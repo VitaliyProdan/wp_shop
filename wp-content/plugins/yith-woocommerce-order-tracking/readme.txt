@@ -1,4 +1,4 @@
-﻿=== YITH WooCommerce Order Tracking ===
+=== YITH WooCommerce Order Tracking ===
 
 Contributors: yithemes
 Tags: A-1 International, AFL Logistics Limited, Afghan POST, AN POST IRELAND, Aramex, Australia POST Domestic,BRT Courier Express,China POST,DHL Germany,Fastway Couriers,YODEL DIRECT,Japan POST,New Zealand Post,PERU POST,Parcel2Go,Posten Sweden,SM Couriers,TNT,Despatch bay,Correos,El correo,Australia POST Domestic,BlazeFlash,Chronos Couriers,DPD,First Flight,HongKong POST,LA Poste,OM International Courier & Cargo,POS Indonesia,Parcel Force,Post Switzerland,SafeXpress,TradEx,Colis privè,Yurtici Kargo,Deprisa,Blue Dart,City link,Dynamex,FlyKing,ICC Worldwide,LaserShip,OnTrac,POS Malaysia,Parcel link,The Professional Courier - India,Shree Maruti,UPS,South African Post Office,Post Haste,TransMission.NL,Bpost,Collect+,Elta courier,GATI,India POST,Magyar posta,Orbit Worldwide express,POST NL,Pos Laju National Courier,Purolator,Singapore POST,USPS,GLS,ICS Courier
@@ -6,8 +6,8 @@ SDA Italy,CEVA,Track & Trace by CourierPost,Ensenda,GD Express,InterLink Express
 Estafeta,EMS China Courier,Delhivery,Toll Priority,Toll Group, woocommerce order tracking, woocommerce  order tracking usps, fedex woocommerce, order tracking, order track, order trace, delivery, carriers, shipping, ship orders, e-commerce, send product, product shipping, delivery notes, track carriers, track email, delivery note, order shipping, order, orders, shop, e commerce, ecommerce
 
 Requires at least: 4.0
-Tested up to: 4.3.1
-Stable tag: 1.0.7
+Tested up to: 4.5
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -79,35 +79,45 @@ YITH WooCommerce Order Tracking will add a new tab called "Order tracking" in "Y
 
 == Changelog ==
 
-= Version 1.0.7 - RELEASED: OCT 29, 2015 =
+= Version 1.0.9 - Released: May 04, 2016 =
+
+* Fixed: missing YITH Plugin FW files
+
+= Version 1.0.8 - Released: May 02, 2016 =
+
+* Updated: plugin compatible with WordPress 4.5
+* Updated: plugin author name
+* Updated: YITH Plugin Framework
+
+= Version 1.0.7 - Released: Oct 29, 2015 =
 
 * Tweak: update YITH Plugin framework.
 
-= Version 1.0.6 - RELEASED: OCT 27, 2015 =
+= Version 1.0.6 - Released: Oct 27, 2015 =
 
 * Update: changed text domain from ywot to yith-woocommerce-order-tracking
 
-= Version 1.0.5 - RELEASED: SEP 18, 2015 =
+= Version 1.0.5 - Released: Sep 18, 2015 =
 
 * Fixed: error on changing order status when picked up checkbox is not checked.
 
-= Version 1.0.4 - RELEASED: AUG 12, 2015 =
+= Version 1.0.4 - Released: Aug 12, 2015 =
 
 * Tweak: update YITH Plugin framework.
 
-= Version 1.0.3 - RELEASED: JUN 25, 2015 =
+= Version 1.0.3 - Released: Jun 25, 2015 =
 
 * Fixed: WPML compatibility issue
 
-= Version 1.0.2 - RELEASED: FEB 17, 2015 =
+= Version 1.0.2 - Released: Feb 17, 2015 =
 
 * Fixed: Dates are now shown in WordPress date format.
 
-= Version 1.0.1 - RELEASED: FEB 16, 2015 =
+= Version 1.0.1 - Released: Feb 16, 2015 =
 
 * Fixed: Default carrier sometimes was not correctly selected on new orders
 
-= Version 1.0.0 - RELEASED: FEB 13, 2015 =
+= Version 1.0.0 - Released: Feb 13, 2015 =
 
 * Initial release
 

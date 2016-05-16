@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: YITH WooCommerce Order Tracking\n"
-"POT-Creation-Date: 2015-11-04 11:59+0100\n"
+"POT-Creation-Date: 2016-05-04 10:48+0200\n"
 "PO-Revision-Date: 2015-04-22 11:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: Your Inspiration Themes <plugins@yithemes.com>\n"
@@ -40,14 +40,14 @@ msgid "Invoice To:"
 msgstr ""
 
 #: lib/class.yith-invoice.php:258
-#: lib/class.yith-woocommerce-pdf-invoice.php:445
-#: lib/class.yith-woocommerce-pdf-invoice.php:447
-#: lib/class.yith-woocommerce-pdf-invoice.php:452
-#: lib/class.yith-woocommerce-pdf-invoice.php:499
+#: lib/class.yith-woocommerce-pdf-invoice.php:467
+#: lib/class.yith-woocommerce-pdf-invoice.php:470
+#: lib/class.yith-woocommerce-pdf-invoice.php:476
+#: lib/class.yith-woocommerce-pdf-invoice.php:523
 msgid "Invoice"
 msgstr ""
 
-#: lib/class.yith-invoice.php:263 lib/class.yith-shipping.php:176
+#: lib/class.yith-invoice.php:263 lib/class.yith-shipping.php:180
 msgid "Order"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Invoice date"
 msgstr ""
 
-#: lib/class.yith-invoice.php:272 lib/class.yith-shipping.php:185
+#: lib/class.yith-invoice.php:272 lib/class.yith-shipping.php:189
 msgid "Order Amount"
 msgstr ""
 
@@ -63,72 +63,72 @@ msgstr ""
 msgid "Shipping From:"
 msgstr ""
 
-#: lib/class.yith-shipping.php:159
+#: lib/class.yith-shipping.php:163
 msgid "Shipping To:"
 msgstr ""
 
-#: lib/class.yith-shipping.php:181
+#: lib/class.yith-shipping.php:185
 msgid "Order date"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:128
+#: lib/class.yith-woocommerce-pdf-invoice.php:136
 msgid "Show invoice"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:132
-#: lib/class.yith-woocommerce-pdf-invoice.php:451
+#: lib/class.yith-woocommerce-pdf-invoice.php:140
+#: lib/class.yith-woocommerce-pdf-invoice.php:475
 msgid "Create invoice"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:149
+#: lib/class.yith-woocommerce-pdf-invoice.php:157
 msgid "Show shipping list document"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:154
+#: lib/class.yith-woocommerce-pdf-invoice.php:162
 msgid "Create shipping list document"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:234
+#: lib/class.yith-woocommerce-pdf-invoice.php:246
 #, php-format
 msgid "Invoice No. %s of %s"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:407
+#: lib/class.yith-woocommerce-pdf-invoice.php:426
 msgid "YITH PDF Invoice"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:431
+#: lib/class.yith-woocommerce-pdf-invoice.php:451
 msgid "Invoiced on : "
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:438
+#: lib/class.yith-woocommerce-pdf-invoice.php:459
 msgid "Invoice number : "
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:444
+#: lib/class.yith-woocommerce-pdf-invoice.php:466
 msgid "View invoice"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:446
+#: lib/class.yith-woocommerce-pdf-invoice.php:469
 msgid "Cancel invoice"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:464
+#: lib/class.yith-woocommerce-pdf-invoice.php:488
 msgid "View shipping list"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:465
-#: lib/class.yith-woocommerce-pdf-invoice.php:468
-#: lib/class.yith-woocommerce-pdf-invoice.php:474
+#: lib/class.yith-woocommerce-pdf-invoice.php:489
+#: lib/class.yith-woocommerce-pdf-invoice.php:492
+#: lib/class.yith-woocommerce-pdf-invoice.php:498
 #: templates/invoice/invoice-details.php:43
 msgid "Shipping"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:467
+#: lib/class.yith-woocommerce-pdf-invoice.php:491
 msgid "Cancel shipping list"
 msgstr ""
 
-#: lib/class.yith-woocommerce-pdf-invoice.php:473
+#: lib/class.yith-woocommerce-pdf-invoice.php:497
 msgid "Create shipping list"
 msgstr ""
 
@@ -399,34 +399,34 @@ msgstr ""
 msgid "Set text to show on invoice footer"
 msgstr ""
 
-#: templates/admin/premium.php:192
+#: templates/admin/premium.php:193
 #, php-format
 msgid ""
 "Upgrade to %1$spremium version%2$s of %1$sYITH WooCommerce PDF Invoice and "
 "Shipping List%2$s to benefit from all features!"
 msgstr ""
 
-#: templates/admin/premium.php:195 templates/admin/premium.php:315
+#: templates/admin/premium.php:196 templates/admin/premium.php:344
 msgid "UPGRADE"
 msgstr ""
 
-#: templates/admin/premium.php:196 templates/admin/premium.php:316
+#: templates/admin/premium.php:197 templates/admin/premium.php:345
 msgid "to the premium version"
 msgstr ""
 
-#: templates/admin/premium.php:202
+#: templates/admin/premium.php:203
 msgid "Premium Features"
 msgstr ""
 
-#: templates/admin/premium.php:205
+#: templates/admin/premium.php:206
 msgid "pro forma invoice"
 msgstr ""
 
-#: templates/admin/premium.php:210
+#: templates/admin/premium.php:211
 msgid "PRO FORMA INVOICE"
 msgstr ""
 
-#: templates/admin/premium.php:213
+#: templates/admin/premium.php:214
 #, php-format
 msgid ""
 "While waiting for the invoice of the order, users can ask a %1$spro forma "
@@ -435,11 +435,11 @@ msgid ""
 "disposal."
 msgstr ""
 
-#: templates/admin/premium.php:223
+#: templates/admin/premium.php:224
 msgid "FILE NAME"
 msgstr ""
 
-#: templates/admin/premium.php:225
+#: templates/admin/premium.php:226
 #, php-format
 msgid ""
 "Every name of the created PDF files will be composed following the settings "
@@ -447,19 +447,19 @@ msgid ""
 "Invoice, or Shipping%2$s, you can create names with a different structure."
 msgstr ""
 
-#: templates/admin/premium.php:229
+#: templates/admin/premium.php:230
 msgid "file name"
 msgstr ""
 
-#: templates/admin/premium.php:236
+#: templates/admin/premium.php:237
 msgid "save path"
 msgstr ""
 
-#: templates/admin/premium.php:241
+#: templates/admin/premium.php:242
 msgid "SAVE PATH"
 msgstr ""
 
-#: templates/admin/premium.php:243
+#: templates/admin/premium.php:244
 #, php-format
 msgid ""
 "If your business is booming, you will create many invoices, and so there "
@@ -467,11 +467,11 @@ msgid ""
 "folders by %1$syear, month or day%2$s in which you save the file."
 msgstr ""
 
-#: templates/admin/premium.php:253
+#: templates/admin/premium.php:254
 msgid "AUTOMATIC BACKUP ON DROBOX"
 msgstr ""
 
-#: templates/admin/premium.php:255
+#: templates/admin/premium.php:256
 #, php-format
 msgid ""
 "The saving of the created documents can be %1$ssynchronized%2$s with your "
@@ -479,19 +479,19 @@ msgid ""
 "every time you make a new save."
 msgstr ""
 
-#: templates/admin/premium.php:259
+#: templates/admin/premium.php:260
 msgid "automatic backup on dropbox"
 msgstr ""
 
-#: templates/admin/premium.php:266
+#: templates/admin/premium.php:267
 msgid "notes and footer in the document"
 msgstr ""
 
-#: templates/admin/premium.php:271
+#: templates/admin/premium.php:272
 msgid "NOTES AND FOOTER IN THE DOCUMENT"
 msgstr ""
 
-#: templates/admin/premium.php:273
+#: templates/admin/premium.php:274
 #, php-format
 msgid ""
 "In addition to the name of the company and the order details, you can write "
@@ -499,11 +499,11 @@ msgid ""
 "freely a note into the document, and a footer."
 msgstr ""
 
-#: templates/admin/premium.php:283
+#: templates/admin/premium.php:284
 msgid "SSN AND VAT"
 msgstr ""
 
-#: templates/admin/premium.php:285
+#: templates/admin/premium.php:286
 #, php-format
 msgid ""
 "Once activated, these two options will add two new input fields for the "
@@ -511,19 +511,19 @@ msgid ""
 "into the PDF document."
 msgstr ""
 
-#: templates/admin/premium.php:288
+#: templates/admin/premium.php:289
 msgid "ssn and vat"
 msgstr ""
 
-#: templates/admin/premium.php:295
+#: templates/admin/premium.php:296 templates/admin/premium.php:324
 msgid "templates"
 msgstr ""
 
-#: templates/admin/premium.php:300
+#: templates/admin/premium.php:301
 msgid "DIFFERENT TEMPLATES FOR EVERY DOCUMENT TYPE"
 msgstr ""
 
-#: templates/admin/premium.php:302
+#: templates/admin/premium.php:303
 #, php-format
 msgid ""
 "For every document created, you can set which kind of information it should "
@@ -532,11 +532,38 @@ msgid ""
 "prices%2$s."
 msgstr ""
 
-#: templates/admin/premium.php:312
+#: templates/admin/premium.php:312 templates/admin/premium.php:317
+msgid "User information"
+msgstr ""
+
+#: templates/admin/premium.php:314
 #, php-format
 msgid ""
-"Upgrade to the %1$spremium version%2$s of %1$sYITH WooCommerce Pdf Invoice"
-"%2$s and Shipping List to benefit from all features!"
+"No more limits for information about order and user to be inserted in the "
+"document. All you have to do is obtain the %1$s\"meta key\"%2$s value and "
+"the information will be dynamically inserted. A system that allows you to "
+"make documents rich of useful data."
+msgstr ""
+
+#: templates/admin/premium.php:329
+msgid "Overwrite template"
+msgstr ""
+
+#: templates/admin/premium.php:331
+#, php-format
+msgid ""
+"If you are a developer and you want to change the document template provided "
+"by default from the plugin, you can easily copy files of interest in your "
+"theme folder.%3$s After changes, enable the %1$spreview mode%2$s: in this "
+"way you could generate an invoice sample to check the changes without an "
+"increase in numeration."
+msgstr ""
+
+#: templates/admin/premium.php:341
+#, php-format
+msgid ""
+"Upgrade to the %1$spremium version%2$s of %1$sYITH WooCommerce Pdf Invoice "
+"and Shipping List%2$s to benefit from all features!"
 msgstr ""
 
 #: templates/invoice/invoice-details.php:6

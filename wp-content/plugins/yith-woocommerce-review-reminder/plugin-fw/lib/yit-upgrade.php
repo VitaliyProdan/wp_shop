@@ -196,7 +196,7 @@ if ( ! class_exists( 'YIT_Upgrade' ) ) {
                 parse_str( rawurldecode( htmlspecialchars_decode( $action_url['query'] ) ) );
                 $plugins = explode( ',', $plugins );
                 foreach( $plugins as $plugin_init ){
-                    $to_upgrade = get_plugin_data( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR .  $plugin_init );
+                    $to_upgrade = get_plugin_data( WP_PLUGIN_DIR . '/' .  $plugin_init );
                     if( $to_upgrade['Name'] == $upgrader->skin->plugin_info['Name'] ){
                         $plugin = $plugin_init;
                     }
@@ -541,7 +541,7 @@ if ( ! function_exists( 'YIT_Upgrade' ) ) {
     /**
      * Main instance of plugin
      *
-     * @return object
+     * @return YIT_Upgrade
      * @since  1.0
      * @author Andrea Grillo <andrea.grillo@yithemes.com>
      */

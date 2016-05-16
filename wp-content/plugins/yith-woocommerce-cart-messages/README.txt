@@ -3,8 +3,8 @@
 Contributors: yithemes
 Tags: cart, notices, yithemes, message, woocommerce, shop, ecommerce, e-commerce, cart notices, notifications, show notice, checkout notice, checkout message, deadline notices, deadline message
 Requires at least: 3.5.1
-Tested up to: 4.1.1
-Stable tag: 1.1.4
+Tested up to: 4.5.1
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,39 +66,45 @@ During this transition step, .po and .mo files will be used as always, but in or
 4. Settings Page
 
 == Changelog ==
-= 1.1.4 =
+= 1.1.5  - Released on May 05, 2016 =
+* Added: Compatibilty with Wordpress 4.5.1
+* Added: Compatibilty with Master Slider Plugin
+* Update: Some string in cart message detail page
+* Update: Plugin Core Framework
+
+= 1.1.4 - Released on Oct 30, 2015 =
 * Added: Add Plugin-Fw support for Essential Kit #1
 
-= 1.1.3 =
+= 1.1.3 - Released on Oct 10, 2015 =
 * Fixed: Errors with bbPress Plugin
 
-= 1.1.2 =
+= 1.1.2 - Released on Oct 02, 2015 =
 * Updated: Changed Text Domain from 'ywcm' to 'yith-woocommerce-cart-messages'
 * Updated: Plugin Core Framework
 
 
-= 1.1.1 =
+= 1.1.1 - Released on Aug 12, 2015 =
 * Added: Support to WooCommerce 2.4.2
 * Updated: Plugin Core Framework
 
-= 1.1.0 =
+= 1.1.0 - Released on May 14, 2015 =
 * Fixed: add_query_arg() and remove_query_arg() usage
 * Updated: Plugin core framework
 
-= 1.0.3 =
+= 1.0.3 - Released on Mar 30, 2015 =
 * Fix: Support to WPML
 * Updated: Plugin core framework
 
-= 1.0.2 =
+= 1.0.2 - Released on Feb 13, 2015 =
 * Added: Support to WooCommerce 2.3.x
 * Added: Support to WPML
 
-= 1.0.1 =
+= 1.0.1 - Released on Feb 06, 2015 =
 
 * Updated: Plugin core framework
 * Fixed: issue with upload fields
 
-= 1.0.0 =
+= 1.0.0 - Released on Feb 05, 2015 =
 
 * Initial release
 
